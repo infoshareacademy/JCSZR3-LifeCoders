@@ -2,7 +2,7 @@
 
 namespace TravelerAppCore
 {
-    public class Class1
+    public class ProgramCore
     {
     }
 }
