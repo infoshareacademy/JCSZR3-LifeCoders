@@ -39,14 +39,7 @@ namespace TravelerAppCore.Models
         private static string getAdress() {
             Console.WriteLine("Podaj adress do wyszukiwania:");
             string adress = Console.ReadLine();
-            if(adress.Length < 4)
-            {
-                Console.WriteLine("Wyszukiwana fraza powinna mieć conajmniej 3 znaki");
-                return getAdress();
-            } else
-            {
-                return adress;
-            }
+            return adress;
         }
     }
 }
