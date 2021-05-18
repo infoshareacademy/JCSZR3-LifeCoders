@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using TravelerAppCore.Models.Hotels;
 using Newtonsoft.Json;
 using System.Linq;
+using System.Diagnostics;
 
 namespace TravelerFacebookConsole
 {
@@ -16,6 +17,8 @@ namespace TravelerFacebookConsole
 
         static void DeserializeJson()
         {
+            var stopper = new Stopwatch();
+            stopper.Start();
             string sCurrentDirectory = AppDomain.CurrentDomain.BaseDirectory;
             string sFile = Path.Combine(sCurrentDirectory, @"..\..\..\..\TravelerAppCore\Data\JSON_Hotels");
             string sFilePath = Path.GetFullPath(sFile);
@@ -38,6 +41,9 @@ namespace TravelerFacebookConsole
                 {
                 }
             }
+            stopper.Stop();
+            Console.WriteLine($"Czas odczytu wszystkich plików: {stopper.Elapsed}");
+            Console.WriteLine($"Ilość odczytanych plików: {targetData.Count()}");
             Console.WriteLine("[POINTER] Koniec deserializacji");
         }
     }
