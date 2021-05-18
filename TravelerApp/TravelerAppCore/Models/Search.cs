@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using TravelerAppCore.Models.Hotels;
 
@@ -13,10 +14,12 @@ namespace TravelerAppCore.Models
         {
             List<Root> hotelLocalisation = new List<Root>();
             string adress = getAdress();
+            string regPattern = @$">{adress}<";
+            Regex rx = new Regex(regPattern, RegexOptions.IgnoreCase);
 
             foreach(Root hotel in targetData)
             {
-                if(hotel.HotelInfo.Address == adress)
+                if(rx.Matches(hotel.HotelInfo.Address).Count != 0)
                 {
                     hotelLocalisation.Add(hotel);
                 }
