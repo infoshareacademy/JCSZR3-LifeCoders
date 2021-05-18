@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TravelerAppCore.Models.Hotels
+namespace TravelerAppCore.Controller
 {
-    public class Hotels
+    class ReadWriteJSON
     {
-        public Root hotel { get; set; } = new Root();
     }
 }
