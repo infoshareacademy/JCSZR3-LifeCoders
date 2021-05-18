@@ -5,27 +5,35 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using TravelerAppCore.Models.Hotels;
+using TravelerAppCore.View;
 
 namespace TravelerAppCore.Models
 {
     public static class Search
     { 
-        public static List<Root> byLocalisation(List<Root> targetData)
+        public static void byLocalisation(List<Root> targetData)
         {
             List<Root> hotelLocalisation = new List<Root>();
             string adress = getAdress();
             string regPattern = @$">{adress}<";
-            Regex rx = new Regex(regPattern, RegexOptions.IgnoreCase);
+            Regex regEx = new Regex(regPattern, RegexOptions.IgnoreCase);
 
             foreach(Root hotel in targetData)
             {
-                if(rx.Matches(hotel.HotelInfo.Address).Count != 0)
+                if (hotel.HotelInfo.Address == null)
                 {
-                    hotelLocalisation.Add(hotel);
+
+                } else { 
+                    if (regEx.IsMatch(hotel.HotelInfo.Address))
+                    {
+                        hotelLocalisation.Add(hotel);
+                    }
                 }
             }
+            int count = hotelLocalisation.Count;
+            Console.Clear();
+            DrawTable.Hotelinfo(hotelLocalisation, count);
 
-            return hotelLocalisation;
         }
 
         private static string getAdress() {
