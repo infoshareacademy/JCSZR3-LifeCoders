@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TravelerAppCore.Models.Hotels;
 
 namespace TravelerAppCore.View
 {
-    class DrawTable
+    public class DrawTable
     {
         public static int tableWidth;
         public static void PrintLine()
@@ -17,7 +18,7 @@ namespace TravelerAppCore.View
         public static void PrintRow(bool newline, params string[] columns)
         {
             int width = (tableWidth - columns.Length) / columns.Length;
-            string row = "|";
+            string row = "";
 
             foreach (string column in columns)
             {
@@ -40,6 +41,42 @@ namespace TravelerAppCore.View
             {
                 return text.PadRight(width - (width - text.Length) / 2).PadLeft(width);
             }
+        }
+
+        public static void Hotelinfo(List<Root> dataReaded, int numRecords)
+        {
+            //Przykład wypisywania informacji w tabeli - użytek dowolny i własnowolny
+            DrawTable.tableWidth = 165;
+            DrawTable.PrintLine();
+            DrawTable.tableWidth = 15;
+            DrawTable.PrintRow(false, "Id");
+            DrawTable.tableWidth = 80;
+            DrawTable.PrintRow(false, "Name", "HotelUrl");
+            DrawTable.tableWidth = 15;
+            DrawTable.PrintRow(false, "Price");
+            DrawTable.tableWidth = 40;
+            DrawTable.PrintRow(false, "Address");
+            DrawTable.tableWidth = 15;
+            DrawTable.PrintRow(true, "HotelID");
+            DrawTable.tableWidth = 165;
+            DrawTable.PrintLine();
+            int count = 1;
+            for (int i = 0; i < numRecords; i++)
+            {
+                DrawTable.tableWidth = 15;
+                DrawTable.PrintRow(false, (i + 1).ToString());
+                DrawTable.tableWidth = 80;
+                DrawTable.PrintRow(false, dataReaded[i].HotelInfo.Name, dataReaded[i].HotelInfo.HotelURL);
+                DrawTable.tableWidth = 15;
+                DrawTable.PrintRow(false, dataReaded[i].HotelInfo.Price);
+                DrawTable.tableWidth = 40;
+                DrawTable.PrintRow(false, dataReaded[i].HotelInfo.Address);
+                DrawTable.tableWidth = 15;
+                DrawTable.PrintRow(true, dataReaded[i].HotelInfo.HotelID);
+                //count++;
+            }
+            DrawTable.tableWidth = 165;
+            DrawTable.PrintLine();
         }
     }
 }
