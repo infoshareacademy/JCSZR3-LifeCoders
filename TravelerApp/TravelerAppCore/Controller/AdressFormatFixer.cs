@@ -15,17 +15,17 @@ namespace TravelerAppCore.Controller
             foreach (Root hotel in baseData)
             {
                 hotel.HotelInfo.Address = Regex.Replace(hotel.HotelInfo.Address, "<.*?>", string.Empty);
-                int counter = 0;
+                int commaCounter = 0;
+
                 string street = "";
                 string city = "";
                 string postalCode = "";
-                string more = "";
 
                 foreach (var letter in hotel.HotelInfo.Address)
                 {
                     if (letter != ',')
                     {
-                        switch (counter)
+                        switch (commaCounter)
                         {
                             case 0:
                                 street += letter;
@@ -37,17 +37,20 @@ namespace TravelerAppCore.Controller
                                 postalCode += letter;
                                 break;
                             default:
-                                more += letter;
                                 break;
 
                         }
                     } else
                     {
-                        counter++;
+                        commaCounter++;
                     }
                 }
 
-                hotel.HotelInfo.Address = $"{city.Trim()}, {street.Trim()}, {postalCode.Trim()}";
+                street = street.Trim();
+                city = city.Trim();
+                postalCode = postalCode.Trim();
+
+                hotel.HotelInfo.Address = $"{city}, {street}, {postalCode}";
 
             }
             return baseData;
