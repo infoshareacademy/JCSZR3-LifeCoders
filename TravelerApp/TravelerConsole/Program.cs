@@ -16,7 +16,7 @@ namespace TravelerAppConsole
         static void Main(string[] args)
         {
             //Ustawia wysokość i szerokość okna konsoli na określone wartości.
-            Console.SetWindowSize(180, 30);
+            Console.SetWindowSize(200, 30);
 
             List<Root> dataReaded = new List<Root>();
             JSON.Read(dataReaded);

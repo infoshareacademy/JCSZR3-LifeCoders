@@ -47,7 +47,7 @@ namespace TravelerAppCore.Controller
                     }
                 }
 
-                hotel.HotelInfo.Address = $"Street:{street.Trim()}\nCity:{city.Trim()}\nPostal Code:{postalCode.Trim()}";
+                hotel.HotelInfo.Address = $"{city.Trim()}, {street.Trim()}, {postalCode.Trim()}";
 
             }
             return baseData;
