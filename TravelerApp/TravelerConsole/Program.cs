@@ -22,6 +22,7 @@ namespace TravelerAppConsole
             JSON.Read(dataReaded);
             AdressFormatFixer.FixAdress(dataReaded);
             List<Root> dataSaved = new List<Root>();
+            Console.WriteLine(dataReaded[1].HotelInfo.Address);
             JSON.Write(dataSaved);
 
             //Dostępne informacje:
