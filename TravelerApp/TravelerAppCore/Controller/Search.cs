@@ -15,7 +15,7 @@ namespace TravelerAppCore.Models
         {
             List<Root> hotelLocalisation = new List<Root>();
             string adress = getAdress();
-            string regPattern = @$">{adress}<";
+            string regPattern = $@"{adress}";
             Regex regEx = new Regex(regPattern, RegexOptions.IgnoreCase);
 
             foreach(Root hotel in targetData)
@@ -39,6 +39,11 @@ namespace TravelerAppCore.Models
         private static string getAdress() {
             Console.WriteLine("Podaj adress do wyszukiwania:");
             string adress = Console.ReadLine();
+            if(adress.Length < 4)
+            {
+                Console.WriteLine($"Wyszukiwana fraza powinna mieć co najmniej trzy znaki!");
+                getAdress();
+            }
             return adress;
         }
     }
