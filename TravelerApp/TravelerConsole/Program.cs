@@ -7,6 +7,7 @@ using System.Linq;
 using System.Diagnostics;
 using TravelerAppCore.Controller;
 using TravelerAppCore.View;
+using System.Text.RegularExpressions;
 
 namespace TravelerAppConsole
 {
@@ -19,7 +20,7 @@ namespace TravelerAppConsole
 
             List<Root> dataReaded = new List<Root>();
             JSON.Read(dataReaded);
-
+            AdressFormatFixer.FixAdress(dataReaded);
             List<Root> dataSaved = new List<Root>();
             JSON.Write(dataSaved);
 
