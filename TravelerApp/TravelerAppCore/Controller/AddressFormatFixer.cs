@@ -8,9 +8,9 @@ using TravelerAppCore.Models.Hotels;
 
 namespace TravelerAppCore.Controller
 {
-    public class AdressFormatFixer
+    public class AddressFormatFixer
     {
-        public static List<Root> FixAdress (List<Root> baseData)
+        public static List<Root> FixAddress (List<Root> baseData)
         {
             foreach (Root hotel in baseData)
             {
