@@ -20,7 +20,7 @@ namespace TravelerAppConsole
 
             List<Root> dataReaded = new List<Root>();
             JSON.Read(dataReaded);
-            AdressFormatFixer.FixAdress(dataReaded);
+            AddressFormatFixer.FixAddress(dataReaded);
             List<Root> dataSaved = new List<Root>();
             Console.WriteLine(dataReaded[1].HotelInfo.Address);
             JSON.Write(dataSaved);
