@@ -11,7 +11,7 @@ namespace TravelerAppCore.Models
 {
     public static class Search
     { 
-        public static void byLocalisation(List<Root> targetData)
+        public static List<Root> byLocalisation(List<Root> targetData)
         {
             List<Root> hotelLocalisation = new List<Root>();
             string adress = getAddress();
@@ -23,17 +23,22 @@ namespace TravelerAppCore.Models
                 if (hotel.HotelInfo.Address == null)
                 {
 
-                } else { 
+                } else 
+                { 
                     if (regEx.IsMatch(hotel.HotelInfo.Address))
                     {
                         hotelLocalisation.Add(hotel);
                     }
                 }
             }
-            int count = hotelLocalisation.Count;
-            Console.Clear();
-            DrawTable.Hotelinfo(hotelLocalisation, count);
+            return hotelLocalisation;
+        }
 
+        public static void drawTable(List<Root> dataToDraw)
+        {
+            int count = dataToDraw.Count;
+            Console.Clear();
+            DrawTable.Hotelinfo(dataToDraw, count);
         }
 
         private static string getAddress() {
