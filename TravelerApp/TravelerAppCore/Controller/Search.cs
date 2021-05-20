@@ -31,6 +31,12 @@ namespace TravelerAppCore.Models
                     }
                 }
             }
+
+            if(hotelLocalisation.Count == 0)
+            {
+                Console.WriteLine($"Nie znaleziono szukanej frazy: {adress}");
+            }
+
             return hotelLocalisation;
         }
 
@@ -44,7 +50,7 @@ namespace TravelerAppCore.Models
         private static string getAddress() {
             Console.WriteLine("Podaj adress do wyszukiwania:");
             string adress = Console.ReadLine();
-            if(adress.Length < 4)
+            if(adress.Length < 3)
             {
                 Console.WriteLine($"Wyszukiwana fraza powinna mieć co najmniej trzy znaki!");
                 getAddress();
