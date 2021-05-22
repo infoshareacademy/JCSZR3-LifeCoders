@@ -10,7 +10,7 @@ namespace TravelerAppConsole
 {
   
 
-    public class MenuIntarface 
+    public class MenuInterface 
     {
         public void chooseLanguage()
         {

@@ -7,7 +7,7 @@ namespace TravelerFacebookConsole
     {
         static void Main(string[] args)
         {
-            new MenuIntarface().chooseLanguage();
+            new MenuInterface().chooseLanguage();
 
         }
     }
