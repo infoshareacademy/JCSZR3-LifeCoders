@@ -9,13 +9,13 @@ namespace TravelerAppCore.Models.Hotels
 {
     public class Ratings
     {
-        public string Overall { get; set; }
-        public string Service { get; set; }
-        public string Cleanliness { get; set; }
-        public string Value { get; set; }
-        public string SleepQuality { get; set; }
-        public string Rooms { get; set; }
-        public string Location { get; set; }
+        public float Overall { get; set; }
+        public float Service { get; set; }
+        public float Cleanliness { get; set; }
+        public float Value { get; set; }
+        public float SleepQuality { get; set; }
+        public float Rooms { get; set; }
+        public float Location { get; set; }
 
         [JsonProperty("Checkin/frontdesk")]
         public string CheckinFrontdesk { get; set; }
