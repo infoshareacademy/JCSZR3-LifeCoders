@@ -1,4 +1,5 @@
 ﻿using System;
+using TravelerAppConsole;
 
 namespace TravelerFacebookConsole
 {
@@ -6,7 +7,8 @@ namespace TravelerFacebookConsole
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            new MenuIntarface().chooseLanguage();
+
         }
     }
 }
