@@ -1,18 +1,19 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
-using System.Threading.Channels;
 using System.Threading.Tasks;
-using Microsoft.VisualBasic.FileIO;
 using TravelerAppCore.Models.Hotels;
-using TravelerAppCore.View;
+using TravelerAppCore.Controller;
 
 namespace TravelerAppConsole
 {
   
 
-    public class MenuInterface 
+    public class MenuInterface: TravelerAppCore.Controller.JSON
     {
         public void chooseLanguage()
         {
@@ -135,11 +136,13 @@ namespace TravelerAppConsole
             
         }
 
-        public virtual void  SearchOption(ConsoleKeyInfo key)
+        public void  SearchOption(ConsoleKeyInfo key)
         {
+            List<Root> dataReaded = new List<Root>();
+            JSON.Read(dataReaded);
             if (key.Key == ConsoleKey.M)
-                // TravelerAppCore.Models.Search.byLocalisation(List<Root> targetData);
-                ;
+                 TravelerAppCore.Models.Search.byLocalisation(dataReaded);
+                
             else if (key.Key == ConsoleKey.R)
                 //Search by rating
                 ;
@@ -147,10 +150,12 @@ namespace TravelerAppConsole
                 //search by name
                 ;
         }
-        public virtual void SortOption(ConsoleKeyInfo key)
+        public  void SortOption(ConsoleKeyInfo key)
         {
+            List<Root> dataReaded = new List<Root>();
+            JSON.Read(dataReaded);
             Console.WriteLine("Uruchomiono SortOption");
-            
+            TravelerAppCore.Controller.Sort.sort(dataReaded);
         }
 
     }
