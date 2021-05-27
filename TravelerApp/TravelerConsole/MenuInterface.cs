@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Channels;
 using System.Threading.Tasks;
 using Microsoft.VisualBasic.FileIO;
+using TravelerAppCore.Models.Hotels;
+using TravelerAppCore.View;
 
 namespace TravelerAppConsole
 {
@@ -86,7 +88,7 @@ namespace TravelerAppConsole
                         PLlanguage();
                         break;
                     default:
-                        Console.WriteLine("Wrong Option");
+                     
                         chooseOption(key);
                         break;
 
@@ -135,8 +137,15 @@ namespace TravelerAppConsole
 
         public virtual void  SearchOption(ConsoleKeyInfo key)
         {
-            Console.WriteLine("Uruchomiono SearchOption");
-            
+            if (key.Key == ConsoleKey.M)
+                // TravelerAppCore.Models.Search.byLocalisation(List<Root> targetData);
+                ;
+            else if (key.Key == ConsoleKey.R)
+                //Search by rating
+                ;
+            else
+                //search by name
+                ;
         }
         public virtual void SortOption(ConsoleKeyInfo key)
         {
