@@ -1,12 +1,13 @@
 ﻿using System;
 using System.IO;
 using System.Collections.Generic;
-using TravelerAppCore.Models.Hotels;
 using Newtonsoft.Json;
 using System.Linq;
 using System.Diagnostics;
 using TravelerAppCore.Controller;
 using TravelerAppCore.View;
+using TravelerAppCore.Models.Hotels;
+using TravelerAppCore.Models;
 
 namespace TravelerAppConsole
 {
@@ -18,12 +19,18 @@ namespace TravelerAppConsole
             Console.SetWindowSize(180, 30);
 
             List<Root> dataReaded = new List<Root>();
-            JSON.Read(dataReaded);
-
             List<Root> dataSaved = new List<Root>();
-            JSON.Write(dataSaved);
+            SearchHotel hotels = new SearchHotel(new ByName(), new ByLocalization(), new ByRate());
 
-            //Dostępne informacje:
+            //Menu
+            JSON.Read(dataReaded);
+            JSON.Write(dataSaved);
+            hotels.SearchByName();
+            hotels.SearchByLocalization();
+            hotels.SearchByRate();
+            hotels.GetSearch(dataReaded);
+
+            //INFO:
             //-Poszczególne kryteria ocen:
             //  float ratingsCleanLiness = dataReaded[0].Reviews[2].Ratings.Cleanliness;
             //  float ratingsOverall = dataReaded[0].Reviews[2].Ratings.Overall;
@@ -49,8 +56,7 @@ namespace TravelerAppConsole
             //  string hotelID = dataReaded[0].HotelInfo.HotelID;
             //  string hotelImgURL = dataReaded[0].HotelInfo.ImgURL;
 
-            int numberOfRecords = 10;
-            DrawTable.Hotelinfo(dataReaded, numberOfRecords);
+            
 
         }
 
