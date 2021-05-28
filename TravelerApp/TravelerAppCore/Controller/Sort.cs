@@ -10,7 +10,7 @@ namespace TravelerAppCore.Controller
 {
    public class Sort
     {
-        public static void sort(List<Root> targetData)
+        public static void sortByRatings(List<Root> targetData)
         {
             List<Root> hotelRatings = targetData;
 

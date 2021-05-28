@@ -58,7 +58,7 @@ namespace TravelerAppConsole
 
             int numberOfRecords = 10;
             DrawTable.Hotelinfo(dataReaded, numberOfRecords);
-            Sort.sort(dataReaded);
+            Sort.sortByRatings(dataReaded);
 
         }
 
