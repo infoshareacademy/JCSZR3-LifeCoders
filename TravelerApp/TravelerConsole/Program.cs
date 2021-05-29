@@ -7,6 +7,7 @@ using System.Linq;
 using System.Diagnostics;
 using TravelerAppCore.Controller;
 using TravelerAppCore.View;
+using TravelerAppCore.Models;
 
 namespace TravelerAppConsole
 {
@@ -15,13 +16,15 @@ namespace TravelerAppConsole
         static void Main(string[] args)
         {
             //Ustawia wysokość i szerokość okna konsoli na określone wartości.
-            Console.SetWindowSize(180, 30);
+            //Console.SetWindowSize(180, 30);
 
             List<Root> dataReaded = new List<Root>();
             JSON.Read(dataReaded);
 
             List<Root> dataSaved = new List<Root>();
             JSON.Write(dataSaved);
+
+            SearchByRate.byRating(dataReaded);
 
             //Dostępne informacje:
             //-Poszczególne kryteria ocen:
