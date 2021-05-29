@@ -15,10 +15,10 @@ namespace TravelerAppConsole
         static void Main(string[] args)
         {
             //Ustawia wysokość i szerokość okna konsoli na określone wartości.
-            Console.SetWindowSize(180, 30);
+            //Console.SetWindowSize(180, 30);
 
-            List<Root> dataReaded = new List<Root>();
-            JSON.Read(dataReaded);
+            List<Root> dataRead = new List<Root>();
+            JSON.Read(dataRead);
 
             List<Root> dataSaved = new List<Root>();
             JSON.Write(dataSaved);
@@ -42,18 +42,34 @@ namespace TravelerAppConsole
             //  string reviewDate = dataReaded[0].Reviews[2].Date;
 
             //-Informacje o hotelu:
-            //  string hotelName = dataReaded[0].HotelInfo.Name;
+            // string hotelName = dataRead[0].HotelInfo.Name;
             //  string hotelURL = dataReaded[0].HotelInfo.HotelURL;
             //  string hotelPrice = dataReaded[0].HotelInfo.Price;
             //  string hotelAddress = dataReaded[0].HotelInfo.Address; //zawiera HTML
             //  string hotelID = dataReaded[0].HotelInfo.HotelID;
             //  string hotelImgURL = dataReaded[0].HotelInfo.ImgURL;
 
-            int numberOfRecords = 10;
-            DrawTable.Hotelinfo(dataReaded, numberOfRecords);
+            int numberOfRecords = 12;
+            DrawTable.Hotelinfo(dataRead, numberOfRecords);
+
+            string searchedName = "BEST WESTERN Loyal Inn";// "Christopher's Inn";
+            List<int> list = SearchByName.HotelsByName(dataRead, searchedName);
+            //list.Sort();
+            List<Root> hotelsReturnedByName = new List<Root>();
+            foreach (int item in list)
+
+            {
+
+               // Console.WriteLine(dataRead[item].HotelInfo.Name);
+                hotelsReturnedByName.Add(dataRead[item]);
+               
+            }
+            Console.WriteLine($"Hotels having {searchedName} in their names" );
+       
+            DrawTable.Hotelinfo(hotelsReturnedByName, list.Count);
+
+
 
         }
-
-        
     }
 }
