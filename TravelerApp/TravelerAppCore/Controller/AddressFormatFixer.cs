@@ -14,37 +14,39 @@ namespace TravelerAppCore.Controller
         {
             foreach (Root hotel in baseData)
             {
-                hotel.HotelInfo.Address = Regex.Replace(hotel.HotelInfo.Address, "<.*?>", string.Empty);
+                var address = Regex.Replace(hotel.HotelInfo.Address, "<.*?>", string.Empty);
                 int commaCounter = 0;
 
-                string street = "";
-                string city = "";
-                string postalCode = "";
+                Regex rg = new Regex(@"(?<street>.+),\s(?<city>.+),\s(?<postalCode>.+)");
+                var addressMatch = rg.Match(address);
+                string street = addressMatch.Groups["street"].Value;
+                string city = addressMatch.Groups["city"].Value;
+                string postalCode = addressMatch.Groups["postalCode"].Value;
 
-                foreach (var letter in hotel.HotelInfo.Address)
-                {
-                    if (letter != ',')
-                    {
-                        switch (commaCounter)
-                        {
-                            case 0:
-                                street += letter;
-                                break;
-                            case 1:
-                                city += letter;
-                                break;
-                            case 2:
-                                postalCode += letter;
-                                break;
-                            default:
-                                break;
+                //foreach (var letter in hotel.HotelInfo.Address)
+                //{
+                //    if (letter != ',')
+                //    {
+                //        switch (commaCounter)
+                //        {
+                //            case 0:
+                //                street += letter;
+                //                break;
+                //            case 1:
+                //                city += letter;
+                //                break;
+                //            case 2:
+                //                postalCode += letter;
+                //                break;
+                //            default:
+                //                break;
 
-                        }
-                    } else
-                    {
-                        commaCounter++;
-                    }
-                }
+                //        }
+                //    } else
+                //    {
+                //        commaCounter++;
+                //    }
+                // }
 
                 street = street.Trim();
                 city = city.Trim();
