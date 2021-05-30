@@ -10,52 +10,64 @@ using TravelerAppCore.View;
 namespace TravelerAppCore.Models
 {
     public static class Search
-    { 
-        public static List<Root> byLocalisation(List<Root> targetData)
+    {
+        public static List<Root> byLocalisation(List<Root> targetData, string address)
         {
             List<Root> hotelLocalisation = new List<Root>();
-            string adress = getAddress();
-            string regPattern = $@"{adress}";
+            string regPattern = $@"{address}";
             Regex regEx = new Regex(regPattern, RegexOptions.IgnoreCase);
 
-            foreach(Root hotel in targetData)
+            foreach (Root hotel in targetData)
             {
                 if (hotel.HotelInfo.Address == null)
                 {
+                    continue;
+                }
 
-                } else 
-                { 
-                    if (regEx.IsMatch(hotel.HotelInfo.Address))
-                    {
-                        hotelLocalisation.Add(hotel);
-                    }
+                if (regEx.IsMatch(hotel.HotelInfo.Address))
+                {
+                    hotelLocalisation.Add(hotel);
                 }
             }
 
-            if(hotelLocalisation.Count == 0)
+            if (hotelLocalisation.Count == 0)
             {
-                Console.WriteLine($"Nie znaleziono szukanej frazy: {adress}");
+               
             }
 
             return hotelLocalisation;
         }
+    }
 
-        public static void drawTable(List<Root> dataToDraw)
+    public class consoleAddress
+    {
+        public void searchAddressConsole(List<Root> hotelData) 
         {
-            int count = dataToDraw.Count;
-            Console.Clear();
-            DrawTable.Hotelinfo(dataToDraw, count);
+            var hotelList = Search.byLocalisation(hotelData, getAddress());
+            if(hotelList.Count == 0)
+            {
+                Console.WriteLine("Podana fraza nie została odnaleziona");
+            }
+            drawTable(hotelList);
         }
 
-        private static string getAddress() {
+        public string getAddress()
+        {
             Console.WriteLine("Podaj adress do wyszukiwania:");
             string adress = Console.ReadLine();
-            if(adress.Length < 3)
+            if (adress.Length < 3)
             {
                 Console.WriteLine($"Wyszukiwana fraza powinna mieć co najmniej trzy znaki!");
                 getAddress();
             }
             return adress;
+        }
+
+        public void drawTable(List<Root> dataToDraw)
+        {
+            int count = dataToDraw.Count;
+            Console.Clear();
+            DrawTable.Hotelinfo(dataToDraw, count);
         }
     }
 }
