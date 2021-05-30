@@ -17,53 +17,44 @@ namespace TravelerAppCore.Models
             float rate = getRate();
             List<Ratings> averages = new List<Ratings>();
             int i = 0;
-            foreach (Root hotel in targetData)
-            {
-                float averageOverall = 0;
-                int overall = 0;
-                float averageService = 0;
-                int service = 0;
-                float averageCleanliness = 0;
-                int cleanliness = 0;
-                float averageValue = 0;
-                int value = 0;
-                float averageSleepQuality = 0;
-                int sleepQuality = 0;
-                float averageRooms = 0;
-                int rooms = 0;
-                float averageLocation = 0;
-                int location = 0;
-                foreach (Review item in hotel.Reviews)
-                {
-                    averageOverall += item.Ratings.Overall;
-                    overall++;
-                    averageService += item.Ratings.Service;
-                    service++;
-                    averageCleanliness += item.Ratings.Cleanliness;
-                    cleanliness++;
-                    averageValue += item.Ratings.Value;
-                    value++;
-                    averageSleepQuality += item.Ratings.SleepQuality;
-                    sleepQuality++;
-                    averageRooms += item.Ratings.Rooms;
-                    rooms++;
-                    averageLocation += item.Ratings.Location;
-                    location++;
-                }
-                averages.Add(new Ratings
-                {
-                    Overall = averageOverall / (float)overall,
-                    Service = averageService / (float)service,
-                    Cleanliness = averageCleanliness / (float)cleanliness,
-                    Value = averageValue / (float)value,
-                    SleepQuality = averageSleepQuality / (float)sleepQuality,
-                    Rooms = averageRooms / (float)rooms,
-                    Location = averageLocation / (float)location
-                });
-            }
-            Console.Clear();
-            //DrawTable.Hotelinfo(hotelLocalisation, count);​
-        }private static float getRate()
+  foreach (Review item in hotel.Reviews)
+{
+	if(item.Ratings.Overall != null)
+	{
+		averageOverall += item.Ratings.Overall;
+		overall++;
+	}
+	if(item.Ratings.Service != null)
+	{
+		averageService += item.Ratings.Service;
+		service++;
+	}
+	if(item.Ratings.Cleanliness != null)
+	{
+		averageCleanliness += item.Ratings.Cleanliness;
+		cleanliness++;
+	}
+	if(item.Ratings.Value != null)
+	{
+		averageValue += item.Ratings.Value;
+		value++;
+	}
+	if(item.Ratings.SleepQuality != null)
+	{
+		averageSleepQuality += item.Ratings.SleepQuality;
+		sleepQuality++;
+	}
+	if(item.Ratings.Rooms != null)
+	{
+		averageRooms += item.Ratings.Rooms;
+		rooms++;
+	}
+	if(item.Ratings.Location != null)
+	{
+		averageLocation += item.Ratings.Location;
+		location++;
+	}
+}
         {
             Console.WriteLine("Podaj ocene do wyszukania:");
             float rate = float.Parse(Console.ReadLine());
