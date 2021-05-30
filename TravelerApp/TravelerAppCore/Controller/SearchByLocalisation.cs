@@ -29,12 +29,6 @@ namespace TravelerAppCore.Models
                     hotelLocalisation.Add(hotel);
                 }
             }
-
-            if (hotelLocalisation.Count == 0)
-            {
-               
-            }
-
             return hotelLocalisation;
         }
     }
