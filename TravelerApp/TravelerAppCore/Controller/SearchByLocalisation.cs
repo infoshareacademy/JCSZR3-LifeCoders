@@ -9,7 +9,7 @@ using TravelerAppCore.View;
 
 namespace TravelerAppCore.Models
 {
-    public static class Search
+    public static class SearchByLocalisation
     {
         public static List<Root> byLocalisation(List<Root> targetData, string address)
         {
@@ -43,7 +43,7 @@ namespace TravelerAppCore.Models
     {
         public void searchAddressConsole(List<Root> hotelData) 
         {
-            var hotelList = Search.byLocalisation(hotelData, getAddress());
+            var hotelList = SearchByLocalisation.byLocalisation(hotelData, getAddress());
             if(hotelList.Count == 0)
             {
                 Console.WriteLine("Podana fraza nie została odnaleziona");
