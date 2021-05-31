@@ -9,7 +9,7 @@ namespace TravelerAppCore.Controller
 {
     public static class AddHotelInfo
     {
-        public static Root HotelInfo()
+        public static Root CreateNew()
         {
             Root saveInfoHotel = new Root()
             {
