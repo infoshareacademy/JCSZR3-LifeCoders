@@ -7,8 +7,17 @@ using TravelerAppCore.Models.Hotels;
 
 namespace TravelerAppCore.Controller
 {
-    public static class RateTheHotel
+    public static class AddHotelInfo
     {
+        public static Root HotelInfo()
+        {
+            Root saveInfoHotel = new Root()
+            {
+                Reviews = SaveRate(),
+                HotelInfo = SaveInfo()
+            };
+            return saveInfoHotel;
+        }
         public static HotelInfo SaveInfo()
         {
             Console.WriteLine("Podaj informacje o hotelu");
@@ -16,10 +25,10 @@ namespace TravelerAppCore.Controller
             {
                 HotelInfo = new HotelInfo()
                 {
-                    Name = RateTheHotel.GetName(),
+                    Name = AddHotelInfo.GetName(),
                     HotelURL = "default",
-                    Price = RateTheHotel.GetPrice(),
-                    Address = RateTheHotel.GetAddress(),
+                    Price = AddHotelInfo.GetPrice(),
+                    Address = AddHotelInfo.GetAddress(),
                     HotelID = "default",
                     ImgURL = "default"
                 }
@@ -36,12 +45,12 @@ namespace TravelerAppCore.Controller
                     Ratings = new Ratings() {
                         Overall = 0.0f,
                         //Overall = RateTheHotel.GetOverall(),
-                        Service = RateTheHotel.GetService(),
-                        Cleanliness = RateTheHotel.GetCleanliness(),
-                        Value = RateTheHotel.GetValue(),
-                        SleepQuality = RateTheHotel.GetSleepQuality(),
-                        Rooms = RateTheHotel.GetRooms(),
-                        Location = RateTheHotel.GetLocation()
+                        Service = AddHotelInfo.GetService(),
+                        Cleanliness = AddHotelInfo.GetCleanliness(),
+                        Value = AddHotelInfo.GetValue(),
+                        SleepQuality = AddHotelInfo.GetSleepQuality(),
+                        Rooms = AddHotelInfo.GetRooms(),
+                        Location = AddHotelInfo.GetLocation()
                         } } }
             };
             return saveInfoHotel.Reviews;
