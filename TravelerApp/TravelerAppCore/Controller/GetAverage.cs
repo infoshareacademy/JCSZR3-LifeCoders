@@ -82,8 +82,11 @@ namespace TravelerAppCore.Controller
                     } } }
                 });
             }
-            
-            return averages;
+            for (int i = 0; i < record.Count(); i++)
+            {
+                record[i].Reviews = averages[i].Reviews;
+            }
+            return record;
         }
     }
 }
