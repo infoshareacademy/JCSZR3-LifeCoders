@@ -9,6 +9,23 @@ namespace TravelerAppCore.Controller
 {
     public static class RateTheHotel
     {
+        public static Root SaveInfo()
+        {
+            Console.WriteLine("Podaj informacje o hotelu");
+            Root saveInfoHotel = new Root()
+            {
+                HotelInfo = new HotelInfo()
+                {
+                    Name = RateTheHotel.GetName(),
+                    HotelURL = "default",
+                    Price = RateTheHotel.GetPrice(),
+                    Address = RateTheHotel.GetAddress(),
+                    HotelID = "default",
+                    ImgURL = "default"
+                }
+            };
+            return saveInfoHotel;
+        }
         public static List<Review> SaveRate()
         {
             Console.WriteLine("Oceń hotel w skali od 0 do 5");
