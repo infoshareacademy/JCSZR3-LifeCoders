@@ -7,6 +7,7 @@ using System.Linq;
 using System.Diagnostics;
 using TravelerAppCore.Controller;
 using TravelerAppCore.View;
+using TravelerAppCore.Models;
 
 namespace TravelerAppConsole
 {
@@ -15,13 +16,21 @@ namespace TravelerAppConsole
         static void Main(string[] args)
         {
             //Ustawia wysokość i szerokość okna konsoli na określone wartości.
-            Console.SetWindowSize(180, 30);
+            //Console.SetWindowSize(180, 30);
 
             List<Root> dataReaded = new List<Root>();
-            JSON.Read(dataReaded);
+ 
+            SearchHotel hotels = new SearchHotel(new ByName(), new ByLocalization(), new ByRate());
 
-            List<Root> dataSaved = new List<Root>();
-            JSON.Write(dataSaved);
+            //Menu
+            JSON.Write();
+            JSON.Read(dataReaded);
+                DrawTable.Hotelinfo(dataReaded, GetAverage.Rates(dataReaded).Count(), true);
+            //hotels.SearchByName();
+            //hotels.SearchByLocalization();
+            //hotels.SearchByRate();
+            //hotels.GetSearch(dataReaded);
+
 
             //Dostępne informacje:
             //-Poszczególne kryteria ocen:
@@ -48,9 +57,6 @@ namespace TravelerAppConsole
             //  string hotelAddress = dataReaded[0].HotelInfo.Address; //zawiera HTML
             //  string hotelID = dataReaded[0].HotelInfo.HotelID;
             //  string hotelImgURL = dataReaded[0].HotelInfo.ImgURL;
-
-            int numberOfRecords = 10;
-            DrawTable.Hotelinfo(dataReaded, numberOfRecords);
 
         }
 
