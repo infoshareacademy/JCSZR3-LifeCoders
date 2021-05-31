@@ -48,7 +48,7 @@ namespace TravelerAppCore.Controller
 
         public static void Write()
         {
-            string sJsonFile = JsonConvert.SerializeObject(RateTheHotel.SaveInfoHotel());
+            string sJsonFile = JsonConvert.SerializeObject(AddHotelInfo.CreateNew());
 
             string sCurrentDirectory = AppDomain.CurrentDomain.BaseDirectory;
             string sFile = Path.Combine(sCurrentDirectory, @"..\..\..\..\TravelerAppCore\Data\JSON_CreatedHotels");
@@ -60,10 +60,10 @@ namespace TravelerAppCore.Controller
             string sFileJson = Path.Combine(sFilePath, $"{sName}.json");
             try
             {
-                
+
                 using (StreamWriter sw = new StreamWriter(sFileJson))
                 {
-                    sw.WriteLine(sJsonFile);                  
+                    sw.WriteLine(sJsonFile);
                 }
             }
             catch (Exception ex)
