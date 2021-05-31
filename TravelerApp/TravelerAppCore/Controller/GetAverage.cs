@@ -22,9 +22,15 @@ namespace TravelerAppCore.Controller
                 int cleanliness = 0;
                 float averageValue = 0;
                 int value = 0;
-
+                float averageSleepQuality = 0;
+                int sleepQuality = 0;
+                float averageRooms = 0;
+                int rooms = 0;
+                float averageLocation = 0;
+                int location = 0;
                 foreach (Review item in hotel.Reviews)
                 {
+
                     if (item.Ratings.Overall != 0)
                     {
                         averageOverall += item.Ratings.Overall;
@@ -45,18 +51,38 @@ namespace TravelerAppCore.Controller
                         averageValue += item.Ratings.Value;
                         value++;
                     }
+                    if (item.Ratings.SleepQuality != 0)
+                    {
+                        averageSleepQuality += item.Ratings.SleepQuality;
+                        sleepQuality++;
+                    }
+                    if (item.Ratings.Rooms != 0)
+                    {
+                        averageRooms += item.Ratings.Rooms;
+                        rooms++;
+                    }
+                    if (item.Ratings.Location != 0)
+                    {
+                        averageLocation += item.Ratings.Location;
+                        location++;
+                    }
+
                 }
                 averages.Add(new Root()
                 {
                     Reviews = new List<Review>() { new Review() { Ratings = new Ratings() {
-                    Overall = (averageOverall + averageService + averageCleanliness + averageValue)
-                                / (float)(overall + service + cleanliness + value),
+                    Overall = (averageOverall + averageService + averageCleanliness + averageValue + averageSleepQuality + averageRooms + averageLocation)
+                                / (float)(overall + service + cleanliness + value + sleepQuality + rooms + location),
                     Service = averageService / (float)service,
                     Cleanliness = averageCleanliness / (float)cleanliness,
-                    Value = averageValue / (float)value
+                    Value = averageValue / (float)value,
+                    SleepQuality = averageSleepQuality / (float)sleepQuality,
+                    Rooms = averageRooms / (float)rooms,
+                    Location = averageLocation / (float)location
                     } } }
                 });
             }
+            
             return averages;
         }
     }
