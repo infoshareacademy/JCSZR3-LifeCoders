@@ -9,7 +9,7 @@ namespace TravelerAppCore.Controller
 {
     public static class RateTheHotel
     {
-        public static Root SaveInfo()
+        public static HotelInfo SaveInfo()
         {
             Console.WriteLine("Podaj informacje o hotelu");
             Root saveInfoHotel = new Root()
@@ -24,7 +24,7 @@ namespace TravelerAppCore.Controller
                     ImgURL = "default"
                 }
             };
-            return saveInfoHotel;
+            return saveInfoHotel.HotelInfo;
         }
         public static List<Review> SaveRate()
         {
