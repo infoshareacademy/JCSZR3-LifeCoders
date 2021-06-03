@@ -52,9 +52,9 @@ namespace TravelerAppConsole
 
                 Console.Clear();
                 Console.WriteLine(">>>Menu<<<");
-                Console.WriteLine("1. - Wyszukiwanie");
-                Console.WriteLine("2. - Sortowanie ");
-                Console.WriteLine("Wybierz jedną z powyższych opcji");
+                Console.WriteLine("1. - Search");
+                Console.WriteLine("2. - Sort ");
+                Console.WriteLine("Choose one option");
                ConsoleKeyInfo key = Console.ReadKey();
                chooseOption(key);
           
@@ -68,72 +68,69 @@ namespace TravelerAppConsole
                 Console.Clear();
                 Console.WriteLine("Po czym chcesz wyszukiwać");
                 Console.WriteLine(
-                    "         N - po nazwie hotelu, \n \t R-po ocenie hotelu,\n \t M-po nazwie miasta \n \tEsc-wróć poziom wyżej");
+                    "N - po nazwie hotelu, \n \t R-po ocenie hotelu,\n \t -po nazwie miasta \n \tEsc-wróć poziom wyżej");
                 while (true)
                 {
-                
 
-                ConsoleKeyInfo key2 = Console.ReadKey();
-                switch (key2.Key)
-                {
-                    case ConsoleKey.N:
-                        SearchOption(key2);
-                        break;
-                    case ConsoleKey.R:
-                        SearchOption(key2);
-                        break;
-                    case ConsoleKey.M:
-                        SearchOption(key2);
-                        break;
-                    case ConsoleKey.Escape:
-                        PLlanguage();
-                        break;
-                    default:
-                     
+
+                    ConsoleKeyInfo key2 = Console.ReadKey();
+                    if (key2.Key != ConsoleKey.L && key2.Key != ConsoleKey.N && key2.Key != ConsoleKey.R)
+                    {
+                        
                         chooseOption(key);
-                        break;
-
-
+                       
+                    }
+                    else if (key2.Key == ConsoleKey.Escape)
+                    {
+                        
+                        chooseOption(key);
+                       
+                    }
+                    else
+                        Choice(key2,key);
                 }
+   
             }
-        }
             else if (key.Key == ConsoleKey.D2)
             {
                 Console.Clear();
                 Console.WriteLine("Po czym chcesz sortować");
                 Console.WriteLine(
-                    "         N - po nazwie hotelu, \n R-po ocenie hotelu,\n M-po nazwie miasta \n Esc-wróć poziom wyżej");
+                    "         R-sortowanie po ocenie Esc-wróć poziom wyżej");
                 while (true)
                 {
                     ConsoleKeyInfo key2 = Console.ReadKey();
-                    switch (key2.Key)
+                    if ( key2.Key != ConsoleKey.R)
                     {
-                        case ConsoleKey.N:
-                            SortOption(key2);
-                            break;
-                        case ConsoleKey.R:
-                            SortOption(key2);
-                            break;
-                        case ConsoleKey.M:
-                            SortOption(key2);
-                            break;
-                        case ConsoleKey.Escape:
-                            PLlanguage();
-                            break;
-                        default:
-                            Console.WriteLine("Wrong Option");
-                            chooseOption(key);
-                            break;
 
+                        chooseOption(key);
 
                     }
+                    else if (key2.Key == ConsoleKey.Escape)
+                    {
+
+                        chooseOption(key);
+
+                    }
+                    else
+                        Choice(key2,key);
+
+
+
                 }
             }
-            else if(key.Key==ConsoleKey.Escape)
+            else if (key.Key == ConsoleKey.Escape)
+            {
                 Environment.Exit(0);
-
+               
+            }
            
             
+        }
+
+        public void Choice(ConsoleKeyInfo key2,ConsoleKeyInfo key)
+        {
+          
         }
 
         public void  SearchOption(ConsoleKeyInfo key)
@@ -155,7 +152,7 @@ namespace TravelerAppConsole
             List<Root> dataReaded = new List<Root>();
             JSON.Read(dataReaded);
             Console.WriteLine("Uruchomiono SortOption");
-            TravelerAppCore.Controller.Sort.sort(dataReaded);
+           // TravelerAppCore.Controller.Sort.sort(dataReaded);
         }
 
     }
