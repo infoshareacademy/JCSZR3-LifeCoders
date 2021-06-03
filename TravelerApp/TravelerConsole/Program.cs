@@ -58,7 +58,7 @@ namespace TravelerAppConsole
 
             int numberOfRecords = 10;
             DrawTable.Hotelinfo(dataReaded, numberOfRecords);
-             new MenuInterface().chooseLanguage();
+            new MenuInterface().Menu();
 
         }
 
