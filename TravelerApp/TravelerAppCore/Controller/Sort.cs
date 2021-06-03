@@ -15,7 +15,7 @@ namespace TravelerAppCore.Controller
             List<Root> hotelRatings = targetData;
 
 
-            // hotelPrice.Sort();
+           
 
             hotelRatings.Sort(IComparer);
 
