@@ -12,128 +12,68 @@ using TravelerAppCore.Models;
 
 namespace TravelerAppConsole
 {
-  
+    public class Item
+    {
+
+
+        public string text { get; set; }
+        public ConsoleKey Key { get; set; }
+        public Del met { get; set; }
+        public Item(ConsoleKey k, string n, Del M1)
+        {
+            Key = k;
+            text = n;
+            met = M1;
+        }
+
+    }
 
     public class MenuInterface
     {
-      
+        public static List<Item> lista { get; set; }
 
-        public void Menu()
+        public static void MenuAddItem(ConsoleKey K, string napis, Del method, List<Item> lista)
         {
 
-
-            Console.Title = "Interface menu";
-            Console.Clear();
-                Console.WriteLine(">>>Menu<<<");
-                Console.WriteLine("1. - Search");
-                Console.WriteLine("2. - Sort ");
-                Console.WriteLine("Choose one option");
-               ConsoleKeyInfo key = Console.ReadKey();
-               chooseOption(key);
-          
-        }
-
-        public void chooseOption(ConsoleKeyInfo key)
-        {
-
-            if (key.Key == ConsoleKey.D1)
-            {
-                Console.Clear();
-                Console.WriteLine("Which option do you want to search?");
-                Console.WriteLine(
-                    "\n\tN - by hotel name, \n \tR - by hotel rate,\n \tL - by hotel localisation  \n \tEsc-level up");
-                while (true)
-                {
-
-
-                    ConsoleKeyInfo key2 = Console.ReadKey();
-                    if (key2.Key == ConsoleKey.L || key2.Key == ConsoleKey.N || key2.Key == ConsoleKey.R)
-                    {
-                        
-                        Choice(key2,key);
-                       
-                    }
-                    else if (key2.Key == ConsoleKey.Escape)
-                    {
-
-                        Menu();
-
-                    }
-                    else
-                        chooseOption(key);
-                }
-   
-            }
-            else if (key.Key == ConsoleKey.D2)
-            {
-                Console.Clear();
-                Console.WriteLine("Choose one option");
-                Console.WriteLine(
-                    "\n\tR-Sort by rate \n\tEsc-level up");
-                while (true)
-                {
-                    ConsoleKeyInfo key2 = Console.ReadKey();
-                    if (key2.Key == ConsoleKey.R)
-                    {
-
-                        Choice(key2, key);
-
-                    }
-                    else if (key2.Key == ConsoleKey.Escape)
-                    {
-
-                        Menu();
-
-                    }
-                    else
-                        chooseOption(key);
-
-
-
-                }
-            }
-            else if (key.Key == ConsoleKey.Escape)
-            {
-                Environment.Exit(0);
-               
-            }
-           
             
-        }
 
-        public void Choice(ConsoleKeyInfo key2,ConsoleKeyInfo key)
+            var i = new Item(K, napis, method);
+            lista.Add(i);
+
+
+        }
+        public static void Menu(List<Item> lista)
         {
-            if (key.Key == ConsoleKey.D1)
+            foreach (var item in lista)
             {
-                if (key2.Key == ConsoleKey.L)
-                    Console.WriteLine("SearchByLocalisation");
-                    // hotels.SearchByLocalization();;
-                    
-                else if (key2.Key == ConsoleKey.N)
-                    Console.WriteLine("searchByName");
-                    //hotels.SearchByName();
-                    
-                else if (key2.Key == ConsoleKey.R)
-                    Console.WriteLine("searchByRate");
-                    //hotels.SearchByRate();
-                    ;
-            }
-            else 
-            {
-
-                if (key2.Key == ConsoleKey.R)
-                    Console.WriteLine("Sort");
-                    // hotels.Sort();
-                    ;
-              
-                    
-
-
+                Console.WriteLine(item.Key.ToString() + " " + item.text);
             }
 
         }
 
+        public static void MenuWork( List<Item> lista)
+        {
+            ConsoleKeyInfo key = Console.ReadKey();
+            List<Root> dataReaded = new List<Root>();
+            JSON.Read(dataReaded);
+            int tmp = 0;
+            foreach (var item in lista)
+            {
+                if (key.Key == item.Key)
+                {
+                    item.met(dataReaded);
+                    tmp = 1;
+                }
+            }
+            if (tmp == 0)
+                MenuWork(lista);
+                    
+
+
+        }
 
 
     }
+    public delegate void Del(List<Root> targetData);
+
 }

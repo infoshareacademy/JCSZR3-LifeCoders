@@ -58,8 +58,16 @@ namespace TravelerAppConsole
 
             int numberOfRecords = 10;
             DrawTable.Hotelinfo(dataReaded, numberOfRecords);
-            new MenuInterface().Menu();
-
+            //Zmieniam funkcję wyszukiwanie po lokalizacji na typ delegata ja nazwałam go Del, żebym mogła dodać ją do parametrów funkcji
+            Del jakas = TravelerAppCore.Models.Search.byLocalisation;
+           
+           
+            List<Item> lista = new List<Item>();//lista znaków jakie może wpisywać użytkownik, żeby poruszać się po menu
+            MenuInterface.MenuAddItem( ConsoleKey.L,"by localisation", jakas,lista);//metoda która dodaje nową funkcjonalność do Menu
+            //pierwszy parametr oznacza znak z klawiatury po którym użytkownik włączy funkcjonalność, 2 to tekst jaki się będzie wyświetlał w menu
+            //3 parametr to wasza funkcja zmieniona na typ delegata.
+            MenuInterface.Menu(lista);//wyświetlenie wszystkich funkcjonalności które są zapisane do menu
+            MenuInterface.MenuWork(lista);//uruchomienie wyboru użytkownika, jeśli wybór jest na liście uruchamia funkcjonalność
         }
 
         
