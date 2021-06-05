@@ -46,7 +46,7 @@ namespace TravelerAppCore.View
         public static void Hotelinfo(List<Root> dataReaded, int numRecords)
         {
             //Przykład wypisywania informacji w tabeli - użytek dowolny i własnowolny
-            DrawTable.tableWidth = 165;
+            DrawTable.tableWidth = 185;
             DrawTable.PrintLine();
             DrawTable.tableWidth = 15;
             DrawTable.PrintRow(false, "Id");
@@ -54,11 +54,11 @@ namespace TravelerAppCore.View
             DrawTable.PrintRow(false, "Name", "HotelUrl");
             DrawTable.tableWidth = 15;
             DrawTable.PrintRow(false, "Price");
-            DrawTable.tableWidth = 40;
+            DrawTable.tableWidth = 60;
             DrawTable.PrintRow(false, "Address");
             DrawTable.tableWidth = 15;
             DrawTable.PrintRow(true, "HotelID");
-            DrawTable.tableWidth = 165;
+            DrawTable.tableWidth = 185;
             DrawTable.PrintLine();
             int count = 1;
             for (int i = 0; i < numRecords; i++)
@@ -69,13 +69,13 @@ namespace TravelerAppCore.View
                 DrawTable.PrintRow(false, dataReaded[i].HotelInfo.Name, dataReaded[i].HotelInfo.HotelURL);
                 DrawTable.tableWidth = 15;
                 DrawTable.PrintRow(false, dataReaded[i].HotelInfo.Price);
-                DrawTable.tableWidth = 40;
+                DrawTable.tableWidth = 60;
                 DrawTable.PrintRow(false, dataReaded[i].HotelInfo.Address);
                 DrawTable.tableWidth = 15;
                 DrawTable.PrintRow(true, dataReaded[i].HotelInfo.HotelID);
                 //count++;
             }
-            DrawTable.tableWidth = 165;
+            DrawTable.tableWidth = 185;
             DrawTable.PrintLine();
         }
     }
