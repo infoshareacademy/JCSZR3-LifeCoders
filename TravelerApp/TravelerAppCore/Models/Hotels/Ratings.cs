@@ -1,9 +1,4 @@
 ﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TravelerAppCore.Models.Hotels
 {
@@ -22,5 +17,7 @@ namespace TravelerAppCore.Models.Hotels
 
         [JsonProperty("Businessservice(e.g.,internetaccess)")]
         public string BusinessserviceEGInternetaccess { get; set; }
+
+
     }
 }
