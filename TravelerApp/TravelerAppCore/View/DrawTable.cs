@@ -51,7 +51,7 @@ namespace TravelerAppCore.View
             DrawTable.PrintRow(false, "Name");
             DrawTable.tableWidth = 15;
             DrawTable.PrintRow(false, "Price");
-            DrawTable.tableWidth = 40;
+            DrawTable.tableWidth = 60;
             DrawTable.PrintRow(false, "Address");
             DrawTable.tableWidth = 15;
             if (withRate) { DrawTable.PrintRow(true, "Rate"); }
@@ -66,7 +66,7 @@ namespace TravelerAppCore.View
                 DrawTable.PrintRow(false, dataReaded[i].HotelInfo.Name);
                 DrawTable.tableWidth = 15;
                 DrawTable.PrintRow(false, dataReaded[i].HotelInfo.Price);
-                DrawTable.tableWidth = 40;
+                DrawTable.tableWidth = 60;
                 DrawTable.PrintRow(false, dataReaded[i].HotelInfo.Address);
                 DrawTable.tableWidth = 15;
                 if (withRate) { DrawTable.PrintRow(true, (dataReaded[i].AverageRates.Overall).ToString("0.00")); }
