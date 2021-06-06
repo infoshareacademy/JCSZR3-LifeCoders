@@ -15,6 +15,8 @@ namespace TravelerAppConsole
                 new Option("Wczytaj bazę hoteli", ReadWriteHotel.ReadAndDisplay),
                 new Option("Zapisz hotel", new Hotel().CreateNew),
                 new Option("Wyszukaj po lokalizacji", Search.ByLocalisation),
+                new Option("Wyszukaj po nazwie", Search.ByName),
+                new Option("Wyszukaj po ocenie", Search.ByRate),
             };
             new Menu(options).Interface();
         }

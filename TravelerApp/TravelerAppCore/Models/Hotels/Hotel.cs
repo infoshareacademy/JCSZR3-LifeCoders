@@ -113,7 +113,7 @@ namespace TravelerAppCore.Models.Hotels
         }
         private void SaveToFile(List<Hotel> NewHotel)
         {
-            Console.WriteLine("Czy zapisać informacje do pliku .json? ( T / N )");
+            Console.WriteLine("-\nCzy zapisać informacje do pliku .json? ( T / N )");
             ConsoleKeyInfo info = Console.ReadKey(true);
             while (info.Key != ConsoleKey.T && info.Key != ConsoleKey.N)
             {
@@ -181,17 +181,30 @@ namespace TravelerAppCore.Models.Hotels
         }
         private string GetAddress()
         {
-            log = "Adres: ";
+            Console.WriteLine("-\nPodaj adres");
+            string log = "Nazwa ulicy: ";
             Console.WriteLine(log);
-            Console.SetCursorPosition(log.Length + 1, Console.CursorTop - 1);
-            return Console.ReadLine();
+            Console.SetCursorPosition(log.Length, Console.CursorTop - 1);
+            string street = Console.ReadLine();
+            log = "Nazwa miasta: ";
+            Console.WriteLine(log);
+            Console.SetCursorPosition(log.Length, Console.CursorTop - 1);
+            string city = Console.ReadLine();
+            log = "Kod pocztowy: ";
+            Console.WriteLine(log);
+            Console.SetCursorPosition(log.Length, Console.CursorTop - 1);
+            string postalcode = Console.ReadLine();
+            Console.WriteLine("-");
+            return city + ", " + street + ", " + postalcode;
         }
-        private float GetRate()
+        public static float GetRate()
         {
             float fRateHotel = 0;
             while (!float.TryParse(Console.ReadLine(), out fRateHotel) || fRateHotel < 0 || fRateHotel > 5)
             {
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("* Ocena tylko w skali 0 do 5!");
+                Console.ResetColor();
             }
             return fRateHotel;
         }

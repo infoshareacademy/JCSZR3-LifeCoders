@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using TravelerAppConsole;
 using TravelerAppCore.Models.Hotels;
 using TravelerAppCore.View;
@@ -12,16 +13,16 @@ namespace TravelerAppCore.Controller
 {
     public class ReadWriteHotel
     {
-        public static void ReadAndDisplay(List<Hotel> dataReaded)
+        public static void ReadAndDisplay(List<Hotel> Data)
         {
-            Read(dataReaded);
-            DisplayLoadedData(dataReaded);
+            Read(Data);
+            DisplayLoadedData(Data);
         }
         public static Stopwatch stopper = new Stopwatch();
-        public static void Read(List<Hotel> dataReaded)
+        public static void Read(List<Hotel> Data)
         {
             stopper.Start();
-            dataReaded.Clear();
+            Data.Clear();
             string sCurrentDirectory = AppDomain.CurrentDomain.BaseDirectory;
             string sFile = Path.Combine(sCurrentDirectory, @"..\..\..\..\TravelerAppCore\Data\JSON_Hotels");
             string sFilePath = Path.GetFullPath(sFile);
@@ -36,35 +37,58 @@ namespace TravelerAppCore.Controller
                     using (StreamReader reader = new StreamReader(sFileJson))
                     {
                         jsonFromFiles = reader.ReadToEnd();
-                        dataReaded.Add(JsonConvert.DeserializeObject<Hotel>(jsonFromFiles));
+                        Data.Add(JsonConvert.DeserializeObject<Hotel>(jsonFromFiles));
                     }
                 }
                 catch (Exception ex)
                 {
                 }
             }
+            Data = FixAddress(Data);
             stopper.Stop();
-
         }
-        public static void DisplayLoadedData(List<Hotel> dataReaded)
+        public static List<Hotel> FixAddress(List<Hotel> baseData)
+        {
+            foreach (Hotel hotel in baseData)
+            {
+                var address = Regex.Replace(hotel.HotelInfo.Address, "<.*?>", string.Empty);
+
+                Regex rg = new Regex(@"(?<street>.+),\s(?<city>.+),\s(?<postalCode>.+)");
+                var addressMatch = rg.Match(address);
+                string street = addressMatch.Groups["street"].Value;
+                string city = addressMatch.Groups["city"].Value;
+                string postalCode = addressMatch.Groups["postalCode"].Value;
+
+                street = street.Trim();
+                city = city.Trim();
+                postalCode = postalCode.Trim();
+
+                hotel.HotelInfo.Address = $"{city}, {street}, {postalCode}";
+
+            }
+            return baseData;
+        }
+
+        public static void DisplayLoadedData(List<Hotel> Data)
         {
             Console.WriteLine("----------------------------------------------------");
             Console.WriteLine($"Czas odczytu wszystkich plików: {stopper.Elapsed}");
-            Console.WriteLine($"Ilość odczytanych plików: {dataReaded.Count()}");
+            Console.WriteLine($"Ilość odczytanych plików: {Data.Count()}");
             Console.WriteLine("Koniec deserializacji");
             Console.WriteLine("----------------------------------------------------\n");
-            DrawTable.Hotelinfo(dataReaded, dataReaded.Count(), true);
+            DrawTable.Hotelinfo(Data, Data.Count, true);
+
         }
 
-        public static void WriteAndDisplay(List<Hotel> dataReaded)
+        public static void WriteAndDisplay(List<Hotel> Data)
         {
-            Write(dataReaded);
-            DisplaySavedData(dataReaded);
+            Write(Data);
+            DisplaySavedData(Data);
         }
 
-        public static void Write(List<Hotel> targetData)
+        public static void Write(List<Hotel> Data)
         {
-            string sJsonFile = JsonConvert.SerializeObject(targetData.Last());
+            string sJsonFile = JsonConvert.SerializeObject(Data.Last());
             string sCurrentDirectory = AppDomain.CurrentDomain.BaseDirectory;
             string sFile = Path.Combine(sCurrentDirectory, @"..\..\..\..\TravelerAppCore\Data\JSON_Hotels");
             string sFilePath = Path.GetFullPath(sFile);
@@ -84,9 +108,8 @@ namespace TravelerAppCore.Controller
             catch (Exception ex)
             {
             }
-
         }
-        public static void DisplaySavedData(List<Hotel> targetData)
+        public static void DisplaySavedData(List<Hotel> Data)
         {
             Console.Clear();
             new Menu().DisplayMenu();
@@ -94,7 +117,8 @@ namespace TravelerAppCore.Controller
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("Plik został zapisany!");
             Console.ResetColor();
-            DrawTable.Hotelinfo(new List<Hotel>() { targetData.Last() }, 1, true);
+            if (!Menu.MultipleOptions && Data.Count() != 0) DrawTable.Hotelinfo(new List<Hotel>() { Data.Last() }, 1, true);
         }
+
     }
 }
