@@ -124,75 +124,56 @@ namespace TravelerAppCore.Models.Hotels
 
         private float GetService()
         {
-            log = "Jakość usług (0 - 5): ";
-            Console.WriteLine(log);
-            Console.SetCursorPosition(log.Length + 1, Console.CursorTop - 1);
+            Console.Write("Jakość usług (0 - 5): ");
             return GetRate();
         }
         private float GetCleanliness()
         {
-            log = "Czystość (0 - 5): ";
-            Console.WriteLine(log);
-            Console.SetCursorPosition(log.Length + 1, Console.CursorTop - 1);
+            Console.Write("Czystość (0 - 5): ");
             return GetRate();
         }
         private float GetValue()
         {
-            log = "Stosunek jakości do ceny (0 - 5): ";
-            Console.WriteLine(log);
-            Console.SetCursorPosition(log.Length + 1, Console.CursorTop - 1);
+            Console.Write("Stosunek jakości do ceny (0 - 5): ");
             return GetRate();
         }
         private float GetSleepQuality()
         {
-            log = "Komfort (0 - 5): ";
-            Console.WriteLine(log);
-            Console.SetCursorPosition(log.Length + 1, Console.CursorTop - 1);
+            Console.Write("Komfort (0 - 5): ");
             return GetRate();
         }
         private float GetRooms()
         {
-            log = "Wygląd (0 - 5): ";
-            Console.WriteLine(log);
-            Console.SetCursorPosition(log.Length + 1, Console.CursorTop - 1);
+            Console.Write("Wygląd (0 - 5): ");
             return GetRate();
         }
         private float GetLocation()
         {
-            log = "Lokalizacja (0 - 5): ";
-            Console.WriteLine(log);
-            Console.SetCursorPosition(log.Length + 1, Console.CursorTop - 1);
+            Console.Write("Lokalizacja (0 - 5): ");
             return GetRate();
         }
 
         private string GetName()
         {
-            log = "Nazwa hotelu: ";
-            Console.WriteLine(log);
-            Console.SetCursorPosition(log.Length + 1, Console.CursorTop - 1);
+            Console.Write("Nazwa hotelu: ");
             return Console.ReadLine();
         }
         private string GetPrice()
         {
-            log = "Zakres cenowy: ";
-            Console.WriteLine(log);
-            Console.SetCursorPosition(log.Length + 1, Console.CursorTop - 1);
+            Console.Write("Zakres cenowy: ");
             return Console.ReadLine();
         }
         private string GetAddress()
         {
             Console.WriteLine("-\nPodaj adres");
-            string log = "Nazwa ulicy: ";
-            Console.WriteLine(log);
-            Console.SetCursorPosition(log.Length, Console.CursorTop - 1);
+
+            Console.Write("Nazwa ulicy: ");
             string street = Console.ReadLine();
-            log = "Nazwa miasta: ";
-            Console.WriteLine(log);
-            Console.SetCursorPosition(log.Length, Console.CursorTop - 1);
+
+            Console.Write("Nazwa miasta: ");
             string city = Console.ReadLine();
-            log = "Kod pocztowy: ";
-            Console.WriteLine(log);
-            Console.SetCursorPosition(log.Length, Console.CursorTop - 1);
+
+            Console.Write("Kod pocztowy: ");
             string postalcode = Console.ReadLine();
             Console.WriteLine("-");
             return city + ", " + street + ", " + postalcode;
@@ -203,7 +184,7 @@ namespace TravelerAppCore.Models.Hotels
             while (!float.TryParse(Console.ReadLine(), out fRateHotel) || fRateHotel < 0 || fRateHotel > 5)
             {
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("* Ocena tylko w skali 0 do 5!");
+                Console.Write("* Ocena tylko w skali 0 do 5! ");
                 Console.ResetColor();
             }
             return fRateHotel;
