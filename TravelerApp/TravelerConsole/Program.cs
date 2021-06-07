@@ -12,7 +12,7 @@ namespace TravelerAppConsole
             Console.SetWindowSize(180, 30);
 
             Option[] options = new Option[] {
-                new Option("Wczytaj bazę hoteli", ReadWriteHotel.ReadAndDisplay),
+                new Option("Wczytaj bazę hoteli", HotelService.ReadAndDisplay),
                 new Option("Zapisz hotel", new Hotel().CreateNew),
                 new Option("Wyszukaj po lokalizacji", Search.ByLocalisation),
                 new Option("Wyszukaj po nazwie", Search.ByName),

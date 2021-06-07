@@ -11,7 +11,7 @@ using TravelerAppCore.View;
 
 namespace TravelerAppCore.Controller
 {
-    public class ReadWriteHotel
+    public class HotelService
     {
         public static void ReadAndDisplay(List<Hotel> Data)
         {
@@ -23,14 +23,14 @@ namespace TravelerAppCore.Controller
         {
             stopper.Start();
             Data.Clear();
-            string sCurrentDirectory = AppDomain.CurrentDomain.BaseDirectory;
-            string sFile = Path.Combine(sCurrentDirectory, @"..\..\..\..\TravelerAppCore\Data\JSON_Hotels");
-            string sFilePath = Path.GetFullPath(sFile);
-            string[] jsonFiles = Directory.GetFiles(sFilePath, "*.json").Select(Path.GetFileName).ToArray();
+            string CurrentDirectory = AppDomain.CurrentDomain.BaseDirectory;
+            string File = Path.Combine(CurrentDirectory, @"..\..\..\..\TravelerAppCore\Data\JSON_Hotels");
+            string FilePath = Path.GetFullPath(File);
+            string[] jsonFiles = Directory.GetFiles(FilePath, "*.json").Select(Path.GetFileName).ToArray();
 
             foreach (var item in jsonFiles)
             {
-                string sFileJson = Path.Combine(sFilePath, item);
+                string sFileJson = Path.Combine(FilePath, item);
                 try
                 {
                     string jsonFromFiles;
@@ -52,23 +52,18 @@ namespace TravelerAppCore.Controller
             foreach (Hotel hotel in baseData)
             {
                 var address = Regex.Replace(hotel.HotelInfo.Address, "<.*?>", string.Empty);
-
                 Regex rg = new Regex(@"(?<street>.+),\s(?<city>.+),\s(?<postalCode>.+)");
                 var addressMatch = rg.Match(address);
                 string street = addressMatch.Groups["street"].Value;
                 string city = addressMatch.Groups["city"].Value;
                 string postalCode = addressMatch.Groups["postalCode"].Value;
-
                 street = street.Trim();
                 city = city.Trim();
                 postalCode = postalCode.Trim();
-
                 hotel.HotelInfo.Address = $"{city}, {street}, {postalCode}";
-
             }
             return baseData;
         }
-
         public static void DisplayLoadedData(List<Hotel> Data)
         {
             Console.WriteLine("----------------------------------------------------");
@@ -77,32 +72,26 @@ namespace TravelerAppCore.Controller
             Console.WriteLine("Koniec deserializacji");
             Console.WriteLine("----------------------------------------------------\n");
             DrawTable.Hotelinfo(Data, Data.Count, true);
-
         }
-
         public static void WriteAndDisplay(List<Hotel> Data)
         {
             Write(Data);
             DisplaySavedData(Data);
         }
-
         public static void Write(List<Hotel> Data)
         {
-            string sJsonFile = JsonConvert.SerializeObject(Data.Last());
-            string sCurrentDirectory = AppDomain.CurrentDomain.BaseDirectory;
-            string sFile = Path.Combine(sCurrentDirectory, @"..\..\..\..\TravelerAppCore\Data\JSON_Hotels");
-            string sFilePath = Path.GetFullPath(sFile);
-
+            string JsonFile = JsonConvert.SerializeObject(Data.Last());
+            string CurrentDirectory = AppDomain.CurrentDomain.BaseDirectory;
+            string File = Path.Combine(CurrentDirectory, @"..\..\..\..\TravelerAppCore\Data\JSON_Hotels");
+            string FilePath = Path.GetFullPath(File);
             Console.WriteLine("\nPodaj nazwę pliku do zapisu");
-            string sName = Console.ReadLine();
-
-            string sFileJson = Path.Combine(sFilePath, $"{sName}.json");
+            string Name = Console.ReadLine();
+            string FileJson = Path.Combine(FilePath, $"{Name}.json");
             try
             {
-
-                using (StreamWriter sw = new StreamWriter(sFileJson))
+                using (StreamWriter sw = new StreamWriter(FileJson))
                 {
-                    sw.WriteLine(sJsonFile);
+                    sw.WriteLine(JsonFile);
                 }
             }
             catch (Exception ex)
@@ -119,6 +108,5 @@ namespace TravelerAppCore.Controller
             Console.ResetColor();
             if (!Menu.MultipleOptions && Data.Count() != 0) DrawTable.Hotelinfo(new List<Hotel>() { Data.Last() }, 1, true);
         }
-
     }
 }

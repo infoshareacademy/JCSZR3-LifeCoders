@@ -8,26 +8,24 @@ namespace TravelerAppConsole
 {
     public class Option
     {
-        private static int num = 0;
-        public int _num { get; set; }
-        public string _text { get; set; }
-        public Del _met { get; set; }
-        public Option(string n, Del M1)
+        private static int id = 0;
+        public int _id { get; set; }
+        public string _optionText { get; set; }
+        public Options _menuOptions { get; set; }
+        public Option(string optionText, Options options)
         {
-            _text = n;
-            _met = M1;
-            _num = num;
-            num++;
+            _optionText = optionText;
+            _menuOptions = options;
+            _id = id;
+            id++;
         }
     }
-
     public class Menu
     {
         public static List<Option> MenuList = new List<Option>();
         private static List<Option> SelectedOptions = new List<Option>();
         public static List<Hotel> Data = new List<Hotel>();
         public static List<Hotel> DataReaded = new List<Hotel>();
-
         public static bool MultipleOptions { get; set; }
 
         public Menu() { }
@@ -38,7 +36,6 @@ namespace TravelerAppConsole
                 MenuList.Add(option);
             }
         }
-
         static int origRow = Console.CursorTop;
         static int origCol = Console.CursorLeft;
         static void WriteAt(string s, int x, int y)
@@ -59,21 +56,19 @@ namespace TravelerAppConsole
         public void DisplayMenu()
         {
             Console.CursorVisible = false;
-
             Console.WriteLine("Menu:");
             origRow = Console.CursorTop;
             origCol = Console.CursorLeft;
-
             foreach (var item in MenuList)
             {
-                if (i == item._num)
+                if (i == item._id)
                 {
                     Console.ForegroundColor = ConsoleColor.Black;
                     Console.BackgroundColor = ConsoleColor.White;
-                    Console.WriteLine($" {(char)16}  {item._text}");
+                    Console.WriteLine($" {(char)16}  {item._optionText}");
                     Console.ResetColor();
                 }
-                else Console.WriteLine($"[ ] {item._text}");
+                else Console.WriteLine($"[ ] {item._optionText}");
             }
         }
         public void Interface()
@@ -91,25 +86,25 @@ namespace TravelerAppConsole
                     if (!selected[i + 1])
                     {
                         Console.ResetColor();
-                        WriteAt($"[ ] {MenuList[i + 1]._text}   ", 0, i + 1);
+                        WriteAt($"[ ] {MenuList[i + 1]._optionText}   ", 0, i + 1);
                     }
                     if (selected[i + 1] || selected[i])
                     {
                         Console.ForegroundColor = ConsoleColor.Green;
-                        WriteAt($"[█] {MenuList[i + 1]._text}   ", 0, i + 1);
+                        WriteAt($"[█] {MenuList[i + 1]._optionText}   ", 0, i + 1);
                         Console.ResetColor();
                     }
                     if (!selected[i])
                     {
                         Console.ForegroundColor = ConsoleColor.Black;
                         Console.BackgroundColor = ConsoleColor.White;
-                        WriteAt($" {(char)16}  {MenuList[i]._text}", 0, i);
+                        WriteAt($" {(char)16}  {MenuList[i]._optionText}", 0, i);
                         Console.ResetColor();
                     }
                     if (selected[i])
                     {
                         Console.ForegroundColor = ConsoleColor.Green;
-                        WriteAt($"[█] {MenuList[i]._text} {(char)17}   ", 0, i);
+                        WriteAt($"[█] {MenuList[i]._optionText} {(char)17}   ", 0, i);
                         Console.ResetColor();
                     }
                 }
@@ -122,29 +117,27 @@ namespace TravelerAppConsole
                     {
                         Console.ForegroundColor = ConsoleColor.Black;
                         Console.BackgroundColor = ConsoleColor.White;
-                        WriteAt($" {(char)16}  {MenuList[i]._text}", 0, i);
+                        WriteAt($" {(char)16}  {MenuList[i]._optionText}", 0, i);
                         Console.ResetColor();
                     }
                     if (!selected[i - 1])
                     {
                         Console.ResetColor();
-                        WriteAt($"[ ] {MenuList[i - 1]._text}   ", 0, i - 1);
+                        WriteAt($"[ ] {MenuList[i - 1]._optionText}   ", 0, i - 1);
                     }
                     if (selected[i])
                     {
                         Console.ForegroundColor = ConsoleColor.Green;
-                        WriteAt($"[█] {MenuList[i]._text} {(char)17}", 0, i);
+                        WriteAt($"[█] {MenuList[i]._optionText} {(char)17}", 0, i);
                         Console.ResetColor();
                     }
                     if (selected[i - 1])
                     {
                         Console.ForegroundColor = ConsoleColor.Green;
-                        WriteAt($"[█] {MenuList[i - 1]._text}   ", 0, i - 1);
+                        WriteAt($"[█] {MenuList[i - 1]._optionText}   ", 0, i - 1);
                         Console.ResetColor();
                     }
                 }
-
-
                 if (info.Key == ConsoleKey.Spacebar)
                 {
                     selected[i] = selected[i] ? false : true;
@@ -152,19 +145,18 @@ namespace TravelerAppConsole
                     {
                         Console.ForegroundColor = ConsoleColor.Black;
                         Console.BackgroundColor = ConsoleColor.White;
-                        WriteAt($" {(char)16}  {MenuList[i]._text}  ", 0, i);
+                        WriteAt($" {(char)16}  {MenuList[i]._optionText}  ", 0, i);
                         Console.ResetColor();
                         SelectedOptions.Remove(MenuList[i]);
                     }
                     if (selected[i])
                     {
                         Console.ForegroundColor = ConsoleColor.Green;
-                        WriteAt($"[█] {MenuList[i]._text} {(char)17}   ", 0, i);
+                        WriteAt($"[█] {MenuList[i]._optionText} {(char)17}   ", 0, i);
                         Console.ResetColor();
                         SelectedOptions.Add(MenuList[i]);
                     }
                 }
-
                 if (info.Key == ConsoleKey.Enter)
                 {
                     int nextline = 0;
@@ -189,12 +181,12 @@ namespace TravelerAppConsole
 
                         foreach (var item in SelectedOptions)
                         {
-                            selected[item._num] = false;
+                            selected[item._id] = false;
                             Console.ResetColor();
                             origRow = MenuList.Count() + 2 + nextline;
                             origCol = 0;
                             Console.SetCursorPosition(origCol, origRow);
-                            item._met(Data);
+                            item._menuOptions(Data);
                             nextline++;
                         }
                         DrawTable.Hotelinfo(Data, Data.Count, true);
@@ -208,7 +200,7 @@ namespace TravelerAppConsole
                         origRow = MenuList.Count() + 2 + nextline;
                         origCol = 0;
                         Console.SetCursorPosition(origCol, origRow);
-                        SelectedOptions[0]._met(Data);
+                        SelectedOptions[0]._menuOptions(Data);
                     }
                     SelectedOptions.Clear();
                     origRow = 1;
@@ -218,7 +210,7 @@ namespace TravelerAppConsole
             } while (true);
         }
     }
-    public delegate void Del(List<Hotel> Data);
+    public delegate void Options(List<Hotel> Data);
 }
 
 

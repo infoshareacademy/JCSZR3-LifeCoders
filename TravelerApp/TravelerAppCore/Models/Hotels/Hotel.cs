@@ -8,8 +8,6 @@ namespace TravelerAppCore.Models.Hotels
     {
         public List<Review> Reviews { get; set; }
         public HotelInfo HotelInfo { get; set; }
-
-        private string log;
         private Ratings averages;
         public Ratings AverageRates
         {
@@ -33,37 +31,37 @@ namespace TravelerAppCore.Models.Hotels
                 foreach (Review item in Reviews)
                 {
 
-                    if (item.Ratings.Overall != 0)
+                    if (item.Ratings.Overall > 0 && item.Ratings.Overall <= 5)
                     {
                         averageOverall += item.Ratings.Overall;
                         overall++;
                     }
-                    if (item.Ratings.Service != 0)
+                    if (item.Ratings.Service > 0 && item.Ratings.Service <= 5)
                     {
                         averageService += item.Ratings.Service;
                         service++;
                     }
-                    if (item.Ratings.Cleanliness != 0)
+                    if (item.Ratings.Cleanliness > 0 && item.Ratings.Cleanliness <= 5)
                     {
                         averageCleanliness += item.Ratings.Cleanliness;
                         cleanliness++;
                     }
-                    if (item.Ratings.Value != 0)
+                    if (item.Ratings.Value > 0 && item.Ratings.Value <= 5)
                     {
                         averageValue += item.Ratings.Value;
                         value++;
                     }
-                    if (item.Ratings.SleepQuality != 0)
+                    if (item.Ratings.SleepQuality > 0 && item.Ratings.SleepQuality <= 5)
                     {
                         averageSleepQuality += item.Ratings.SleepQuality;
                         sleepQuality++;
                     }
-                    if (item.Ratings.Rooms != 0)
+                    if (item.Ratings.Rooms > 0 && item.Ratings.Rooms <= 5)
                     {
                         averageRooms += item.Ratings.Rooms;
                         rooms++;
                     }
-                    if (item.Ratings.Location != 0)
+                    if (item.Ratings.Location > 0 && item.Ratings.Location <= 5)
                     {
                         averageLocation += item.Ratings.Location;
                         location++;
@@ -83,7 +81,6 @@ namespace TravelerAppCore.Models.Hotels
                 return averages;
             }
         }
-
         public void CreateNew(List<Hotel> NewHotel)
         {
             NewHotel.Add(new Hotel()
@@ -119,40 +116,38 @@ namespace TravelerAppCore.Models.Hotels
             {
                 info = Console.ReadKey(true);
             }
-            if (info.Key == ConsoleKey.T) ReadWriteHotel.WriteAndDisplay(NewHotel);
+            if (info.Key == ConsoleKey.T) HotelService.WriteAndDisplay(NewHotel);
         }
-
         private float GetService()
         {
-            Console.Write("Jakość usług (0 - 5): ");
+            Console.Write("Jakość usług (1 - 5): ");
             return GetRate();
         }
         private float GetCleanliness()
         {
-            Console.Write("Czystość (0 - 5): ");
+            Console.Write("Czystość (1 - 5): ");
             return GetRate();
         }
         private float GetValue()
         {
-            Console.Write("Stosunek jakości do ceny (0 - 5): ");
+            Console.Write("Stosunek jakości do ceny (1 - 5): ");
             return GetRate();
         }
         private float GetSleepQuality()
         {
-            Console.Write("Komfort (0 - 5): ");
+            Console.Write("Komfort (1 - 5): ");
             return GetRate();
         }
         private float GetRooms()
         {
-            Console.Write("Wygląd (0 - 5): ");
+            Console.Write("Wygląd (1 - 5): ");
             return GetRate();
         }
         private float GetLocation()
         {
-            Console.Write("Lokalizacja (0 - 5): ");
+            Console.Write("Lokalizacja (1 - 5): ");
             return GetRate();
         }
-
         private string GetName()
         {
             Console.Write("Nazwa hotelu: ");
@@ -166,13 +161,10 @@ namespace TravelerAppCore.Models.Hotels
         private string GetAddress()
         {
             Console.WriteLine("-\nPodaj adres");
-
             Console.Write("Nazwa ulicy: ");
             string street = Console.ReadLine();
-
             Console.Write("Nazwa miasta: ");
             string city = Console.ReadLine();
-
             Console.Write("Kod pocztowy: ");
             string postalcode = Console.ReadLine();
             Console.WriteLine("-");
@@ -181,14 +173,13 @@ namespace TravelerAppCore.Models.Hotels
         public static float GetRate()
         {
             float fRateHotel = 0;
-            while (!float.TryParse(Console.ReadLine(), out fRateHotel) || fRateHotel < 0 || fRateHotel > 5)
+            while (!float.TryParse(Console.ReadLine(), out fRateHotel) || fRateHotel < 1 || fRateHotel > 5)
             {
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.Write("* Ocena tylko w skali 0 do 5! ");
+                Console.Write("* Ocena tylko w skali 1 do 5! ");
                 Console.ResetColor();
             }
             return fRateHotel;
         }
-
     }
 }

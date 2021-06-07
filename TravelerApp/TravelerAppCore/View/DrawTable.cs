@@ -11,25 +11,20 @@ namespace TravelerAppCore.View
         {
             Console.WriteLine(new string('-', tableWidth));
         }
-
         public static void PrintRow(bool newline, params string[] columns)
         {
             int width = (tableWidth - columns.Length) / columns.Length;
             string row = "";
-
             foreach (string column in columns)
             {
                 row += AlignCentre(column, width) + "|";
             }
-
             if (newline) { Console.WriteLine(row); }
             else Console.Write(row);
         }
-
         public static string AlignCentre(string text, int width)
         {
             text = text.Length > width ? text.Substring(0, width - 3) + "..." : text;
-
             if (string.IsNullOrEmpty(text))
             {
                 return new string(' ', width);

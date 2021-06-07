@@ -41,7 +41,6 @@ namespace TravelerAppCore.Models
             }
             CheckData(Data, hotelLocalisation);
         }
-
         private static string GetAdress()
         {
 
@@ -51,7 +50,6 @@ namespace TravelerAppCore.Models
             string adress = Console.ReadLine();
             return adress;
         }
-
         public static void ByName(List<Hotel> Data)
         {
             List<Hotel> hotelName = new List<Hotel>();
@@ -86,17 +84,12 @@ namespace TravelerAppCore.Models
         }
         private static string GetName()
         {
-            string log = "Podaj nazwę do wyszukiwania: ";
-            Console.WriteLine(log);
-            Console.SetCursorPosition(log.Length, Console.CursorTop - 1);
-            string adress = Console.ReadLine();
-            return adress;
+            Console.Write("Podaj nazwę do wyszukiwania: ");
+            return Console.ReadLine();
         }
         private static float GetRate()
         {
-            string log = "Wyszukaj od oceny: ";
-            Console.WriteLine(log);
-            Console.SetCursorPosition(log.Length, Console.CursorTop - 1);
+            Console.Write("Wyszukaj od oceny: ");
             return Hotel.GetRate();
         }
         public static void ByRate(List<Hotel> Data)
@@ -107,7 +100,6 @@ namespace TravelerAppCore.Models
                 float searchByRate = GetRate();
                 foreach (Hotel hotel in Data)
                 {
-
                     if (hotel.AverageRates.Overall >= searchByRate)
                     {
                         findRate.Add(hotel);
