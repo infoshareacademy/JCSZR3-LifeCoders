@@ -12,37 +12,18 @@ using TravelerAppCore.Models;
 
 namespace TravelerAppConsole
 {
-    public class Item
-    {
 
-
-        public string text { get; set; }
-        public ConsoleKey Key { get; set; }
-        public Del met { get; set; }
-        public Item(ConsoleKey k, string n, Del M1)
-        {
-            Key = k;
-            text = n;
-            met = M1;
-        }
-
-    }
 
     public class MenuInterface
     {
-        public static List<Item> lista { get; set; }
+        private static List<Item> lista = new List<Item>();
 
-        public static void MenuAddItem(ConsoleKey K, string napis, Del method, List<Item> lista)
+        public static void MenuAddItem(ConsoleKey K, string napis, Del method)
         {
-
-            
-
             var i = new Item(K, napis, method);
             lista.Add(i);
-
-
         }
-        public static void Menu(List<Item> lista)
+        public static void Menu()
         {
             foreach (var item in lista)
             {
@@ -51,7 +32,7 @@ namespace TravelerAppConsole
 
         }
 
-        public static void MenuWork( List<Item> lista)
+        public static void MenuWork()
         {
             ConsoleKeyInfo key = Console.ReadKey();
             List<Root> dataReaded = new List<Root>();
@@ -66,7 +47,7 @@ namespace TravelerAppConsole
                 }
             }
             if (tmp == 0)
-                MenuWork(lista);
+                MenuWork();
                     
 
 

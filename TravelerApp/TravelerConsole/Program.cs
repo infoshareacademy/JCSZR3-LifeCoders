@@ -62,12 +62,12 @@ namespace TravelerAppConsole
             Del jakas = TravelerAppCore.Models.Search.byLocalisation;
            
            
-            List<Item> lista = new List<Item>();//lista znaków jakie może wpisywać użytkownik, żeby poruszać się po menu
-            MenuInterface.MenuAddItem( ConsoleKey.L,"by localisation", jakas,lista);//metoda która dodaje nową funkcjonalność do Menu
+           // List<Item> lista = new List<Item>();//lista znaków jakie może wpisywać użytkownik, żeby poruszać się po menu
+            MenuInterface.MenuAddItem( ConsoleKey.L,"by localisation", jakas);//metoda która dodaje nową funkcjonalność do Menu
             //pierwszy parametr oznacza znak z klawiatury po którym użytkownik włączy funkcjonalność, 2 to tekst jaki się będzie wyświetlał w menu
             //3 parametr to wasza funkcja zmieniona na typ delegata.
-            MenuInterface.Menu(lista);//wyświetlenie wszystkich funkcjonalności które są zapisane do menu
-            MenuInterface.MenuWork(lista);//uruchomienie wyboru użytkownika, jeśli wybór jest na liście uruchamia funkcjonalność
+            MenuInterface.Menu();//wyświetlenie wszystkich funkcjonalności które są zapisane do menu
+            MenuInterface.MenuWork();//uruchomienie wyboru użytkownika, jeśli wybór jest na liście uruchamia funkcjonalność
         }
 
         
