@@ -7,6 +7,7 @@ using System.Linq;
 using System.Diagnostics;
 using TravelerAppCore.Controller;
 using TravelerAppCore.View;
+using System.Text.RegularExpressions;
 
 namespace TravelerAppConsole
 {
@@ -15,12 +16,13 @@ namespace TravelerAppConsole
         static void Main(string[] args)
         {
             //Ustawia wysokość i szerokość okna konsoli na określone wartości.
-            //Console.SetWindowSize(180, 30);
+            Console.SetWindowSize(200, 30);
 
-            List<Root> dataRead = new List<Root>();
-            JSON.Read(dataRead);
-
+            List<Root> dataReaded = new List<Root>();
+            JSON.Read(dataReaded);
+            AddressFormatFixer.FixAddress(dataReaded);
             List<Root> dataSaved = new List<Root>();
+            Console.WriteLine(dataReaded[1].HotelInfo.Address);
             JSON.Write(dataSaved);
 
             //Dostępne informacje:
@@ -42,7 +44,7 @@ namespace TravelerAppConsole
             //  string reviewDate = dataReaded[0].Reviews[2].Date;
 
             //-Informacje o hotelu:
-            // string hotelName = dataRead[0].HotelInfo.Name;
+            //  string hotelName = dataReaded[0].HotelInfo.Name;
             //  string hotelURL = dataReaded[0].HotelInfo.HotelURL;
             //  string hotelPrice = dataReaded[0].HotelInfo.Price;
             //  string hotelAddress = dataReaded[0].HotelInfo.Address; //zawiera HTML
