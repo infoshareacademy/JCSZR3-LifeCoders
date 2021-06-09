@@ -6,9 +6,7 @@ using System.Threading.Tasks;
 
 namespace TravelerAppCore.Models.Hotels
 {
-    public class Root
+    class Hotel
     {
-        public List<Review> Reviews { get; set; }
-        public HotelInfo HotelInfo { get; set; }
     }
 }
