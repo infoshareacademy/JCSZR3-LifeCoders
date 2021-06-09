@@ -19,7 +19,7 @@ namespace TravelerAppCore.Controller
 
             hotelRatings.Sort(IComparer);
 
-            show(hotelRatings);
+            display(hotelRatings);
 
            
         }
@@ -33,7 +33,7 @@ namespace TravelerAppCore.Controller
             else
                 return 0;
         }
-        public static void show(List<Root> targetdata)
+        public static void display(List<Root> targetdata)
         {
             DrawTable.PrintLine();
             DrawTable.PrintRow(true, "hotelId", "Name", "Price", "Ratings");
