@@ -19,18 +19,9 @@ namespace TravelerAppCore.Controller
 
             hotelRatings.Sort(IComparer);
 
+            show(hotelRatings);
 
-            DrawTable.PrintLine();
-            DrawTable.PrintRow(true,"hotelId", "Name", "Price", "Ratings");
-
-            foreach (var hotel in hotelRatings)
-            {
-                DrawTable.PrintLine();
-                DrawTable.PrintRow(true, hotel.HotelInfo.HotelID, hotel.HotelInfo.Name, hotel.HotelInfo.Price, hotel.Reviews[2].Ratings.Overall.ToString());
-                
-            }
-            DrawTable.PrintLine();
-            
+           
         }
 
         private static int IComparer(Root x, Root y)
@@ -41,6 +32,21 @@ namespace TravelerAppCore.Controller
                 return -1;
             else
                 return 0;
+        }
+        public static void show(List<Root> targetdata)
+        {
+            DrawTable.PrintLine();
+            DrawTable.PrintRow(true, "hotelId", "Name", "Price", "Ratings");
+
+            foreach (var hotel in targetdata)
+            {
+                DrawTable.PrintLine();
+                DrawTable.PrintRow(true, hotel.HotelInfo.HotelID, hotel.HotelInfo.Name, hotel.HotelInfo.Price, hotel.Reviews[2].Ratings.Overall.ToString());
+
+            }
+            DrawTable.PrintLine();
+
+
         }
     }
 }
