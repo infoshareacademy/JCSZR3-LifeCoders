@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 namespace TravelerAppConsole
 {
-   
         public class Item
         {
             public string text { get; set; }

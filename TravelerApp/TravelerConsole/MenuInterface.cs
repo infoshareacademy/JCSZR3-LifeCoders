@@ -13,7 +13,6 @@ using TravelerAppCore.Models;
 namespace TravelerAppConsole
 {
 
-
     public class MenuInterface
     {
         private static List<Item> lista = new List<Item>();
@@ -48,11 +47,8 @@ namespace TravelerAppConsole
             }
             if (tmp == 0)
                 MenuWork();
-                    
-
 
         }
-
 
     }
     public delegate void Del(List<Root> targetData);
