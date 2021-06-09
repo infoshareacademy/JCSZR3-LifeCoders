@@ -51,11 +51,23 @@ namespace TravelerAppConsole
             //  string hotelID = dataReaded[0].HotelInfo.HotelID;
             //  string hotelImgURL = dataReaded[0].HotelInfo.ImgURL;
 
-            int numberOfRecords = 10;
+            int numberOfRecords = 12;
             DrawTable.Hotelinfo(dataReaded, numberOfRecords);
 
-        }
+            string searchedName = null;// "BEST WESTERN Loyal Inn";// "Christopher's Inn";
+            List<int> list = SearchByName.HotelsByName(dataReaded, searchedName);
+            //list.Sort();
+            List<Root> hotelsReturnedByName = new List<Root>();
+            foreach (int item in list)
+            {
+                hotelsReturnedByName.Add(dataReaded[item]);
+            }
+            Console.WriteLine($"Hotels having {searchedName} in their names" );
+       
+            DrawTable.Hotelinfo(hotelsReturnedByName, list.Count);
 
-        
+
+
+        }
     }
 }

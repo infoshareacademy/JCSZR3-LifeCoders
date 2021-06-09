@@ -1,1 +1,1 @@
-Póki co pusty plik
+//Póki co pusty plik
