@@ -17,7 +17,5 @@ namespace TravelerAppCore.Models.Hotels
 
         [JsonProperty("Businessservice(e.g.,internetaccess)")]
         public string BusinessserviceEGInternetaccess { get; set; }
-
-
     }
 }

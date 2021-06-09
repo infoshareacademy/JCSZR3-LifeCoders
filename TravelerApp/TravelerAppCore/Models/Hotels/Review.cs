@@ -9,7 +9,5 @@
         public string ReviewID { get; set; }
         public string Content { get; set; }
         public string Date { get; set; }
-
-
     }
 }

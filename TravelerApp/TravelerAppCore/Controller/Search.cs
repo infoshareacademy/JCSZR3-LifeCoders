@@ -20,16 +20,9 @@ namespace TravelerAppCore.Models
 
                 foreach (Hotel hotel in Data)
                 {
-                    if (hotel.HotelInfo.Address == null)
+                    if (regEx.IsMatch(hotel.HotelInfo.Address) && hotel.HotelInfo.Address != null)
                     {
-
-                    }
-                    else
-                    {
-                        if (regEx.IsMatch(hotel.HotelInfo.Address))
-                        {
-                            hotelLocalisation.Add(hotel);
-                        }
+                        hotelLocalisation.Add(hotel);
                     }
                 }
             }
@@ -43,11 +36,15 @@ namespace TravelerAppCore.Models
         }
         private static string GetAdress()
         {
-
-            string log = "Podaj adres do wyszukiwania: ";
-            Console.WriteLine(log);
-            Console.SetCursorPosition(log.Length, Console.CursorTop - 1);
+            Console.WriteLine("Podaj adres do wyszukiwania: ");
             string adress = Console.ReadLine();
+            while (String.IsNullOrEmpty(adress) || adress.Length < 3)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.Write("\n* Wyszukiwana fraza powinna zawierać conajmniej trzy znaki! ");
+                Console.ResetColor();
+                adress = Console.ReadLine();
+            }
             return adress;
         }
         public static void ByName(List<Hotel> Data)
@@ -61,17 +58,10 @@ namespace TravelerAppCore.Models
 
                 foreach (Hotel hotel in Data)
                 {
-                    if (hotel.HotelInfo.Address == null)
-                    {
-
-                    }
-                    else
-                    {
-                        if (regEx.IsMatch(hotel.HotelInfo.Name))
+                        if (regEx.IsMatch(hotel.HotelInfo.Name) && hotel.HotelInfo.Address != null)
                         {
                             hotelName.Add(hotel);
                         }
-                    }
                 }
             }
             else
@@ -85,7 +75,15 @@ namespace TravelerAppCore.Models
         private static string GetName()
         {
             Console.Write("Podaj nazwę do wyszukiwania: ");
-            return Console.ReadLine();
+            string name = Console.ReadLine();
+            while (String.IsNullOrEmpty(name) || name.Length < 3)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.Write("* Wyszukiwana fraza powinna zawierać conajmniej trzy znaki! ");
+                Console.ResetColor();
+                name = Console.ReadLine();
+            }
+            return name;
         }
         private static float GetRate()
         {

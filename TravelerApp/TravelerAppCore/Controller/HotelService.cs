@@ -27,7 +27,6 @@ namespace TravelerAppCore.Controller
             string File = Path.Combine(CurrentDirectory, @"..\..\..\..\TravelerAppCore\Data\JSON_Hotels");
             string FilePath = Path.GetFullPath(File);
             string[] jsonFiles = Directory.GetFiles(FilePath, "*.json").Select(Path.GetFileName).ToArray();
-
             foreach (var item in jsonFiles)
             {
                 string sFileJson = Path.Combine(FilePath, item);
