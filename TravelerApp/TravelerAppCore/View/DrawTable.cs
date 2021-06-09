@@ -34,8 +34,6 @@ namespace TravelerAppCore.View
                 return text.PadRight(width - (width - text.Length) / 2).PadLeft(width);
             }
         }
-
-
         public static void Hotelinfo(List<Hotel> dataReaded, int numRecords, bool withRate)
         {
             DrawTable.tableWidth = 135;
