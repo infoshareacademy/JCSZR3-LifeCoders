@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using TravelerAppCore.Models.Hotels;
 using TravelerAppCore.View;
 
@@ -11,7 +8,7 @@ namespace TravelerAppCore.Models
 {
     public static class SearchByLocalisation
     {
-        public static List<Root> byLocalisation(List<Root> targetData, string address)
+        public static List<Root> ByLocalisation(List<Root> targetData, string address)
         {
             List<Root> hotelLocalisation = new List<Root>();
             string regPattern = $@"{address}";
