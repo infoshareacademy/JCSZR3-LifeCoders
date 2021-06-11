@@ -24,7 +24,7 @@ namespace TravelerAppConsole
             List<Root> dataSaved = new List<Root>();
             JSON.Write(dataSaved);
 
-            SearchByRate.byRating(dataReaded);
+            SearchRate.ByRating(dataReaded,3.0f);
 
             //Dostępne informacje:
             //-Poszczególne kryteria ocen:
