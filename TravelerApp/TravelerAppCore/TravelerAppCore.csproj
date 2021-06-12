@@ -9,6 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Data\JSON_CreatedHotels\" />
     <Folder Include="Models\Users\" />
   </ItemGroup>
 

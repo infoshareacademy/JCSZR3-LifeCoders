@@ -10,30 +10,18 @@ namespace TravelerAppCore.Controller
 {
    public class Sort
     {
-        public static void sortByRatings(List<Root> targetData)
+        public static void sortByRatings(List<Hotel> targetData)
         {
-            List<Root> hotelRatings = targetData;
-
-
-           
-
-            hotelRatings.Sort(IComparer);
-
-            display(hotelRatings);
-
-           
+            List<Hotel> hotelRatings = new List<Hotel>();
+            hotelRatings = targetData;
+            var SORT = hotelRatings.OrderByDescending(x => x.AverageRates.Overall);
+           var sort1= SORT.ToList();
+            display(sort1);
+ 
         }
 
-        private static int IComparer(Root x, Root y)
-        {
-            if (x.Reviews[2].Ratings.Overall < y.Reviews[2].Ratings.Overall)
-                return 1;
-            else if (x.Reviews[2].Ratings.Overall > y.Reviews[2].Ratings.Overall)
-                return -1;
-            else
-                return 0;
-        }
-        public static void display(List<Root> targetdata)
+  
+        public static void display(List<Hotel> targetdata)
         {
             DrawTable.PrintLine();
             DrawTable.PrintRow(true, "hotelId", "Name", "Price", "Ratings");
@@ -41,7 +29,7 @@ namespace TravelerAppCore.Controller
             foreach (var hotel in targetdata)
             {
                 DrawTable.PrintLine();
-                DrawTable.PrintRow(true, hotel.HotelInfo.HotelID, hotel.HotelInfo.Name, hotel.HotelInfo.Price, hotel.Reviews[2].Ratings.Overall.ToString());
+                DrawTable.PrintRow(true, hotel.HotelInfo.HotelID, hotel.HotelInfo.Name, hotel.HotelInfo.Price, hotel.AverageRates.Overall.ToString("0.00"));
 
             }
             DrawTable.PrintLine();
