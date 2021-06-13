@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using TravelerAppCore.Controller;
 using TravelerAppCore.Models.Hotels;
 using TravelerAppCore.View;
