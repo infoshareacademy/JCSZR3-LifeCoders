@@ -1,5 +1,6 @@
-﻿using System;
+using System;
 using TravelerAppCore.Controller;
+using TravelerAppCore.Models.Hotels;
 using TravelerAppCore.View;
 
 namespace TravelerAppConsole
@@ -11,9 +12,14 @@ namespace TravelerAppConsole
             //Ustawia wysokość i szerokość okna konsoli na określone wartości.
             Console.SetWindowSize(200, 30);
 
-            HotelService.Read();
-            int numberOfRecords = 12;
-            DrawTable.Hotelinfo(HotelService.Data, numberOfRecords);
+            Option[] options = new Option[] {
+                new Option("Wczytaj bazę hoteli", HotelService.ReadAndDisplay),
+                new Option("Zapisz hotel", new Hotel().CreateNew),
+                new Option("Wyszukaj po lokalizacji", ConsolePrint.SearchAddressConsole),
+                //new Option("Wyszukaj po nazwie", Search.ByName),
+                //new Option("Wyszukaj po ocenie", Search.ByRate),
+            };
+            new Menu(options).Interface();
 
             //string searchedName = "BEST WESTERN Loyal Inn";// "Christopher's Inn";
             //List<int> list = SearchByName.HotelsByName(dataRead, searchedName);

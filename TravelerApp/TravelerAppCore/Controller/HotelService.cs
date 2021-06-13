@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using TravelerAppCore.Models.Hotels;
+using TravelerAppCore.View;
 
 namespace TravelerAppCore.Controller
 {
@@ -13,10 +14,16 @@ namespace TravelerAppCore.Controller
     {
         public static Stopwatch stopper = new Stopwatch();
         public static List<Hotel> Data = new List<Hotel>();
+        public static void ReadAndDisplay()
+        {
+            Read();
+            ConsolePrint.DisplayLoadedData();
+        }
         public static void Read()
         {
             var stopper = new Stopwatch();
             stopper.Start();
+            Data.Clear();
             string sCurrentDirectory = AppDomain.CurrentDomain.BaseDirectory;
             string sFile = Path.Combine(sCurrentDirectory, @"..\..\..\..\TravelerAppCore\Data\JSON_Hotels");
             string sFilePath = Path.GetFullPath(sFile);
@@ -56,9 +63,31 @@ namespace TravelerAppCore.Controller
                 hotel.HotelInfo.Address = $"{city}, {street}, {postalCode}";
             }
         }
-        public static void Write(List<Hotel> targetData)
+        public static void WriteAndDisplay()
         {
+            Write(Hotel.NewHotel);
+            ConsolePrint.DisplaySavedData();
+        }
 
+        public static void Write(Hotel Object)
+        {
+            string JsonFile = JsonConvert.SerializeObject(Object);
+            string CurrentDirectory = AppDomain.CurrentDomain.BaseDirectory;
+            string File = Path.Combine(CurrentDirectory, @"..\..\..\..\TravelerAppCore\Data\JSON_Hotels");
+            string FilePath = Path.GetFullPath(File);
+            Console.WriteLine("\nPodaj nazwę pliku do zapisu");
+            string Name = Console.ReadLine();
+            string FileJson = Path.Combine(FilePath, $"{Name}.json");
+            try
+            {
+                using (StreamWriter sw = new StreamWriter(FileJson))
+                {
+                    sw.WriteLine(JsonFile);
+                }
+            }
+            catch (Exception ex)
+            {
+            }
         }
     }
 }
