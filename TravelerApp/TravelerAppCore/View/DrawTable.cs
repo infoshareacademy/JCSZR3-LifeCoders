@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TravelerAppCore.Models.Hotels;
 
 namespace TravelerAppCore.View
@@ -43,7 +40,7 @@ namespace TravelerAppCore.View
             }
         }
 
-        public static void Hotelinfo(List<Root> dataReaded, int numRecords)
+        public static void Hotelinfo(List<Hotel> dataReaded, int numRecords)
         {
             //Przykład wypisywania informacji w tabeli - użytek dowolny i własnowolny
             DrawTable.tableWidth = 185;

@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace TravelerAppCore.Models.Hotels
 {
-    public class Root
+    public class Hotel
     {
         public List<Review> Reviews { get; set; }
         public HotelInfo HotelInfo { get; set; }
