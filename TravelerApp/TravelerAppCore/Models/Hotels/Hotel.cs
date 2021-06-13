@@ -17,7 +17,6 @@ namespace TravelerAppCore.Models.Hotels
             {
                 averages = new Ratings()
                 {
-                    Overall = (float)Math.Round(Reviews.Average(a => a.Ratings.Overall), 2),
                     Service = (float)Math.Round(Reviews.Average(a => a.Ratings.Service), 2),
                     Cleanliness = (float)Math.Round(Reviews.Average(a => a.Ratings.Cleanliness), 2),
                     Value = (float)Math.Round(Reviews.Average(a => a.Ratings.Value), 2),
@@ -45,7 +44,6 @@ namespace TravelerAppCore.Models.Hotels
                 Reviews = new List<Review>() {
                     new Review() {
                     Ratings = new Ratings() {
-                        Overall = 0.0f,
                         Service = ConsolePrint.GetRateService(),
                         Cleanliness = ConsolePrint.GetRateCleanliness(),
                         Value = ConsolePrint.GetRateValue(),
@@ -54,17 +52,7 @@ namespace TravelerAppCore.Models.Hotels
                         Location = ConsolePrint.GetRateLocation()
                         } } }
             };
-            SaveToFile();
-        }
-        private void SaveToFile()
-        {
-            Console.WriteLine("-\nCzy zapisać informacje do pliku .json? ( T / N )");
-            ConsoleKeyInfo info = Console.ReadKey(true);
-            while (info.Key != ConsoleKey.T && info.Key != ConsoleKey.N)
-            {
-                info = Console.ReadKey(true);
-            }
-            if (info.Key == ConsoleKey.T) HotelService.WriteAndDisplay();
+            ConsolePrint.SaveToFile();
         }
     }
 }

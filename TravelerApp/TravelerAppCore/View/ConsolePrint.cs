@@ -61,6 +61,16 @@ namespace TravelerAppCore.View
             Console.ResetColor();
             if (!Menu.MultipleOptions && HotelService.Data.Count() != 0) DrawTable.Hotelinfo(new List<Hotel>() { Hotel.NewHotel }, 1, true);
         }
+        public static void SaveToFile()
+        {
+            Console.WriteLine("-\nCzy zapisać informacje do pliku .json? ( T / N )");
+            ConsoleKeyInfo info = Console.ReadKey(true);
+            while (info.Key != ConsoleKey.T && info.Key != ConsoleKey.N)
+            {
+                info = Console.ReadKey(true);
+            }
+            if (info.Key == ConsoleKey.T) HotelService.WriteAndDisplay();
+        }
         public static void CheckData(List<Hotel> DataFound)
         {
             if (DataFound.Count != 0 && Menu.MultipleOptions)
