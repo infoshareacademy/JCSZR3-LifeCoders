@@ -13,15 +13,28 @@ namespace TravelerAppCore.Controller
     {
         public static List<Hotel> sortByRatings()
         {
-            List<Hotel> hotelRatings = new List<Hotel>();
-           
-            var SORT = hotelRatings.OrderByDescending(x => x.AverageRates.Overall);
+          
+            var SORT = HotelService.Data.OrderByDescending(x => x.AverageRates.Overall);
            var sort1= SORT.ToList();
            return sort1;
 
         }
+        public static void display()
+        {
+            DrawTable.PrintLine();
+            DrawTable.PrintRow(true, "hotelId", "Name", "Price", "Ratings");
+            List<Hotel> hotelRatings = Sort.sortByRatings();
+            foreach (var hotel in hotelRatings)
+            {
+                DrawTable.PrintLine();
+                DrawTable.PrintRow(true, hotel.HotelInfo.HotelID, hotel.HotelInfo.Name, hotel.HotelInfo.Price, hotel.AverageRates.Overall.ToString("0.00"));
+
+            }
+            DrawTable.PrintLine();
 
 
-       
+        }
+
+
     }
 }
