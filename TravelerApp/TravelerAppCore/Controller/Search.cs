@@ -1,135 +1,61 @@
-﻿using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
-using TravelerAppConsole;
 using TravelerAppCore.Models.Hotels;
-using TravelerAppCore.View;
 
-namespace TravelerAppCore.Models
+namespace TravelerAppCore.Controller
 {
-    public class Search
+    class Search
     {
-        public static void ByLocalisation(List<Hotel> Data)
+        public static List<Hotel> ByLocalisation(string address)
         {
             List<Hotel> hotelLocalisation = new List<Hotel>();
-            if (Data.Count != 0)
+            string regPattern = $@"{address}";
+            Regex regEx = new Regex(regPattern, RegexOptions.IgnoreCase);
+            foreach (Hotel hotel in HotelService.Data)
             {
-                string adress = GetAdress();
-                string regPattern = @$"{adress}";
-                Regex regEx = new Regex(regPattern, RegexOptions.IgnoreCase);
+                if (hotel.HotelInfo.Address == null)
+                {
+                    continue;
+                }
+                if (regEx.IsMatch(hotel.HotelInfo.Address))
+                {
+                    hotelLocalisation.Add(hotel);
+                }
+            }
+            return hotelLocalisation;
+        }
 
-                foreach (Hotel hotel in Data)
-                {
-                    if (regEx.IsMatch(hotel.HotelInfo.Address) && hotel.HotelInfo.Address != null)
-                    {
-                        hotelLocalisation.Add(hotel);
-                    }
-                }
-            }
-            else
-            {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("Baza hoteli jest pusta");
-                Console.ResetColor();
-            }
-            CheckData(Data, hotelLocalisation);
-        }
-        private static string GetAdress()
-        {
-            Console.WriteLine("Podaj adres do wyszukiwania: ");
-            string adress = Console.ReadLine();
-            while (String.IsNullOrEmpty(adress) || adress.Length < 3)
-            {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.Write("\n* Wyszukiwana fraza powinna zawierać conajmniej trzy znaki! ");
-                Console.ResetColor();
-                adress = Console.ReadLine();
-            }
-            return adress;
-        }
-        public static void ByName(List<Hotel> Data)
-        {
-            List<Hotel> hotelName = new List<Hotel>();
-            if (Data.Count != 0)
-            {
-                string adress = GetName();
-                string regPattern = @$"{adress}";
-                Regex regEx = new Regex(regPattern, RegexOptions.IgnoreCase);
-
-                foreach (Hotel hotel in Data)
-                {
-                        if (regEx.IsMatch(hotel.HotelInfo.Name) && hotel.HotelInfo.Address != null)
-                        {
-                            hotelName.Add(hotel);
-                        }
-                }
-            }
-            else
-            {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("Baza hoteli jest pusta");
-                Console.ResetColor();
-            }
-            CheckData(Data, hotelName);
-        }
-        private static string GetName()
-        {
-            Console.Write("Podaj nazwę do wyszukiwania: ");
-            string name = Console.ReadLine();
-            while (String.IsNullOrEmpty(name) || name.Length < 3)
-            {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.Write("* Wyszukiwana fraza powinna zawierać conajmniej trzy znaki! ");
-                Console.ResetColor();
-                name = Console.ReadLine();
-            }
-            return name;
-        }
-        private static float GetRate()
-        {
-            Console.Write("Wyszukaj od oceny: ");
-            return Hotel.GetRate();
-        }
-        public static void ByRate(List<Hotel> Data)
-        {
-            List<Hotel> findRate = new List<Hotel>();
-            if (Data.Count != 0)
-            {
-                float searchByRate = GetRate();
-                foreach (Hotel hotel in Data)
-                {
-                    if (hotel.AverageRates.Overall >= searchByRate)
-                    {
-                        findRate.Add(hotel);
-                    }
-                }
-            }
-            else
-            {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("Baza hoteli jest pusta");
-                Console.ResetColor();
-            }
-            CheckData(Data, findRate);
-        }
-        private static void CheckData(List<Hotel> Data, List<Hotel> DataFound)
-        {
-            if (DataFound.Count != 0 && Menu.MultipleOptions)
-            {
-                Data.Clear();
-                Data.AddRange(DataFound);
-            }
-            if (DataFound.Count != 0 && !Menu.MultipleOptions)
-            {
-                DrawTable.Hotelinfo(DataFound, DataFound.Count, true);
-            }
-            if (DataFound.Count == 0)
-            {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("Brak wyników wyszukania");
-                Console.ResetColor();
-            }
-        }
+        //public static List<int> HotelsByName(string searchedName)
+        //{
+        //    List<int> foundHotels = new List<int>();
+        //    int exactMatch = 0;
+        //    //check if a search name has at least one character in it
+        //    // search for an exact match first- if found we exit a method after finding one - I assumed hotel names are distinct
+        //    for (int i = 0; i < HotelService.Data.Count; i++)
+        //    {
+        //        if (HotelService.Data[i].HotelInfo.Name.ToUpper().Equals(searchedName.ToUpper()))
+        //        {
+        //            exactMatch++;
+        //            foundHotels.Add(i);
+        //        }
+        //    }
+        //    if (exactMatch != 0)
+        //    {
+        //        return foundHotels;
+        //    }
+        //    else
+        //    //if no exact match has been found- we look for partial match and return all the hotels found
+        //    {
+        //        for (int i = 0; i < HotelService.Data.Count; i++)
+        //        {
+        //            if (HotelService.Data[i].HotelInfo.Name.ToUpper().Contains(searchedName.ToUpper()))
+        //            {
+        //                foundHotels.Add(i);
+        //            }
+        //        }
+        //        return foundHotels;
+        //    }
+        //}
     }
 }
 

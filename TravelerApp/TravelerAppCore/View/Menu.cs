@@ -11,8 +11,7 @@ namespace TravelerAppConsole
     {
         public static List<Option> MenuList = new List<Option>();
         private static List<Option> SelectedOptions = new List<Option>();
-        public static List<Hotel> Data = new List<Hotel>();
-        public static List<Hotel> DataReaded = new List<Hotel>();
+        public static List<Hotel> DataCopy = new List<Hotel>();
         public static bool MultipleOptions { get; set; }
 
         public Menu() { }
@@ -160,10 +159,10 @@ namespace TravelerAppConsole
                     else MultipleOptions = false;
 
                     var last = SelectedOptions.Last();
-                    if (Data.Count != 0 && MultipleOptions)
+                    if (HotelService.Data.Count != 0 && MultipleOptions)
                     {
-                        DataReaded.Clear();
-                        DataReaded.AddRange(Data);
+                        DataCopy.Clear();
+                        DataCopy.AddRange(HotelService.Data);
 
                         foreach (var item in SelectedOptions)
                         {
@@ -172,13 +171,13 @@ namespace TravelerAppConsole
                             origRow = MenuList.Count() + 2 + nextline;
                             origCol = 0;
                             Console.SetCursorPosition(origCol, origRow);
-                            item._menuOptions(Data);
+                            item._menuOptions();
                             nextline++;
                         }
-                        DrawTable.Hotelinfo(Data, Data.Count, true);
+                        DrawTable.Hotelinfo(HotelService.Data, HotelService.Data.Count, true);
                         MultipleOptions = false;
-                        Data.Clear();
-                        Data.AddRange(DataReaded);
+                        HotelService.Data.Clear();
+                        HotelService.Data.AddRange(DataCopy);
                     }
                     else {
                         selected[i] = false;
@@ -186,7 +185,7 @@ namespace TravelerAppConsole
                         origRow = MenuList.Count() + 2 + nextline;
                         origCol = 0;
                         Console.SetCursorPosition(origCol, origRow);
-                        SelectedOptions[0]._menuOptions(Data);
+                        SelectedOptions[0]._menuOptions();
                     }
                     SelectedOptions.Clear();
                     origRow = 1;
@@ -196,7 +195,7 @@ namespace TravelerAppConsole
             } while (true);
         }
     }
-    public delegate void Options(List<Hotel> Data);
+    public delegate void Options();
 }
 
 

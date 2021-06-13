@@ -5,12 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <Compile Remove="Models\Users\**" />
+    <EmbeddedResource Remove="Models\Users\**" />
+    <None Remove="Models\Users\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Data\JSON_CreatedHotels\" />
-    <Folder Include="Models\Users\" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
   </ItemGroup>
 
 </Project>
