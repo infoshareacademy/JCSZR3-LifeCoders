@@ -28,10 +28,10 @@ namespace TravelerAppCore.Models.Hotels
                 return averages;
             }
         }
-        public static Hotel NewHotel;
+        public static Hotel NewHotel = new Hotel();
         public void CreateNew()
         {
-            Hotel NewHotel = new Hotel()
+            NewHotel = new Hotel()
             {
                 HotelInfo = new HotelInfo()
                 {
