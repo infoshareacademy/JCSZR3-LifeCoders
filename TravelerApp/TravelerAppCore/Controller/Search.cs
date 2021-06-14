@@ -28,34 +28,30 @@ namespace TravelerAppCore.Controller
         public static List<Hotel> ByName(string name)
         {
             List<Hotel> foundHotels = new List<Hotel>();
-            int exactMatch = 0;
+
+            string nameUpperTrimed = name.Trim().ToUpper();
+
             //check if a search name has at least one character in it
             // search for an exact match first- if found we exit a method after finding one - I assumed hotel names are distinct
             foreach (Hotel hotel in HotelService.Data)
             {
-                if (hotel.HotelInfo.Name.ToUpper().Equals(name.ToUpper()))
+                if (hotel.HotelInfo.Name.Trim().ToUpper().Equals(nameUpperTrimed))
                 {
-                    exactMatch++;
                     foundHotels.Add(hotel);
                 }
             }
-
-            if (exactMatch != 0)
-            {
-                return foundHotels;
-            }
-            else
             //if no exact match has been found- we look for partial match and return all the hotels found
+            if (foundHotels.Count == 0)
             {
                 foreach (Hotel hotel in HotelService.Data)
                 {
-                    if (hotel.HotelInfo.Name.ToUpper().Contains(name.ToUpper()))
+                    if (hotel.HotelInfo.Name.Trim().ToUpper().Contains(nameUpperTrimed))
                     {
                         foundHotels.Add(hotel);
                     }
                 }
-                return foundHotels;
             }
+            return foundHotels;
         }
     }
 }
