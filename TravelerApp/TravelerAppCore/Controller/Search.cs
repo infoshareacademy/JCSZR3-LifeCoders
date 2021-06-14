@@ -29,13 +29,13 @@ namespace TravelerAppCore.Controller
         {
             List<Hotel> foundHotels = new List<Hotel>();
 
-            string nameUpperTrimed = name.Trim().ToUpper();
+            string nameChanged = name.Replace(" ", string.Empty).ToUpper();
 
             //check if a search name has at least one character in it
             // search for an exact match first- if found we exit a method after finding one - I assumed hotel names are distinct
             foreach (Hotel hotel in HotelService.Data)
             {
-                if (hotel.HotelInfo.Name.Trim().ToUpper().Equals(nameUpperTrimed))
+                if (hotel.HotelInfo.Name.Replace(" ", string.Empty).ToUpper().Equals(nameChanged))
                 {
                     foundHotels.Add(hotel);
                 }
@@ -45,7 +45,7 @@ namespace TravelerAppCore.Controller
             {
                 foreach (Hotel hotel in HotelService.Data)
                 {
-                    if (hotel.HotelInfo.Name.Trim().ToUpper().Contains(nameUpperTrimed))
+                    if (hotel.HotelInfo.Name.Replace(" ", string.Empty).ToUpper().Contains(nameChanged))
                     {
                         foundHotels.Add(hotel);
                     }
