@@ -23,6 +23,20 @@ namespace TravelerAppCore.View
                 CheckData(hotelList);
             }
         }
+        public static void SearchByNameConsole()
+        {
+            if (HotelService.Data.Count == 0)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Baza hoteli jest pusta");
+                Console.ResetColor();
+            }
+            else
+            {
+                List<Hotel> hotelList = Search.ByName(GetName());
+                CheckData(hotelList);
+            }
+        }
 
         public static string GetAddress()
         {
@@ -40,6 +54,24 @@ namespace TravelerAppCore.View
             }
             Console.CursorVisible = false;
             return adress;
+        }
+
+        public static string GetName()
+        {
+            string log = "Podaj nazwę do wyszukiwania:  ";
+            Console.Write(log);
+            Console.CursorVisible = true;
+            string name = Console.ReadLine();
+            while (name.Length < 3)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.Write("* Wyszukiwana fraza powinna zawierać conajmniej trzy znaki! ");
+                Console.ResetColor();
+                Console.SetCursorPosition(log.Count(), Console.CursorTop - 1);
+                name = Console.ReadLine();
+            }
+            Console.CursorVisible = false;
+            return name;
         }
 
         public static void DisplayLoadedData()
