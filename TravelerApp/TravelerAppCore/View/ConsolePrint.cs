@@ -9,6 +9,19 @@ namespace TravelerAppCore.View
 {
     public static class ConsolePrint
     {
+        public static void DisplaySort()
+        {
+            DrawTable.PrintLine();
+            DrawTable.PrintRow(true, "hotelId", "Name", "Price", "Ratings");
+            List<Hotel> hotelRatings = Sort.SortByRatings();
+            foreach (var hotel in hotelRatings)
+            {
+                DrawTable.PrintLine();
+                DrawTable.PrintRow(true, hotel.HotelInfo.HotelID, hotel.HotelInfo.Name, hotel.HotelInfo.Price, hotel.AverageRates.Overall.ToString("0.00"));
+
+            }
+            DrawTable.PrintLine();
+        }
         public static void SearchAddressConsole()
         {
             if (HotelService.Data.Count == 0)
