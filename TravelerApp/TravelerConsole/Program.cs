@@ -11,7 +11,7 @@ namespace TravelerAppConsole
         static void Main(string[] args)
         {
             //Ustawia wysokość i szerokość okna konsoli na określone wartości.
-            Console.SetWindowSize(200, 30);
+            //Console.SetWindowSize(200, 30);
 
             Option[] options = new Option[] {
                 new Option("Wczytaj bazę hoteli", HotelService.ReadAndDisplay),
