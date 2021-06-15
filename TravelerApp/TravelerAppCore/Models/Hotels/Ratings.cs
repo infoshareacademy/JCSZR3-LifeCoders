@@ -1,10 +1,16 @@
 ﻿using Newtonsoft.Json;
+using System;
 
 namespace TravelerAppCore.Models.Hotels
 {
     public class Ratings
     {
-        public float Overall { get; set; }
+        public float Overall {
+            get
+            {
+                return (float)Math.Round((Service + Cleanliness + Value + SleepQuality + Rooms + Location) / 6, 2);
+            }
+        }
         public float Service { get; set; }
         public float Cleanliness { get; set; }
         public float Value { get; set; }

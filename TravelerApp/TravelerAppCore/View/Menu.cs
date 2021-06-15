@@ -38,7 +38,7 @@ namespace TravelerAppConsole
             }
         }
         static int i = 0;
-        public void DisplayMenu()
+        public static void DisplayMenu()
         {
             Console.CursorVisible = false;
             Console.WriteLine("Menu:");

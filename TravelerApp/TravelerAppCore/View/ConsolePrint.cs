@@ -36,6 +36,20 @@ namespace TravelerAppCore.View
                 CheckData(hotelList);
             }
         }
+        public static void SearchByNameConsole()
+        {
+            if (HotelService.Data.Count == 0)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Baza hoteli jest pusta");
+                Console.ResetColor();
+            }
+            else
+            {
+                List<Hotel> hotelList = Search.ByName(GetName());
+                CheckData(hotelList);
+            }
+        }
 
         public static string GetAddress()
         {
@@ -55,6 +69,24 @@ namespace TravelerAppCore.View
             return adress;
         }
 
+        public static string GetName()
+        {
+            string log = "Podaj nazwę do wyszukiwania:  ";
+            Console.Write(log);
+            Console.CursorVisible = true;
+            string name = Console.ReadLine();
+            while (name.Length < 3)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.Write("* Wyszukiwana fraza powinna zawierać conajmniej trzy znaki! ");
+                Console.ResetColor();
+                Console.SetCursorPosition(log.Count(), Console.CursorTop - 1);
+                name = Console.ReadLine();
+            }
+            Console.CursorVisible = false;
+            return name;
+        }
+
         public static void DisplayLoadedData()
         {
             Console.WriteLine("----------------------------------------------------");
@@ -67,12 +99,22 @@ namespace TravelerAppCore.View
         public static void DisplaySavedData()
         {
             Console.Clear();
-            new Menu().DisplayMenu();
+            Menu.DisplayMenu();
             Console.SetCursorPosition(0, Menu.MenuList.Count() + 2);
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("Plik został zapisany!");
             Console.ResetColor();
             if (!Menu.MultipleOptions && HotelService.Data.Count() != 0) DrawTable.Hotelinfo(new List<Hotel>() { Hotel.NewHotel }, 1, true);
+        }
+        public static void SaveToFile()
+        {
+            Console.WriteLine("-\nCzy zapisać informacje do pliku .json? ( T / N )");
+            ConsoleKeyInfo info = Console.ReadKey(false);
+            while (info.Key != ConsoleKey.T && info.Key != ConsoleKey.N)
+            {
+                info = Console.ReadKey(true);
+            }
+            if (info.Key == ConsoleKey.T) HotelService.WriteAndDisplay();
         }
         public static void CheckData(List<Hotel> DataFound)
         {
@@ -154,6 +196,25 @@ namespace TravelerAppCore.View
                 Console.ResetColor();
             }
             return fRateHotel;
+        }
+
+        public static void Exit()
+        {
+            Console.WriteLine("Czy na pewno chcesz wyjść z aplikacji? ( T / N )");
+            ConsoleKeyInfo info = Console.ReadKey(false);
+            while (info.Key != ConsoleKey.T && info.Key != ConsoleKey.N)
+            {
+                info = Console.ReadKey(false);
+            }
+            if (info.Key == ConsoleKey.T) {
+                Console.Clear();
+                Menu.DisplayMenu();
+                Environment.Exit(0); }
+            if (info.Key == ConsoleKey.N)
+            {
+                Console.Clear();
+                Menu.DisplayMenu();
+            }
         }
     }
 }
