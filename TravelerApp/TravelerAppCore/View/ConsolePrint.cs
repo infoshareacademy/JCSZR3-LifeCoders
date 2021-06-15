@@ -54,7 +54,7 @@ namespace TravelerAppCore.View
         public static void DisplaySavedData()
         {
             Console.Clear();
-            new Menu().DisplayMenu();
+            Menu.DisplayMenu();
             Console.SetCursorPosition(0, Menu.MenuList.Count() + 2);
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("Plik został zapisany!");
@@ -64,7 +64,7 @@ namespace TravelerAppCore.View
         public static void SaveToFile()
         {
             Console.WriteLine("-\nCzy zapisać informacje do pliku .json? ( T / N )");
-            ConsoleKeyInfo info = Console.ReadKey(true);
+            ConsoleKeyInfo info = Console.ReadKey(false);
             while (info.Key != ConsoleKey.T && info.Key != ConsoleKey.N)
             {
                 info = Console.ReadKey(true);
@@ -151,6 +151,25 @@ namespace TravelerAppCore.View
                 Console.ResetColor();
             }
             return fRateHotel;
+        }
+
+        public static void Exit()
+        {
+            Console.WriteLine("Czy na pewno chcesz wyjść z aplikacji? ( T / N )");
+            ConsoleKeyInfo info = Console.ReadKey(false);
+            while (info.Key != ConsoleKey.T && info.Key != ConsoleKey.N)
+            {
+                info = Console.ReadKey(false);
+            }
+            if (info.Key == ConsoleKey.T) {
+                Console.Clear();
+                Menu.DisplayMenu();
+                Environment.Exit(0); }
+            if (info.Key == ConsoleKey.N)
+            {
+                Console.Clear();
+                Menu.DisplayMenu();
+            }
         }
     }
 }
