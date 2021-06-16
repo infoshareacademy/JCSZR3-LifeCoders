@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using TravelerAppConsole;
 using TravelerAppCore.Controller;
 using TravelerAppCore.Models.Hotels;
@@ -9,18 +10,12 @@ namespace TravelerAppCore.View
 {
     public static class ConsolePrint
     {
+        public static List<Hotel> DataToSort = new List<Hotel>();
         public static void DisplaySort()
         {
-            DrawTable.PrintLine();
-            DrawTable.PrintRow(true, "hotelId", "Name", "Price", "Ratings");
-            List<Hotel> hotelRatings = Sort.SortByRatings();
-            foreach (var hotel in hotelRatings)
-            {
-                DrawTable.PrintLine();
-                DrawTable.PrintRow(true, hotel.HotelInfo.HotelID, hotel.HotelInfo.Name, hotel.HotelInfo.Price, hotel.AverageRates.Overall.ToString("0.00"));
-
-            }
-            DrawTable.PrintLine();
+            Console.SetCursorPosition(0, Menu.MenuList.Count() + 3 + Menu.nextline);
+            Console.Write("Sortuj po: [N]azwie, [A]dresie, [O]cenie, [C]enie\n");
+            DrawTable.Hotelinfo(DataToSort, DataToSort.Count(), true);
         }
         public static void SearchAddressConsole()
         {
@@ -32,7 +27,7 @@ namespace TravelerAppCore.View
             }
             else
             {
-                List<Hotel> hotelList = Search.ByLocalisation(GetAddress());
+                List<Hotel> hotelList = Search.ByLocalisation(GetText("Podaj adress do wyszukiwania:  "));
                 CheckData(hotelList);
             }
         }
@@ -46,55 +41,63 @@ namespace TravelerAppCore.View
             }
             else
             {
-                List<Hotel> hotelList = Search.ByName(GetName());
+                List<Hotel> hotelList = Search.ByName(GetText("Podaj nazwę do wyszukiwania:  "));
+                CheckData(hotelList);
+            }
+        }
+        public static void SearchByRate()
+        {
+            if (HotelService.Data.Count == 0)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Baza hoteli jest pusta");
+                Console.ResetColor();
+            }
+            else
+            {
+                List<Hotel> hotelList = Search.ByRate(GetRate("Wyszukaj od oceny:  "));
                 CheckData(hotelList);
             }
         }
 
-        public static string GetAddress()
+        public static string GetText(string log)
         {
-            string log = "Podaj adress do wyszukiwania:  ";
             Console.Write(log);
             Console.CursorVisible = true;
-            string adress = Console.ReadLine();
-            while (adress.Length < 3)
+            string findIt = ReadLine();
+            while (findIt.Length < 3)
             {
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.Write("* Wyszukiwana fraza powinna zawierać conajmniej trzy znaki! ");
                 Console.ResetColor();
                 Console.SetCursorPosition(log.Count(), Console.CursorTop - 1);
-                adress = Console.ReadLine();
+                findIt = ReadLine();
             }
             Console.CursorVisible = false;
-            return adress;
+            return findIt;
         }
-
-        public static string GetName()
+        public static float GetRate(string log)
         {
-            string log = "Podaj nazwę do wyszukiwania:  ";
             Console.Write(log);
+            
             Console.CursorVisible = true;
-            string name = Console.ReadLine();
-            while (name.Length < 3)
+            float fRateHotel = 0;
+            while (!float.TryParse(ReadLine(), out fRateHotel) || fRateHotel < 1 || fRateHotel > 5)
             {
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.Write("* Wyszukiwana fraza powinna zawierać conajmniej trzy znaki! ");
+                Console.Write("* Ocena tylko w skali 1 do 5! ");
                 Console.ResetColor();
-                Console.SetCursorPosition(log.Count(), Console.CursorTop - 1);
-                name = Console.ReadLine();
             }
-            Console.CursorVisible = false;
-            return name;
+            return fRateHotel;
         }
-
         public static void DisplayLoadedData()
         {
-            Console.WriteLine("----------------------------------------------------");
-            Console.WriteLine($"Czas odczytu wszystkich plików: {HotelService.stopper.Elapsed}");
-            Console.WriteLine($"Ilość odczytanych plików: {HotelService.Data.Count()}");
-            Console.WriteLine("Koniec deserializacji");
-            Console.WriteLine("----------------------------------------------------\n");
-            DrawTable.Hotelinfo(HotelService.Data, HotelService.Data.Count,true);
+            Console.WriteLine("----------------------------------------------------"); ++Menu.nextline;
+            Console.WriteLine($"Czas odczytu wszystkich plików: {HotelService.stopper.Elapsed}"); ++Menu.nextline;
+            Console.WriteLine($"Ilość odczytanych plików: {HotelService.Data.Count()}"); ++Menu.nextline;
+            Console.WriteLine("Koniec deserializacji"); ++Menu.nextline;
+            Console.WriteLine("----------------------------------------------------"); ++Menu.nextline;
+            DisplaySort();
         }
         public static void DisplaySavedData()
         {
@@ -125,77 +128,69 @@ namespace TravelerAppCore.View
             }
             if (DataFound.Count != 0 && !Menu.MultipleOptions)
             {
-                DrawTable.Hotelinfo(DataFound, DataFound.Count, true);
+                DataToSort.Clear();
+                DataToSort.AddRange(DataFound);
+                Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop+1);
+                DisplaySort();
             }
             if (DataFound.Count == 0)
             {
                 Console.ForegroundColor = ConsoleColor.Red;
+                Console.SetCursorPosition(0, Menu.MenuList.Count() + 3 + Menu.nextline);
                 Console.WriteLine("Brak wyników wyszukania" + new string(' ', 40));
                 Console.ResetColor();
+                Menu.SelectedOptions.Clear();
+                Console.SetCursorPosition(0, 0);
+                new Menu().Interface();
+                Menu.SelectedOptions.Clear();
+                Console.CursorVisible = false;
             }
         }
         public static float GetRateService()
         {
-            Console.Write("Jakość usług (1 - 5): ");
-            return GetRate();
+            return GetRate("Jakość usług (1 - 5): ");
         }
         public static float GetRateCleanliness()
         {
-            Console.Write("Czystość (1 - 5): ");
-            return GetRate();
+            return GetRate("Czystość (1 - 5): ");
         }
         public static float GetRateValue()
         {
-            Console.Write("Stosunek jakości do ceny (1 - 5): ");
-            return GetRate();
+            return GetRate("Stosunek jakości do ceny (1 - 5): ");
         }
         public static float GetRateSleepQuality()
         {
-            Console.Write("Komfort (1 - 5): ");
-            return GetRate();
+            return GetRate("Komfort (1 - 5): ");
         }
         public static float GetRateRooms()
         {
-            Console.Write("Wygląd (1 - 5): ");
-            return GetRate();
+            return GetRate("Wygląd (1 - 5): ");
         }
         public static float GetRateLocation()
         {
-            Console.Write("Lokalizacja (1 - 5): ");
-            return GetRate();
+            return GetRate("Lokalizacja (1 - 5): ");
         }
         public static string GetNewName()
         {
             Console.Write("Nazwa hotelu: ");
-            return Console.ReadLine();
+            return ReadLine();
         }
         public static string GetNewPrice()
         {
             Console.Write("Zakres cenowy: ");
-            return Console.ReadLine();
+            return ReadLine();
         }
         public static string GetNewAddress()
         {
             Console.WriteLine("-\nPodaj adres");
             Console.Write("Nazwa ulicy: ");
-            string street = Console.ReadLine();
+            string street = ReadLine();
             Console.Write("Nazwa miasta: ");
-            string city = Console.ReadLine();
+            string city = ReadLine();
             Console.Write("Kod pocztowy: ");
-            string postalcode = Console.ReadLine();
+            string postalcode = ReadLine();
             Console.WriteLine("-");
             return city + ", " + street + ", " + postalcode;
-        }
-        public static float GetRate()
-        {
-            float fRateHotel = 0;
-            while (!float.TryParse(Console.ReadLine(), out fRateHotel) || fRateHotel < 1 || fRateHotel > 5)
-            {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.Write("* Ocena tylko w skali 1 do 5! ");
-                Console.ResetColor();
-            }
-            return fRateHotel;
         }
 
         public static void Exit()
@@ -215,6 +210,61 @@ namespace TravelerAppCore.View
                 Console.Clear();
                 Menu.DisplayMenu();
             }
+        }
+        public static string ReadLine()
+        {
+            string buf = String.Empty;
+            ConsoleKeyInfo key;
+            do
+            {
+                key = Console.ReadKey(true);
+                if (key.Key == ConsoleKey.Escape)
+                {
+                    Menu.SelectedOptions.Clear();
+                    Console.SetCursorPosition(0, 1);
+                    Console.Clear();
+                    Menu.DisplayMenu();
+                    new Menu().Interface();
+                    return default;
+                }
+                // Ignore if Alt or Ctrl is pressed.
+                if ((key.Modifiers & ConsoleModifiers.Alt) == ConsoleModifiers.Alt)
+                    continue;
+                if ((key.Modifiers & ConsoleModifiers.Control) == ConsoleModifiers.Control)
+                    continue;
+                // Ignore if KeyChar value is \u0000.
+                if (key.KeyChar == '\u0000') continue;
+                // Ignore tab key.
+                if (key.Key == ConsoleKey.Tab) continue;
+                // Handle backspace.
+                if (key.Key == ConsoleKey.Backspace)
+                {
+                    // Are there any characters to erase?
+                    if (buf.Length >= 1)
+                    {
+                        // Determine where we are in the console buffer.
+                        int cursorCol = Console.CursorLeft - 1;
+                        int oldLength = buf.Length;
+                        int extraRows = oldLength / 80;
+
+                        buf = buf.Substring(0,oldLength-1);
+                        Console.CursorLeft = Console.CursorLeft -1;
+                        Console.CursorTop = Console.CursorTop - extraRows;
+                        Console.Write(new String(' ', oldLength - buf.Length));
+                        Console.CursorLeft = cursorCol;
+                    }
+                    continue;
+                }
+                if (key.Key == ConsoleKey.Enter)
+                {
+                    Console.WriteLine("");
+                    return buf;
+                }
+                // Handle key by adding it to input string.
+                Console.Write(key.KeyChar);
+                buf += key.KeyChar;
+            } while (key.Key != ConsoleKey.Enter) ;
+            return default;
         }
     }
 }

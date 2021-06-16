@@ -10,8 +10,9 @@ namespace TravelerAppConsole
     public class Menu
     {
         public static List<Option> MenuList = new List<Option>();
-        private static List<Option> SelectedOptions = new List<Option>();
+        public static List<Option> SelectedOptions = new List<Option>();
         public static List<Hotel> DataCopy = new List<Hotel>();
+        public static int nextline = 0;
         public static bool MultipleOptions { get; set; }
 
         public Menu() { }
@@ -41,6 +42,7 @@ namespace TravelerAppConsole
         public static void DisplayMenu()
         {
             Console.CursorVisible = false;
+            
             Console.WriteLine("Menu:");
             origRow = Console.CursorTop;
             origCol = Console.CursorLeft;
@@ -142,9 +144,29 @@ namespace TravelerAppConsole
                         SelectedOptions.Add(MenuList[i]);
                     }
                 }
+                if (info.Key == ConsoleKey.N)
+                {
+                    ConsolePrint.DataToSort = ConsolePrint.DataToSort.OrderBy(x => x.HotelInfo.Name).ToList();
+                    ConsolePrint.DisplaySort();
+                }
+                if (info.Key == ConsoleKey.A)
+                {
+                    ConsolePrint.DataToSort = ConsolePrint.DataToSort.OrderBy(x => x.HotelInfo.Address).ToList();
+                    ConsolePrint.DisplaySort();
+                }
+                if (info.Key == ConsoleKey.O)
+                {
+                    ConsolePrint.DataToSort = ConsolePrint.DataToSort.OrderByDescending(x => x.AverageRates.Overall).ToList();
+                    ConsolePrint.DisplaySort();
+                }
+                if (info.Key == ConsoleKey.C)
+                {
+                    ConsolePrint.DataToSort = ConsolePrint.DataToSort.OrderByDescending(x => x.HotelInfo.Price).ToList();
+                    ConsolePrint.DisplaySort();
+                }
                 if (info.Key == ConsoleKey.Enter)
                 {
-                    int nextline = 0;
+                    
                     if (!selected[i])
                     {
                         SelectedOptions.Add(MenuList[i]);
@@ -157,7 +179,7 @@ namespace TravelerAppConsole
                         MultipleOptions = true;
                     }
                     else MultipleOptions = false;
-
+                    nextline = 0;
                     var last = SelectedOptions.Last();
                     if (HotelService.Data.Count != 0 && MultipleOptions)
                     {
@@ -174,12 +196,16 @@ namespace TravelerAppConsole
                             item._menuOptions();
                             nextline++;
                         }
-                        DrawTable.Hotelinfo(HotelService.Data, HotelService.Data.Count, true);
+                        ConsolePrint.DataToSort.Clear();
+                        ConsolePrint.DataToSort.AddRange(HotelService.Data);
+                        if (HotelService.Data.Count() > 0) { ConsolePrint.DisplaySort(); }
                         MultipleOptions = false;
                         HotelService.Data.Clear();
                         HotelService.Data.AddRange(DataCopy);
+                        Console.CursorVisible = false;
                     }
-                    else {
+                    else
+                    {
                         selected[i] = false;
                         Console.ResetColor();
                         origRow = MenuList.Count() + 2 + nextline;

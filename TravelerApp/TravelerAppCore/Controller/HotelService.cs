@@ -17,11 +17,13 @@ namespace TravelerAppCore.Controller
         public static void ReadAndDisplay()
         {
             Read();
+            ConsolePrint.DataToSort.Clear();
+            ConsolePrint.DataToSort.AddRange(HotelService.Data);
             ConsolePrint.DisplayLoadedData();
         }
         public static void Read()
         {
-            var stopper = new Stopwatch();
+            stopper = new Stopwatch();
             stopper.Start();
             Data.Clear();
             string sCurrentDirectory = AppDomain.CurrentDomain.BaseDirectory;
