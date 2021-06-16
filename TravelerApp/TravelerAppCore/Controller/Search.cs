@@ -56,7 +56,7 @@ namespace TravelerAppCore.Controller
         }
         public static List<Hotel> ByRate(float Rating)
         {
-            return HotelService.Data.Where(x => x.AverageRates.Overall > Rating).ToList();
+            return HotelService.Data.Where(x => x.AverageRates.Overall >= Rating).ToList();
         }
 
     }
