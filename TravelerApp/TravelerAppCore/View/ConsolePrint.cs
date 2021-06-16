@@ -223,7 +223,6 @@ namespace TravelerAppCore.View
                     Menu.SelectedOptions.Clear();
                     Console.SetCursorPosition(0, 1);
                     Console.Clear();
-                    Menu.DisplayMenu();
                     new Menu().Interface();
                     return default;
                 }

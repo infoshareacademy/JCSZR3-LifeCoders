@@ -61,6 +61,7 @@ namespace TravelerAppConsole
         public void Interface()
         {
             DisplayMenu();
+            Console.CursorVisible = false;
             bool[] selected = new bool[MenuList.Count()];
             ConsoleKeyInfo info;
             do
