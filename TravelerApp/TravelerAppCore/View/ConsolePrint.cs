@@ -69,13 +69,14 @@ namespace TravelerAppCore.View
             Console.Write(log);
             Console.CursorVisible = true;
             string findIt = ReadLine();
-            while (findIt.Length < 3)
+            while (findIt.Length < 3 || findIt.Length > 10)
             {
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.Write("* Fraza powinna zawierać conajmniej trzy znaki! ");
+                if (findIt.Length < 3) { Console.Write("* Fraza powinna zawierać conajmniej trzy znaki! "); }
+                if (findIt.Length > 10) { Console.Write("* Fraza powinna zawierać nie więcej niż 10 znaków! "); }
                 Console.ResetColor();
                 Console.SetCursorPosition(log.Count(), Console.CursorTop - 1);
-                Console.Write(new String(' ', buf.Length + 40));
+                Console.Write(new String(' ', buf.Length + 70));
                 Console.SetCursorPosition(log.Count(), Console.CursorTop);
                 Console.CursorVisible = true;
                 buf = String.Empty;
@@ -228,10 +229,12 @@ namespace TravelerAppCore.View
         {
             Console.Write(log);
             Console.CursorVisible = true;
-            string message = "Kwota może zawierać tylko cyfry!";
             float fPrice = 0;
-            while (!float.TryParse(ReadLine(), out fPrice))
+            string message = "Kwota może zawierać tylko cyfry!";
+            while (!float.TryParse(ReadLine(), out fPrice) || fPrice < 0 || Math.Ceiling(Math.Log10(fPrice)) > 10)
             {
+                if (fPrice < 0) { message = "Kwota nie może być mniejsza od zera" + new String(' ', 10); }
+                if (Math.Ceiling(Math.Log10(fPrice)) > 10) { message = "Kwota może zawierać maksymalnie 10 cyfr" + new String(' ', 10); }
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.Write(message);
                 Console.ResetColor();
@@ -313,8 +316,8 @@ namespace TravelerAppCore.View
                     return default;
                 }
                 // Ignore if Alt or Ctrl is pressed.
-                //if ((key.Modifiers & ConsoleModifiers.Alt) == ConsoleModifiers.Alt)
-                //    continue;
+                if ((key.Modifiers & ConsoleModifiers.Alt) == ConsoleModifiers.Alt)
+                    continue;
                 if ((key.Modifiers & ConsoleModifiers.Control) == ConsoleModifiers.Control)
                     continue;
                 // Ignore if KeyChar value is \u0000.
