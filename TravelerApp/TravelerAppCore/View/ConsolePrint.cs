@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using TravelerAppConsole;
 using TravelerAppCore.Controller;
 using TravelerAppCore.Models.Hotels;
@@ -10,12 +9,16 @@ namespace TravelerAppCore.View
 {
     public static class ConsolePrint
     {
-        public static List<Hotel> DataToSort = new List<Hotel>();
+        public static string buf = String.Empty;
         public static void DisplaySort()
         {
-            Console.SetCursorPosition(0, Menu.MenuList.Count() + 3 + Menu.nextline);
-            Console.Write("Sortuj po: [N]azwie, [A]dresie, [O]cenie, [C]enie\n");
-            DrawTable.Hotelinfo(DataToSort, DataToSort.Count(), true);
+            Console.SetCursorPosition(0, Menu.MenuList.Count() + 2 + Menu.nextline);
+            Console.Write("Sortuj po:  ");
+            Console.ForegroundColor = ConsoleColor.Green; Console.Write("[N]"); Console.ResetColor(); Console.Write("azwie,  ");
+            Console.ForegroundColor = ConsoleColor.Green; Console.Write("[A]"); Console.ResetColor(); Console.Write("dresie,  ");
+            Console.ForegroundColor = ConsoleColor.Green; Console.Write("[O]"); Console.ResetColor(); Console.Write("cenie,  ");
+            Console.ForegroundColor = ConsoleColor.Green; Console.Write("[C]"); Console.ResetColor(); Console.Write("enie,  " + new string(' ', 40) + "\n");
+            DrawTable.Hotelinfo(Sort.DataToSort, Sort.DataToSort.Count(), true);
         }
         public static void SearchAddressConsole()
         {
@@ -59,18 +62,23 @@ namespace TravelerAppCore.View
                 CheckData(hotelList);
             }
         }
-
         public static string GetText(string log)
         {
+            Console.Write(new String(' ', 50));
+            Console.SetCursorPosition(0, Console.CursorTop);
             Console.Write(log);
             Console.CursorVisible = true;
             string findIt = ReadLine();
             while (findIt.Length < 3)
             {
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.Write("* Wyszukiwana fraza powinna zawierać conajmniej trzy znaki! ");
+                Console.Write("* Fraza powinna zawierać conajmniej trzy znaki! ");
                 Console.ResetColor();
                 Console.SetCursorPosition(log.Count(), Console.CursorTop - 1);
+                Console.Write(new String(' ', buf.Length + 40));
+                Console.SetCursorPosition(log.Count(), Console.CursorTop);
+                Console.CursorVisible = true;
+                buf = String.Empty;
                 findIt = ReadLine();
             }
             Console.CursorVisible = false;
@@ -78,8 +86,9 @@ namespace TravelerAppCore.View
         }
         public static float GetRate(string log)
         {
+            Console.Write(new String(' ', 50));
+            Console.SetCursorPosition(0, Console.CursorTop);
             Console.Write(log);
-            
             Console.CursorVisible = true;
             float fRateHotel = 0;
             while (!float.TryParse(ReadLine(), out fRateHotel) || fRateHotel < 1 || fRateHotel > 5)
@@ -87,8 +96,49 @@ namespace TravelerAppCore.View
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.Write("* Ocena tylko w skali 1 do 5! ");
                 Console.ResetColor();
+                Console.SetCursorPosition(log.Count(), Console.CursorTop - 1);
+                Console.Write(new String(' ', 20));
+                Console.SetCursorPosition(log.Count(), Console.CursorTop);
+                Console.CursorVisible = true;
+                buf = String.Empty;
             }
             return fRateHotel;
+        }
+        public static string GetCurrency(string log)
+        {
+            Console.Write(log);
+            Console.CursorVisible = false;
+            string[] curency = { "$", "zł", "EUR", "GBP", "CHF", "AED", "AUD", "CAD", "UAH", "JPY", "HRK", "CZK", "DKK", "NOK", "SEK", "RON",
+            "BGN", "TRY", "XDR", "ZAR", "RUB", "CNY"};
+            string getCurrency = "";
+            ConsoleKeyInfo key;
+            int i = 0;
+            Console.Write(curency[0]);
+            do
+            {
+                key = Console.ReadKey(true);
+                if (key.Key == ConsoleKey.UpArrow)
+                {
+                    i++;
+                    if (i > curency.Count() - 1) i = (curency.Count() - 1);
+                    getCurrency = curency[i];
+                    Console.SetCursorPosition(log.Count(), Console.CursorTop);
+                    Console.Write(new String(' ', getCurrency.Length + 1));
+                    Console.SetCursorPosition(log.Count(), Console.CursorTop);
+                    Console.Write(getCurrency);
+                }
+                if (key.Key == ConsoleKey.DownArrow)
+                {
+                    i--;
+                    if (i < 0) i = 0;
+                    getCurrency = curency[i];
+                    Console.SetCursorPosition(log.Count(), Console.CursorTop);
+                    Console.Write(new String(' ', getCurrency.Length + 1));
+                    Console.SetCursorPosition(log.Count(), Console.CursorTop);
+                    Console.Write(getCurrency);
+                }
+            } while (key.Key != ConsoleKey.Enter);
+            return getCurrency;
         }
         public static void DisplayLoadedData()
         {
@@ -96,7 +146,7 @@ namespace TravelerAppCore.View
             Console.WriteLine($"Czas odczytu wszystkich plików: {HotelService.stopper.Elapsed}"); ++Menu.nextline;
             Console.WriteLine($"Ilość odczytanych plików: {HotelService.Data.Count()}"); ++Menu.nextline;
             Console.WriteLine("Koniec deserializacji"); ++Menu.nextline;
-            Console.WriteLine("----------------------------------------------------"); ++Menu.nextline;
+            Console.Write("----------------------------------------------------"); ++Menu.nextline;
             DisplaySort();
         }
         public static void DisplaySavedData()
@@ -107,7 +157,7 @@ namespace TravelerAppCore.View
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("Plik został zapisany!");
             Console.ResetColor();
-            if (!Menu.MultipleOptions && HotelService.Data.Count() != 0) DrawTable.Hotelinfo(new List<Hotel>() { Hotel.NewHotel }, 1, true);
+            DrawTable.Hotelinfo(new List<Hotel>{Hotel.NewHotel}, 1, true);
         }
         public static void SaveToFile()
         {
@@ -128,8 +178,7 @@ namespace TravelerAppCore.View
             }
             if (DataFound.Count != 0 && !Menu.MultipleOptions)
             {
-                DataToSort.Clear();
-                DataToSort.AddRange(DataFound);
+                Sort.DataOrder(DataFound);
                 Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop+1);
                 DisplaySort();
             }
@@ -172,24 +221,61 @@ namespace TravelerAppCore.View
         }
         public static string GetNewName()
         {
-            Console.Write("Nazwa hotelu: ");
-            return ReadLine();
+            return GetText("Nazwa hotelu: ");
+        }
+
+        public static float GetPrice(string log)
+        {
+            Console.Write(log);
+            Console.CursorVisible = true;
+            string message = "Kwota może zawierać tylko cyfry!";
+            float fPrice = 0;
+            while (!float.TryParse(ReadLine(), out fPrice))
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.Write(message);
+                Console.ResetColor();
+                Console.CursorVisible = true;
+                Console.SetCursorPosition(log.Count(), Console.CursorTop - 1);
+                Console.Write(new String(' ', buf.Length));
+                Console.SetCursorPosition(log.Count(), Console.CursorTop);
+                buf = String.Empty;
+            }
+            Console.SetCursorPosition(0, Console.CursorTop);
+            Console.Write(new String(' ', message.Length));
+            Console.SetCursorPosition(0, Console.CursorTop);
+            return fPrice;
         }
         public static string GetNewPrice()
         {
-            Console.Write("Zakres cenowy: ");
-            return ReadLine();
+            Console.WriteLine("Zakres cenowy: " + new String(' ', 40));
+            float minValue = GetPrice("Od: ");
+            float maxValue = GetPrice("Do: ");
+            string message = "Podana kwota nie może być mniejsza od wartości minimalnej!";
+            while (maxValue < minValue)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.Write(message);
+                Console.ResetColor();
+                Console.CursorVisible = true;
+                Console.SetCursorPosition(4, Console.CursorTop - 1);
+                Console.Write(new String(' ', buf.Length));
+                Console.SetCursorPosition(4, Console.CursorTop);
+                buf = String.Empty;
+                maxValue = GetPrice("");
+            }
+            Console.Write(new String(' ', 80));
+            Console.SetCursorPosition(0, Console.CursorTop);
+            string curreny = GetCurrency("Podaj walutę ↑↓: ");
+            return $"{minValue} - {maxValue} {curreny}";
         }
         public static string GetNewAddress()
         {
-            Console.WriteLine("-\nPodaj adres");
-            Console.Write("Nazwa ulicy: ");
-            string street = ReadLine();
-            Console.Write("Nazwa miasta: ");
-            string city = ReadLine();
-            Console.Write("Kod pocztowy: ");
-            string postalcode = ReadLine();
-            Console.WriteLine("-");
+            Console.WriteLine("\n-\nPodaj adres:");
+            string street = GetText("Nazwa ulicy: ");
+            string city = GetText("Nazwa miasta: ");
+            string postalcode = GetText("Kod pocztowy: ");
+            Console.WriteLine("-" + new String(' ', 50));
             return city + ", " + street + ", " + postalcode;
         }
 
@@ -213,7 +299,7 @@ namespace TravelerAppCore.View
         }
         public static string ReadLine()
         {
-            string buf = String.Empty;
+            buf = String.Empty;
             ConsoleKeyInfo key;
             do
             {
@@ -227,8 +313,8 @@ namespace TravelerAppCore.View
                     return default;
                 }
                 // Ignore if Alt or Ctrl is pressed.
-                if ((key.Modifiers & ConsoleModifiers.Alt) == ConsoleModifiers.Alt)
-                    continue;
+                //if ((key.Modifiers & ConsoleModifiers.Alt) == ConsoleModifiers.Alt)
+                //    continue;
                 if ((key.Modifiers & ConsoleModifiers.Control) == ConsoleModifiers.Control)
                     continue;
                 // Ignore if KeyChar value is \u0000.
@@ -257,6 +343,7 @@ namespace TravelerAppCore.View
                 if (key.Key == ConsoleKey.Enter)
                 {
                     Console.WriteLine("");
+                    Console.CursorVisible = false;
                     return buf;
                 }
                 // Handle key by adding it to input string.

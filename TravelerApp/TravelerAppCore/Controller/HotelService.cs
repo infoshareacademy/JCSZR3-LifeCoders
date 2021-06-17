@@ -17,8 +17,7 @@ namespace TravelerAppCore.Controller
         public static void ReadAndDisplay()
         {
             Read();
-            ConsolePrint.DataToSort.Clear();
-            ConsolePrint.DataToSort.AddRange(HotelService.Data);
+            Sort.DataOrder(HotelService.Data);
             ConsolePrint.DisplayLoadedData();
         }
         public static void Read()
@@ -70,7 +69,6 @@ namespace TravelerAppCore.Controller
             Write(Hotel.NewHotel);
             ConsolePrint.DisplaySavedData();
         }
-
         public static void Write(Hotel Object)
         {
             string JsonFile = JsonConvert.SerializeObject(Object);

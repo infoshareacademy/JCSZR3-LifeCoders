@@ -147,22 +147,22 @@ namespace TravelerAppConsole
                 }
                 if (info.Key == ConsoleKey.N)
                 {
-                    ConsolePrint.DataToSort = ConsolePrint.DataToSort.OrderBy(x => x.HotelInfo.Name).ToList();
+                    Sort.DataToSort = Sort.OrderByName();
                     ConsolePrint.DisplaySort();
                 }
                 if (info.Key == ConsoleKey.A)
                 {
-                    ConsolePrint.DataToSort = ConsolePrint.DataToSort.OrderBy(x => x.HotelInfo.Address).ToList();
+                    Sort.DataToSort = Sort.OrderByAddress();
                     ConsolePrint.DisplaySort();
                 }
                 if (info.Key == ConsoleKey.O)
                 {
-                    ConsolePrint.DataToSort = ConsolePrint.DataToSort.OrderByDescending(x => x.AverageRates.Overall).ToList();
+                    Sort.DataToSort = Sort.OrderByAverageOverall();
                     ConsolePrint.DisplaySort();
                 }
                 if (info.Key == ConsoleKey.C)
                 {
-                    ConsolePrint.DataToSort = ConsolePrint.DataToSort.OrderByDescending(x => x.HotelInfo.Price).ToList();
+                    Sort.DataToSort = Sort.OrderByPrice();
                     ConsolePrint.DisplaySort();
                 }
                 if (info.Key == ConsoleKey.Enter)
@@ -197,8 +197,7 @@ namespace TravelerAppConsole
                             item._menuOptions();
                             nextline++;
                         }
-                        ConsolePrint.DataToSort.Clear();
-                        ConsolePrint.DataToSort.AddRange(HotelService.Data);
+                        Sort.DataOrder(HotelService.Data);
                         if (HotelService.Data.Count() > 0) { ConsolePrint.DisplaySort(); }
                         MultipleOptions = false;
                         HotelService.Data.Clear();

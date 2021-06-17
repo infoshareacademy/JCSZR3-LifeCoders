@@ -29,9 +29,7 @@ namespace TravelerAppCore.Controller
         public static List<Hotel> ByName(string name)
         {
             List<Hotel> foundHotels = new List<Hotel>();
-
             string nameChanged = name.Replace(" ", string.Empty).ToUpper();
-
             //check if a search name has at least one character in it
             // search for an exact match first- if found we exit a method after finding one - I assumed hotel names are distinct
             foreach (Hotel hotel in HotelService.Data)
@@ -58,7 +56,6 @@ namespace TravelerAppCore.Controller
         {
             return HotelService.Data.Where(x => x.AverageRates.Overall >= Rating).ToList();
         }
-
     }
 }
 
