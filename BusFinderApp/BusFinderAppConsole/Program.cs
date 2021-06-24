@@ -7,7 +7,6 @@ namespace BusFinderAppConsole
     {
         static void Main(string[] args)
         {
-            // Rozpakowanie plików JSON do listy elementów
             JSON.ShceduleList = JSON.LoadJsonFiles<ScheduleForStation>("Data");
         }
     }
