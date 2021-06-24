@@ -39,15 +39,23 @@ namespace BusFinderAppCore.Control
             return Data;
         }
 
-        // Rozpakowywanie wszystkich plików JSON, z katalogu Data, tak samo może dotyczyć dowolnego katalogu 
+        // Rozpakowywanie wszystkich plików JSON, z dowolnego katalogu i dowolnej klasy
+        // Katalog musi znajdować się w BusFinderAppCore
+        // Jako T podajemy rodzaj klasy jaką mamy w plikach
+        // Directory nazwa katalogu w którym mamy pliki może to też być np. Data\Coś
+        // Metoda zwraca listę obiektów, które były w pojedyńczych plikach JSON
         public static List<T> LoadJsonFiles<T>(string directory)
         {
+            // Nowa lista zadanych obiektów 
             List<T> Data = new List<T>();
+            // Pobranie domyślnej ścieżki
             string currentDirectory = AppDomain.CurrentDomain.BaseDirectory;
+            // Stworzenie ścieżki do wybranego katalogu
             string path = Path.Combine(currentDirectory, $@"..\..\..\..\BusFinderAppCore\{directory}");
             string sPath = Path.GetFullPath(path);
+            // Stworzenie tablicy stringów z nazwmi plików z które są typu JSON 
             string[] jsonFiles = Directory.GetFiles(sPath, "*.json").Select(Path.GetFileName).ToArray();
-
+            // Iteracja po tablicy i wykorzystanie metody dla jednego pliku 
             foreach (var file in jsonFiles)
             {
                 Data.Add(JSON.LoadJsonFile<T>(file));
