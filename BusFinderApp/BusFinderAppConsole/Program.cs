@@ -1,4 +1,6 @@
 ﻿using System;
+using BusFinderAppCore.Control;
+using BusFinderAppCore.Models;
 
 namespace BusFinderAppConsole
 {
@@ -6,7 +8,8 @@ namespace BusFinderAppConsole
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            // Rozpakowanie plików JSON do listy elementów
+            JSON.ShceduleList = JSON.LoadJsonFiles<ScheduleForStation>("Data");
         }
     }
 }
