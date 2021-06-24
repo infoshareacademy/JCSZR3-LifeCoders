@@ -1,5 +1,4 @@
-﻿using System;
-using BusFinderAppCore.Control;
+﻿using BusFinderAppCore.Control;
 using BusFinderAppCore.Models;
 
 namespace BusFinderAppConsole
