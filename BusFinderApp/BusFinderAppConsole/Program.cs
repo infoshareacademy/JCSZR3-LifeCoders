@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BusFinderAppCore.Control;
+using BusFinderAppCore.Models;
 
 namespace BusFinderAppConsole
 {
@@ -6,7 +7,7 @@ namespace BusFinderAppConsole
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            JSON.ShceduleList = JSON.LoadJsonFiles<ScheduleForStation>("Data");
         }
     }
 }
