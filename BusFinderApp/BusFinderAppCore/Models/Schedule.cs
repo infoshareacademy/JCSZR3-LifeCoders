@@ -4,8 +4,8 @@ namespace BusFinderAppCore.Models
 {
     public class Schedule
     {
-        public List<Itinerary> arrivals { get; set; }
-        public List<Itinerary> departures { get; set; }
-        public string message { get; set; }
+        public List<Itinerary> Arrivals { get; set; }
+        public List<Itinerary> Departures { get; set; }
+        public string Message { get; set; }
     }
 }

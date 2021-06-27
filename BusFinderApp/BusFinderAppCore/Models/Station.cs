@@ -2,12 +2,10 @@
 {
     public class Station
     {
-        public int id { get; set; }
-        public string guid { get; set; }
-        public string name { get; set; }
-        public DefaultAddress default_address { get; set; }
-        public string address { get; set; }
-        public string full_address { get; set; }
-        public Coordinates coordinates { get; set; }
+        public int Id { get; set; }
+        public string Guid { get; set; }
+        public string Name { get; set; }
+        public DefaultAddress Default_address { get; set; }
+        public Coordinates Coordinates { get; set; }
     }
 }

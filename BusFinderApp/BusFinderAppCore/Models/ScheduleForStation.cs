@@ -2,7 +2,7 @@
 {
     public class ScheduleForStation 
     {
-        public Schedule schedule { get; set; }
-        public Station station { get; set; }
+        public Schedule Schedule { get; set; }
+        public Station Station { get; set; }
     }
 }

@@ -17,14 +17,14 @@ namespace BusFinderAppCore.Control
        // bedziemy zapisywac dane wejsciowe do sql servera i kod bedzie w osobnej kolumnie
        public static void divider()
         {
-            foreach (var station in JSON.ShceduleList)
+            foreach (var station in JSON.ScheduleList)
             {
-                var address = station.station.default_address.full_address;
+                var address = station.Station.Default_address.Full_address;
                 Regex rg = new Regex(@"(?<street>.+),\s(?<town>.+),\s(?<country>.+)");
                 var addressMatch = rg.Match(address);
-                station.station.default_address.Street = addressMatch.Groups["street"].Value;
-                station.station.default_address.Town = addressMatch.Groups["town"].Value;
-                station.station.default_address.Country = addressMatch.Groups["country"].Value;
+                station.Station.Default_address.Street = addressMatch.Groups["street"].Value;
+                station.Station.Default_address.Town = addressMatch.Groups["town"].Value;
+                station.Station.Default_address.Country = addressMatch.Groups["country"].Value;
             }
         }
 
