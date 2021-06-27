@@ -2,7 +2,7 @@
 {
     public class Datetime
     {
-        public int timestamp { get; set; }
-        public string tz { get; set; }
+        public int Timestamp { get; set; }
+        public string Tz { get; set; }
     }
 }

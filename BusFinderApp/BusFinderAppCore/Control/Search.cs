@@ -13,17 +13,17 @@ namespace BusFinderAppCore.Control
         //czy wypisujemy wyniki w jednej liscie
         public static  List<ScheduleForStation> ByTown(string town)
         {
-          return  JSON.ShceduleList.Where(x => x.station.default_address.Town.Contains(town)).ToList();            
+          return  JSON.ScheduleList.Where(x => x.Station.Default_address.Town.Contains(town)).ToList();            
         }
 
         public static List<ScheduleForStation> ByCountry(string country)
         {
-            return JSON.ShceduleList.Where(x => x.station.default_address.Country.Contains(country)).ToList();
+            return JSON.ScheduleList.Where(x => x.Station.Default_address.Country.Contains(country)).ToList();
         }
 
         public static List<ScheduleForStation> ByName(string name)
         {
-            return JSON.ShceduleList.Where(x => x.station.name.Contains(name)).ToList();
+            return JSON.ScheduleList.Where(x => x.Station.Name.Contains(name)).ToList();
         }
 
     }

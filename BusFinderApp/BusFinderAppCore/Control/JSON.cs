@@ -9,7 +9,7 @@ namespace BusFinderAppCore.Control
 {
     public class JSON
     {
-        public static List<ScheduleForStation> ShceduleList = new List<ScheduleForStation>();
+        public static List<ScheduleForStation> ScheduleList = new List<ScheduleForStation>();
         public static T LoadJsonFile<T>(string fileName)
         {
             T Data;
