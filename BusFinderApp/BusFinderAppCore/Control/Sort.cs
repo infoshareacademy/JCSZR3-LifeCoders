@@ -36,6 +36,6 @@ namespace BusFinderAppCore.Control
             return itinerary.OrderBy(x => x.datetime.timestamp).ToList();
 
         }
-
+  
     }
 }
