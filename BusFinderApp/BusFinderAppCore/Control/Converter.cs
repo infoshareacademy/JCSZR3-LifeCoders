@@ -13,13 +13,13 @@ namespace BusFinderAppCore.Control
                 foreach (Itinerary arrival in schedule.schedule.arrivals)
                 {
                     double ArivalTimestamp = (double)arrival.datetime.timestamp;
-                    arrival.datetime.Date = beginDate.AddSeconds(ArivalTimestamp);
+                    arrival.datetime.Date = beginDate.AddSeconds(ArivalTimestamp).ToLocalTime();
                 }
 
                 foreach (Itinerary departure in schedule.schedule.departures)
                 {
                     double DeparturesTimestamp = (double) departure.datetime.timestamp;
-                    departure.datetime.Date = beginDate.AddSeconds(DeparturesTimestamp);
+                    departure.datetime.Date = beginDate.AddSeconds(DeparturesTimestamp).ToLocalTime();
                 }
             }
 
