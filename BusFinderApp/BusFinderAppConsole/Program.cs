@@ -17,7 +17,7 @@ namespace BusFinderAppConsole
             Console.WriteLine(JSON.ShceduleList[4].station.default_address.full_address);
             Console.WriteLine(JSON.ShceduleList[5].station.default_address.full_address);
 
-            AddressDivider.divider();
+            AddressDivider.Divider(JSON.ShceduleList);
             Console.WriteLine("**************Adres po uzyciu AddressDivider******************");
             Console.WriteLine(JSON.ShceduleList[0].station.default_address.Street);
             Console.WriteLine(JSON.ShceduleList[0].station.default_address.Town);
