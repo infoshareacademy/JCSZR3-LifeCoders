@@ -1,4 +1,6 @@
-﻿using BusFinderAppWeb.Models;
+﻿using BusFinderAppCore.Models;
+using BusFinderAppCore.ViewModels;
+using BusFinderAppWeb.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -18,9 +20,27 @@ namespace BusFinderAppWeb.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(string sortColumn, string sortDirection = "")
         {
-            return View();
+            var list = new List<ScheduleForStation>();
+            list.Add(new ScheduleForStation() { station = new Station { address = "test 1", Name = "test name" } });
+            list.Add(new ScheduleForStation() { station = new Station { address = "test 2", Name = "test name 2" } });
+            switch (sortColumn)
+            {
+                case "Name":
+                    list = list.OrderBy(x => x.station.Name).ToList();
+                    break;
+                case "Address":
+                    list = list.OrderBy(x => x.station.address).ToList();
+                    break;
+                default:
+                    list = list.OrderByDescending(x => x.station.Name).ToList();
+                    break;
+            }
+
+            var model = new SchedulesViewModel { Schedules = list, SortColumn = sortColumn, SortDirection = sortDirection };
+
+            return View(model);
         }
 
         public IActionResult Privacy()

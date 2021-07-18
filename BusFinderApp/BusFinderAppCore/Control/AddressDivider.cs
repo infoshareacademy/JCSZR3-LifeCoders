@@ -17,6 +17,7 @@ namespace BusFinderAppCore.Control
        // bedziemy zapisywac dane wejsciowe do sql servera i kod bedzie w osobnej kolumnie
        public static void divider()
         {
+           
             foreach (var station in JSON.ShceduleList)
             {
                 var address = station.station.default_address.full_address;

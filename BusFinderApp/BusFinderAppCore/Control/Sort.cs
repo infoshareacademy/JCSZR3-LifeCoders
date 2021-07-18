@@ -9,7 +9,6 @@ namespace BusFinderAppCore.Control
 {
     public class Sort
     {
-
         public static List<ScheduleForStation> SortByTown(string option)
         {
             if (option == "A")
@@ -33,6 +32,6 @@ namespace BusFinderAppCore.Control
             var itinerary = JSON.ShceduleList.SelectMany(x => x.schedule.departures).ToList();
             return itinerary.OrderBy(x => x.datetime.timestamp).ToList();
         }
-
+     
     }
 }

@@ -23,7 +23,7 @@ namespace BusFinderAppCore.Control
 
         public static List<ScheduleForStation> ByName(string name)
         {
-            return JSON.ShceduleList.Where(x => x.station.name.Contains(name)).ToList();
+            return JSON.ShceduleList.Where(x => x.station.Name.Contains(name)).ToList();
         }
 
     }

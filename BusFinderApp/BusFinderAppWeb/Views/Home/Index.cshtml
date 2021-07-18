@@ -1,6 +1,35 @@
-﻿@{
+﻿@using BusFinderAppCore.ViewModels; 
+
+@model SchedulesViewModel
+@{
     ViewData["Title"] = "Home Page";
 }
+
+<table>
+    <thead>
+        <tr>
+            <th>
+                @Html.ActionLink("Station name", "Index", "Home", new { sortColumn = "Name", sortDirection = Model.SortDirection == "" ? "desc" : "" })
+            </th>
+            <th>
+                @Html.ActionLink("Station address", "Index", "Home", new { sortColumn = "Address", sortDirection = Model.SortDirection == "" ? "desc" : "" })
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var schedule in Model.Schedules)
+        {
+        <tr>
+            <td>
+                @schedule.station.Name
+            </td>
+            <td>
+                @schedule.station.address
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
 
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>

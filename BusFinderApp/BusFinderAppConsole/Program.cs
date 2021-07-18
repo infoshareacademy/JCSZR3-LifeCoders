@@ -63,7 +63,7 @@ namespace BusFinderAppConsole
             {
                 Console.WriteLine($"{item.station.name}");
             }
-           
+     
             Console.ReadLine();
         }
     }
