@@ -12,12 +12,12 @@ namespace BusFinderAppCore.Control
     {
         //Aleje Jerozolimskie 144, 02-303 Warszawa, Polska
         //ul.Marszalkowska 104/122, 00-017 Warszawa, Polen
-       //ul.Grochowska / Al.Stanów Zjednoczonych, 04-357 Warszawa, Polska
-       //kod pocztowy- czy rozdzielamy teraz za pomoca regex czy na pozniejszym etapie, gdy
-       // bedziemy zapisywac dane wejsciowe do sql servera i kod bedzie w osobnej kolumnie
-       public static void divider()
+        //ul.Grochowska / Al.Stanów Zjednoczonych, 04-357 Warszawa, Polska
+        //kod pocztowy- czy rozdzielamy teraz za pomoca regex czy na pozniejszym etapie, gdy
+        // bedziemy zapisywac dane wejsciowe do sql servera i kod bedzie w osobnej kolumnie
+        public static List<ScheduleForStation> Divider(List<ScheduleForStation> schedule)
         {
-            foreach (var station in JSON.ShceduleList)
+            foreach (var station in schedule)
             {
                 var address = station.station.default_address.full_address;
                 Regex rg = new Regex(@"(?<street>.+),\s(?<town>.+),\s(?<country>.+)");
@@ -26,6 +26,8 @@ namespace BusFinderAppCore.Control
                 station.station.default_address.Town = addressMatch.Groups["town"].Value;
                 station.station.default_address.Country = addressMatch.Groups["country"].Value;
             }
+
+            return schedule;
         }
 
     }
