@@ -11,6 +11,7 @@ namespace BusFinderAppWeb.Controllers
 {
     public class HomeController : Controller
     {
+        
         private readonly ILogger<HomeController> _logger;
 
         public HomeController(ILogger<HomeController> logger)
@@ -18,14 +19,26 @@ namespace BusFinderAppWeb.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(int temp)
         {
-            return View();
+            return View(Data.lista);
         }
 
         public IActionResult Privacy()
         {
             return View();
+        }
+
+        public IActionResult Form()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Edit(TestModel test)
+        {
+            Data.lista.Add(test);
+            return RedirectToAction("Index");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
