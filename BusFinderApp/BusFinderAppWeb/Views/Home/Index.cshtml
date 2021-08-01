@@ -1,11 +1,12 @@
-﻿@using BusFinderAppCore.ViewModels; 
+﻿@using BusFinderAppCore.ViewModels;
+
 
 @model SchedulesViewModel
 @{
     ViewData["Title"] = "Home Page";
 }
 
-<table>
+<table border="1" cellspacing="0">
     <thead>
         <tr>
             <th>
@@ -14,19 +15,30 @@
             <th>
                 @Html.ActionLink("Station address", "Index", "Home", new { sortColumn = "Address", sortDirection = Model.SortDirection == "" ? "desc" : "" })
             </th>
+            <th>
+                @Html.ActionLink("Message", "Index", "Home", new { sortColumn = "Message", sortDirection = Model.SortDirection == "" ? "desc" : "" })
+            </th>
+            <th>
+                @Html.ActionLink("Time", "Index", "Home", new { sortColumn = "Time", sortDirection = Model.SortDirection == "" ? "desc" : "" })
+            </th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var schedule in Model.Schedules)
+        @foreach (var schedule in Model.Schedules )
         {
-        <tr>
-            <td>
-                @schedule.station.Name
-            </td>
-            <td>
-                @schedule.station.address
-            </td>
-        </tr>
+            <tr>
+                <td>
+                    @schedule.station.Name
+                </td>
+                <td>
+                    @schedule.station.full_address
+                <td>
+                    @schedule.schedule.message
+                </td>
+                <td>
+                    @schedule.schedule.Datetime
+                </td>
+            </tr>
         }
     </tbody>
 </table>

@@ -13,4 +13,6 @@ namespace BusFinderAppCore.ViewModels
         public string SortColumn { get; set; }
         public string SortDirection { get; set; }
     }
+
 }
+  
