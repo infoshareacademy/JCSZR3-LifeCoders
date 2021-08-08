@@ -20,12 +20,12 @@ namespace BusFinderAppCore.Control
            
             foreach (var station in JSON.ShceduleList)
             {
-                var address = station.station.default_address.full_address;
+                var address = station.station.DefaultAddress.full_address;
                 Regex rg = new Regex(@"(?<street>.+),\s(?<town>.+),\s(?<country>.+)");
                 var addressMatch = rg.Match(address);
-                station.station.default_address.Street = addressMatch.Groups["street"].Value;
-                station.station.default_address.Town = addressMatch.Groups["town"].Value;
-                station.station.default_address.Country = addressMatch.Groups["country"].Value;
+                station.station.DefaultAddress.Street = addressMatch.Groups["street"].Value;
+                station.station.DefaultAddress.Town = addressMatch.Groups["town"].Value;
+                station.station.DefaultAddress.Country = addressMatch.Groups["country"].Value;
             }
         }
 
