@@ -7,6 +7,7 @@ using Newtonsoft.Json;
 
 namespace BusFinderAppCore.Control
 {
+    //TODO: REWRITE AS A SERVICE
     public class JSON
     {
         public static List<ScheduleForStation> ShceduleList = new List<ScheduleForStation>();
