@@ -48,19 +48,6 @@ namespace BusFinderAppConsole
                 Console.WriteLine($"{item.station.name}");
             }
 
-            Console.WriteLine("**************SearchByStationName****************************");
-            Console.WriteLine(JSON.ShceduleList[0].station.name);
-            Console.WriteLine(JSON.ShceduleList[1].station.name);
-            Console.WriteLine(JSON.ShceduleList[2].station.name);
-            Console.WriteLine(JSON.ShceduleList[3].station.name);
-            Console.WriteLine(JSON.ShceduleList[4].station.name);
-            Console.WriteLine(JSON.ShceduleList[5].station.name);
-            Console.WriteLine("******************SearchByName: Warsaw************************");
-            List<ScheduleForStation> lista2 = Search.ByName("Warsaw");
-            foreach (var item in lista2)
-            {
-                Console.WriteLine($"{item.station.name}");
-            }
            
             Console.ReadLine();
         }
