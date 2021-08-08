@@ -15,17 +15,22 @@ namespace BusFinderAppWeb.Controllers
 {
     public class ItineraryController : Controller
     {
-        public IActionResult Index(string sortColumn, string sortDirection = "")
+        public IActionResult Index(string searchStationName, string sortColumn, string sortDirection = "")
         {
             var list = JSON.LoadJsonFiles<ScheduleForStation>("Data");
-         
+
+            if (!string.IsNullOrWhiteSpace(searchStationName))
+            {
+                list = list.Where(x => x.station.Name.Contains(searchStationName, StringComparison.InvariantCultureIgnoreCase)).ToList();
+            }
+
             switch (sortColumn)
             {
                 case "Name":
                     list = list.OrderBy(x => x.station.Name).ToList();
                     break;
                 case "Address":
-                    list = list.OrderBy(x => x.station.full_address).ToList();
+                    list = list.OrderBy(x => x.station.FullAddress).ToList();
                     break;
                 case "Message":
                     list = list.OrderBy(x => x.schedule.message).ToList();
