@@ -22,7 +22,8 @@ namespace BusFinderAppWeb
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews();
+            // AddRazorRuntimeCompilation() - This allows to see changes made in the view files without restarting application.
+            services.AddControllersWithViews().AddRazorRuntimeCompilation();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -34,7 +35,7 @@ namespace BusFinderAppWeb
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");
+                app.UseExceptionHandler("/Itinerary/Error");
             }
             app.UseStaticFiles();
 
@@ -46,7 +47,7 @@ namespace BusFinderAppWeb
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Itinerary}/{action=Index}/{id?}");
             });
         }
     }

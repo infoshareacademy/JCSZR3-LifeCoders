@@ -13,22 +13,12 @@ using System.Threading.Tasks;
 
 namespace BusFinderAppWeb.Controllers
 {
-    public class HomeController : Controller
+    public class ItineraryController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
-        {
-            _logger = logger;
-        }
-
         public IActionResult Index(string sortColumn, string sortDirection = "")
         {
-            //var list = new List<ScheduleForStation>();
-            var list=JSON.LoadJsonFiles<ScheduleForStation>("Data");
+            var list = JSON.LoadJsonFiles<ScheduleForStation>("Data");
          
-           // list.Add(new ScheduleForStation() { station = new Station { address = "test 1", Name = "test name" } });
-           // list.Add(new ScheduleForStation() { station = new Station { address = "test 2", Name = "test name 2" } });
             switch (sortColumn)
             {
                 case "Name":
@@ -48,18 +38,11 @@ namespace BusFinderAppWeb.Controllers
                     break;
             }
 
-
-
             var model = new SchedulesViewModel {Schedules = list, SortColumn = sortColumn, SortDirection = sortDirection};
 
             return View(model);
-            
         }
 
-        public IActionResult Privacy()
-        {
-            return View();
-        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
