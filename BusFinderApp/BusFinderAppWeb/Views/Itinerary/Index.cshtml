@@ -48,7 +48,18 @@
                     @schedule.schedule.message
                 </td>
                 <td>
-                    @schedule.schedule.Datetime
+                   <p>
+                       <b>
+                           @schedule.schedule.departures.FirstOrDefault()?.GetDay()
+                       </b>
+                   </p>
+                    
+                    @foreach(var departure in schedule.schedule.departures)
+                        {
+                            <p>
+                                @departure.GetTime()
+                                </p>
+                        }
                 </td>
             </tr>
         }
