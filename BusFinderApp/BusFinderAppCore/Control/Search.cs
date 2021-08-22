@@ -26,5 +26,9 @@ namespace BusFinderAppCore.Control
             return JSON.ShceduleList.Where(x => x.station.Name.Contains(name)).ToList();
         }
 
+        public static List<ScheduleForStation> ByDataTime(double datatime)
+        {
+            return JSON.ShceduleList.Where(x => x.station.Name.Contains((char)datatime)).ToList();
+        }
     }
 }

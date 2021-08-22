@@ -8,5 +8,6 @@ namespace BusFinderAppCore.Models
         public Itinerary Datetime { get; set; }
         public List<Itinerary> departures { get; set; }
         public string message { get; set; }
+        
     }
 }
