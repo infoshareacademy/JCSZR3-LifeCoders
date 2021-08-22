@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - BusFinderAppWeb</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" type="text/css" href="~/css/style.css" />
+    <link rel="stylesheet" type="text/css" href="~/css/Style.css" />
 </head>
 <body>
 <nav class="navi">
@@ -29,8 +29,10 @@
         </ul>
     </div>
 </nav>
-<div class="my-container">
-    @RenderBody();
+<div class="my-background">
+    <div class="my-container">
+        @RenderBody()
+    </div>
 </div>
 <footer class="my-footer">
     <div class="inline">
@@ -39,5 +41,6 @@
         </p>
     </div>
 </footer>
+<script src="js/site.js"></script>
 </body>
 </html>

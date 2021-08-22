@@ -1,14 +1,13 @@
 ﻿* {
     margin: 0 auto;
     box-sizing: border-box;
-
 }
 
 body {
     height: 100vh;
 }
 
-.my-container {
+.my-background {
     background-image: url("../photo/background-bus.jpg");
     background-repeat: no-repeat;
     background-size: cover;
@@ -62,5 +61,10 @@ a:hover {
 
 .inline {
     display: inline-block;
+}
+
+.my-container {
+    max-width: 1200px;
+    color: white;
 }
     
