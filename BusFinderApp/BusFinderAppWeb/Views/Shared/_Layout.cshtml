@@ -5,26 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Bus Finder</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" type="text/css" href="~/css/Style.css" />
+    <link rel="stylesheet" type="text/css" href="~/css/style.css" />
 </head>
 <body>
 <nav class="navi">
     <div class="navi-container">
         <ul class="nav nav-tabs justify-content-center">
             <li class="nav-item">
-                <a class="nav-link active" href="#">Wyszukaj</a>
+                @Html.ActionLink("Home", "Index", "Home", null, new { @class = "nav-link" })
             </li>
             <li class="nav-item">
-                <a class="nav-link " href="#">Informacje</a>
+                @Html.ActionLink("Podróż", "Index", "Itinerary", null, new { @class = "nav-link" })
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">O nas</a>
+                @Html.ActionLink("Informacje", "", "", null, new { @class = "nav-link" })
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Zaloguj</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Zaloguj</a>
+                @Html.ActionLink("Aktualności", "", "", null, new { @class = "nav-link" })
             </li>
         </ul>
     </div>
