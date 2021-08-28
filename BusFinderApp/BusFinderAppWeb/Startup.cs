@@ -47,7 +47,7 @@ namespace BusFinderAppWeb
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Itinerary}/{action=Index}/{Id?}");
+                    pattern: "{controller=Home}/{action=Index}/{Id?}");
             });
         }
     }
