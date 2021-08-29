@@ -1,0 +1,67 @@
+﻿@using BusFinderAppCore.ViewModels;
+
+
+@model SchedulesViewModel
+@{
+    ViewData["Title"] = "Itinerary";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Itinerary</h1>
+</div>
+
+<div>
+    <form asp-action="Index" asp-route-searchStationName="@Model.SearchText" asp-route-sortColumn="@Model.SortColumn" asp-route-sortDirection="@Model.SortDirection">
+        <div class="form-row">
+            <input type="text" placeholder="Search station name" name="searchStationName" class="form-control" value="@Model.SearchText" />
+            <input class="btn btn-info" type="submit" name="Search" value="Search" />
+        </div>
+    </form>
+</div>
+<table class="table table-striped" border="1">
+    <thead>
+        <tr>
+            <th>
+                @Html.ActionLink("Station name", "Index", "Itinerary", new { sortColumn = "Name", searchStationName = Model.SearchText, sortDirection = Model.SortDirection == "" ? "desc" : "" })
+            </th>
+            <th>
+                @Html.ActionLink("Station address", "Index", "Itinerary", new { sortColumn = "Address", searchStationName = Model.SearchText, sortDirection = Model.SortDirection == "" ? "desc" : "" })
+            </th>
+            <th>
+                @Html.ActionLink("Message", "Index", "Itinerary", new { sortColumn = "Message", searchStationName = Model.SearchText, sortDirection = Model.SortDirection == "" ? "desc" : "" })
+            </th>
+            <th>
+                @Html.ActionLink("Time", "Index", "Itinerary", new { sortColumn = "Time", searchStationName = Model.SearchText, sortDirection = Model.SortDirection == "" ? "desc" : "" })
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var schedule in Model.Schedules)
+        {
+            <tr>
+                <td>
+                    @schedule.station.Name
+                </td>
+                <td>
+                    @schedule.station.FullAddress
+                <td>
+                    @schedule.schedule.message
+                </td>
+                <td>
+                   <p>
+                       <b>
+                           @schedule.schedule.departures.FirstOrDefault()?.GetDay()
+                       </b>
+                   </p>
+                    
+                    @foreach(var departure in schedule.schedule.departures)
+                        {
+                            <p>
+                                @departure.GetTime()
+                                </p>
+                        }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
