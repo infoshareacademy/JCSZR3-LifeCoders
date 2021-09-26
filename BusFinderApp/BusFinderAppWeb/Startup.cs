@@ -24,6 +24,7 @@ namespace BusFinderAppWeb
         {
             // AddRazorRuntimeCompilation() - This allows to see changes made in the view files without restarting application.
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
+            services.AddHttpClient();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

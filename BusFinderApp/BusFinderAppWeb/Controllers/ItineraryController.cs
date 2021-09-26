@@ -9,14 +9,34 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Diagnostics;
 using System.Linq;
+using System.Net.Http;
+using System.Net.Http.Json;
 using System.Threading.Tasks;
+using Microsoft.VisualBasic;
+
 
 namespace BusFinderAppWeb.Controllers
 {
     public class ItineraryController : Controller
     {
+        private readonly IHttpClientFactory clientFactory;
+        public ItineraryController(IHttpClientFactory client)
+        {
+             clientFactory=client;
+        }
         public IActionResult Index(string searchStationName, string sortColumn, string sortDirection = "")
         {
+
+            HttpRequestMessage request =
+                new HttpRequestMessage(HttpMethod.Get, "https://localhost:44363/api/Station/1");
+
+            var client=clientFactory.CreateClient();
+            var response=client.Send(request);
+            if (response.IsSuccessStatusCode)
+            {
+               var result =response.Content.ReadFromJsonAsync<StationModelClient>();
+            }
+
             var list = JSON.LoadJsonFiles<ScheduleForStation>("Data");
 
             if (!string.IsNullOrWhiteSpace(searchStationName))
