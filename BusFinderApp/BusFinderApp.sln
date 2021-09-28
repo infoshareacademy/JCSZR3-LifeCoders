@@ -9,7 +9,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BusFinderAppWeb", "BusFinde
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BusFinderAppConsole", "BusFinderAppConsole\BusFinderAppConsole.csproj", "{0023823B-9A88-468A-992B-68BC5021746D}"
 EndProject
+<<<<<<< Updated upstream
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Loggery", "Loggery\Loggery.csproj", "{A4B844E6-540B-4427-A771-7C897AEAC74A}"
+=======
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Loggery2", "Loggery2\Loggery2.csproj", "{6B793393-8126-4E11-97CB-EB696DDE3ACE}"
+>>>>>>> Stashed changes
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,10 +33,17 @@ Global
 		{0023823B-9A88-468A-992B-68BC5021746D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0023823B-9A88-468A-992B-68BC5021746D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0023823B-9A88-468A-992B-68BC5021746D}.Release|Any CPU.Build.0 = Release|Any CPU
+<<<<<<< Updated upstream
 		{A4B844E6-540B-4427-A771-7C897AEAC74A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A4B844E6-540B-4427-A771-7C897AEAC74A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A4B844E6-540B-4427-A771-7C897AEAC74A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A4B844E6-540B-4427-A771-7C897AEAC74A}.Release|Any CPU.Build.0 = Release|Any CPU
+=======
+		{6B793393-8126-4E11-97CB-EB696DDE3ACE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6B793393-8126-4E11-97CB-EB696DDE3ACE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6B793393-8126-4E11-97CB-EB696DDE3ACE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6B793393-8126-4E11-97CB-EB696DDE3ACE}.Release|Any CPU.Build.0 = Release|Any CPU
+>>>>>>> Stashed changes
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
