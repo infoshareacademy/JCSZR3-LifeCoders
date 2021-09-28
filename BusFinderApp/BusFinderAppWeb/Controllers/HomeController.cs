@@ -20,6 +20,7 @@ namespace BusFinderAppWeb.Controllers
 
         public IActionResult Index()
         {
+            _logger.LogInformation("Home page Index displayed!");
             return View();
         }
 
