@@ -1,0 +1,400 @@
+<!DOCTYPE HTML>
+<html lang="pl">
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	
+	<title>LifeCoders - BusFinderApp</title>
+	
+	<meta name="description" content="Projekt realizowany na zaliczenie kursu - Bootcamp C#.Net />
+	<meta name="keywords" content="Strona główna II" />
+	
+	<link rel="stylesheet" href="style.css" type="text/css" />
+	<link rel="stylesheet" href="css/fontello.css" type="text/css" />
+	<link href='http://fonts.googleapis.com/css?family=Lato|Josefin+Sans&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+	
+	<script src="slajder.js"></script>
+	
+	  <style>
+	  
+	       #obraz1{width:740px; position:fixed; heigth:350px; background: url(img/1.jpg) no-repeat; background-size: cover; background-position: center:}
+		   
+		   #obraz2{width:740px; position:fixed; heigth:350px; background: url(img/2.jpg) no-repeat; background-size: cover; background-position: center:}
+		   
+	       #obraz3{width:740px; position:fixed; heigth:350px; background: url(img/3.jpg) no-repeat; background-size: cover; background-position: center:}
+	       
+		   #obraz4{width:740px; position:fixed; heigth:350px; background: url(img/4.jpg) no-repeat; background-size: cover; background-position: center:}
+		   
+		   #obraz5{width:740px; position:fixed; heigth:350px; background: url(img/5.jpg) no-repeat; background-size: cover; background-position: center:}
+		   
+		   #obraz6{width:740px; position:fixed; heigth:350px; background: url(img/6.jpg) no-repeat; background-size: cover; background-position: center:}
+		   
+		   #obraz7{width:740px; position:fixed; heigth:350px; background: url(img/7.jpg) no-repeat; background-size: cover; background-position: center:}
+		   
+		   #obraz8{width:740px; position:fixed; heigth:350px; background: url(img/8.jpg) no-repeat; background-size: cover; background-position: center:}
+		   
+		   #obraz9{width:740px; position:fixed; heigth:350px; background: url(img/9.jpg) no-repeat; background-size: cover; background-position: center:}
+		   
+		   #obraz10{width:740px; position:fixed; heigth:350px; background: url(img/10.jpg) no-repeat; background-size: cover; background-position: center:}
+		   
+		   #obraz11{width:740px; position:fixed; heigth:350px; background: url(img/11.jpg) no-repeat; background-size: cover; background-position: center:}
+		   
+		   #obraz12{width:740px; position:fixed; heigth:350px; background: url(img/12.jpg) no-repeat; background-size: cover; background-position: center:}
+	
+	       #obraz13{width:740px; position:fixed; heigth:350px; background: url(img/13.jpg) no-repeat; background-size: cover; background-position: center:}
+		   
+		   #obraz14{width:740px; position:fixed; heigth:350px; background: url(img/14.jpg) no-repeat; background-size: cover; background-position: center:}
+		   
+		   
+	      .slider1{animation: fade 42s infinite; -webkit-animation: fade 42s infinite;}
+	      .slider2{animation: fade2 42s infinite; -webkit-animation: fade2 42s infinite;}
+	      .slider3{animation: fade3 42s infinite; -webkit-animation: fade3 42s infinite;}
+	      .slider4{animation: fade4 42s infinite; -webkit-animation: fade4 42s infinite;}
+	      .slider5{animation: fade5 42s infinite; -webkit-animation: fade5 42s infinite;}
+	      .slider6{animation: fade6 42s infinite; -webkit-animation: fade6 42s infinite;}
+	      .slider7{animation: fade7 42s infinite; -webkit-animation: fade7 42s infinite;}
+	      .slider8{animation: fade8 42s infinite; -webkit-animation: fade8 42s infinite;}
+	      .slider9{animation: fade9 42s infinite; -webkit-animation: fade9 42s infinite;}
+	      .slider10{animation: fade10 42s infinite; -webkit-animation: fade10 42s infinite;}
+	      .slider11{animation: fade11 42s infinite; -webkit-animation: fade11 42s infinite;}
+	      .slider12{animation: fade12 42s infinite; -webkit-animation: fade12 42s infinite;}
+	      .slider13{animation: fade13 42s infinite; -webkit-animation: fade13 42s infinite;}
+	      .slider14{animation: fade14 42s infinite; -webkit-animation: fade14 42s infinite;}
+	
+	      @okeyframes fade
+		  {
+		    0% {opacity:1;}
+			7.1428% {opacity:0;}
+			14.2857% {opacity:0;}
+			21.4285% {opacity:0;}
+			28,5713% {opacity:0;}
+			35,7141% {opacity:0;}
+			42,8869% {opacity:0;}
+			50,0297% {opacity:0;}
+			57,1725% {opacity:0;}
+			64,3153% {opacity:0;}
+			71,4581% {opacity:0;}
+			78,6009% {opacity:0;}
+			85,7437% {opacity:0;}
+			92,8865% {opacity:0;}
+			100% {opacity:1;}			
+		  }
+		  
+		  
+		  @okeyframes fade2
+		  {
+		    0% {opacity:0;}
+			7.1428% {opacity:1;}
+			14.2857% {opacity:0;}
+			21.4285% {opacity:0;}
+			28,5713% {opacity:0;}
+			35,7141% {opacity:0;}
+			42,8869% {opacity:0;}
+			50,0297% {opacity:0;}
+			57,1725% {opacity:0;}
+			64,3153% {opacity:0;}
+			71,4581% {opacity:0;}
+			78,6009% {opacity:0;}
+			85,7437% {opacity:0;}
+			92,8865% {opacity:0;}
+			100% {opacity:0;}			
+		  }
+		  
+		  @okeyframes fade3
+		  {
+		    0% {opacity:0;}
+			7.1428% {opacity:0;}
+			14.2857% {opacity:1;}
+			21.4285% {opacity:0;}
+			28,5713% {opacity:0;}
+			35,7141% {opacity:0;}
+			42,8869% {opacity:0;}
+			50,0297% {opacity:0;}
+			57,1725% {opacity:0;}
+			64,3153% {opacity:0;}
+			71,4581% {opacity:0;}
+			78,6009% {opacity:0;}
+			85,7437% {opacity:0;}
+			92,8865% {opacity:0;}
+			100% {opacity:0;}			
+		  }
+		  
+		  @okeyframes fade4
+		  {
+		    0% {opacity:0;}
+			7.1428% {opacity:0;}
+			14.2857% {opacity:0;}
+			21.4285% {opacity:1;}
+			28,5713% {opacity:0;}
+			35,7141% {opacity:0;}
+			42,8869% {opacity:0;}
+			50,0297% {opacity:0;}
+			57,1725% {opacity:0;}
+			64,3153% {opacity:0;}
+			71,4581% {opacity:0;}
+			78,6009% {opacity:0;}
+			85,7437% {opacity:0;}
+			92,8865% {opacity:0;}
+			100% {opacity:0;}			
+		  }
+		  
+		  @okeyframes fade5
+		  {
+		    0% {opacity:0;}
+			7.1428% {opacity:0;}
+			14.2857% {opacity:0;}
+			21.4285% {opacity:0;}
+			28,5713% {opacity:1;}
+			35,7141% {opacity:0;}
+			42,8869% {opacity:0;}
+			50,0297% {opacity:0;}
+			57,1725% {opacity:0;}
+			64,3153% {opacity:0;}
+			71,4581% {opacity:0;}
+			78,6009% {opacity:0;}
+			85,7437% {opacity:0;}
+			92,8865% {opacity:0;}
+			100% {opacity:0;}			
+		  }
+		  
+		  @okeyframes fade6
+		  {
+		    0% {opacity:0;}
+			7.1428% {opacity:0;}
+			14.2857% {opacity:0;}
+			21.4285% {opacity:0;}
+			28,5713% {opacity:0;}
+			35,7141% {opacity:1;}
+			42,8869% {opacity:0;}
+			50,0297% {opacity:0;}
+			57,1725% {opacity:0;}
+			64,3153% {opacity:0;}
+			71,4581% {opacity:0;}
+			78,6009% {opacity:0;}
+			85,7437% {opacity:0;}
+			92,8865% {opacity:0;}
+			100% {opacity:0;}			
+		  }
+		  
+		  @okeyframes fade7
+		  {
+		    0% {opacity:0;}
+			7.1428% {opacity:0;}
+			14.2857% {opacity:0;}
+			21.4285% {opacity:0;}
+			28,5713% {opacity:0;}
+			35,7141% {opacity:0;}
+			42,8869% {opacity:1;}
+			50,0297% {opacity:0;}
+			57,1725% {opacity:0;}
+			64,3153% {opacity:0;}
+			71,4581% {opacity:0;}
+			78,6009% {opacity:0;}
+			85,7437% {opacity:0;}
+			92,8865% {opacity:0;}
+			100% {opacity:0;}			
+		  }
+		  
+		  @okeyframes fade8
+		  {
+		    0% {opacity:0;}
+			7.1428% {opacity:0;}
+			14.2857% {opacity:0;}
+			21.4285% {opacity:0;}
+			28,5713% {opacity:0;}
+			35,7141% {opacity:0;}
+			42,8869% {opacity:0;}
+			50,0297% {opacity:1;}
+			57,1725% {opacity:0;}
+			64,3153% {opacity:0;}
+			71,4581% {opacity:0;}
+			78,6009% {opacity:0;}
+			85,7437% {opacity:0;}
+			92,8865% {opacity:0;}
+			100% {opacity:0;}			
+		  }
+		  
+		  @okeyframes fade9
+		  {
+		    0% {opacity:0;}
+			7.1428% {opacity:0;}
+			14.2857% {opacity:0;}
+			21.4285% {opacity:0;}
+			28,5713% {opacity:0;}
+			35,7141% {opacity:0;}
+			42,8869% {opacity:0;}
+			50,0297% {opacity:0;}
+			57,1725% {opacity:1;}
+			64,3153% {opacity:0;}
+			71,4581% {opacity:0;}
+			78,6009% {opacity:0;}
+			85,7437% {opacity:0;}
+			92,8865% {opacity:0;}
+			100% {opacity:0;}			
+		  }
+		  
+		  @okeyframes fade10
+		  {
+		    0% {opacity:0;}
+			7.1428% {opacity:0;}
+			14.2857% {opacity:0;}
+			21.4285% {opacity:0;}
+			28,5713% {opacity:0;}
+			35,7141% {opacity:0;}
+			42,8869% {opacity:0;}
+			50,0297% {opacity:0;}
+			57,1725% {opacity:0;}
+			64,3153% {opacity:1;}
+			71,4581% {opacity:0;}
+			78,6009% {opacity:0;}
+			85,7437% {opacity:0;}
+			92,8865% {opacity:0;}
+			100% {opacity:0;}			
+		  }
+	      
+		  @okeyframes fade11
+		  {
+		    0% {opacity:0;}
+			7.1428% {opacity:0;}
+			14.2857% {opacity:0;}
+			21.4285% {opacity:0;}
+			28,5713% {opacity:0;}
+			35,7141% {opacity:0;}
+			42,8869% {opacity:0;}
+			50,0297% {opacity:0;}
+			57,1725% {opacity:0;}
+			64,3153% {opacity:0;}
+			71,4581% {opacity:1;}
+			78,6009% {opacity:0;}
+			85,7437% {opacity:0;}
+			92,8865% {opacity:0;}
+			100% {opacity:0;}			
+		  }
+		  
+		  @okeyframes fade12
+		  {
+		    0% {opacity:0;}
+			7.1428% {opacity:0;}
+			14.2857% {opacity:0;}
+			21.4285% {opacity:0;}
+			28,5713% {opacity:0;}
+			35,7141% {opacity:0;}
+			42,8869% {opacity:0;}
+			50,0297% {opacity:0;}
+			57,1725% {opacity:0;}
+			64,3153% {opacity:0;}
+			71,4581% {opacity:0;}
+			78,6009% {opacity:1;}
+			85,7437% {opacity:0;}
+			92,8865% {opacity:0;}
+			100% {opacity:0;}			
+		  }
+		  
+		  @okeyframes fade13
+		  {
+		    0% {opacity:0;}
+			7.1428% {opacity:0;}
+			14.2857% {opacity:0;}
+			21.4285% {opacity:0;}
+			28,5713% {opacity:0;}
+			35,7141% {opacity:0;}
+			42,8869% {opacity:0;}
+			50,0297% {opacity:0;}
+			57,1725% {opacity:0;}
+			64,3153% {opacity:0;}
+			71,4581% {opacity:0;}
+			78,6009% {opacity:0;}
+			85,7437% {opacity:1;}
+			92,8865% {opacity:0;}
+			100% {opacity:0;}			
+		  }
+		  
+		  @okeyframes fade14
+		  {
+		    0% {opacity:0;}
+			7.1428% {opacity:0;}
+			14.2857% {opacity:0;}
+			21.4285% {opacity:0;}
+			28,5713% {opacity:0;}
+			35,7141% {opacity:0;}
+			42,8869% {opacity:0;}
+			50,0297% {opacity:0;}
+			57,1725% {opacity:0;}
+			64,3153% {opacity:0;}
+			71,4581% {opacity:0;}
+			78,6009% {opacity:0;}
+			85,7437% {opacity:0;}
+			92,8865% {opacity:1;}
+			100% {opacity:0;}			
+		  }
+		  
+		  
+	  </style>
+	
+</head>
+
+<body>
+      
+	    <div id="container">
+	
+	        <div id="menu">
+		       <div class="option">Strona główna </div>
+			   <div class="option" >Wyszukaj połączenie </div>
+			   <div class="option">Aktualności  </div>
+			   <div class="option" >Informacje </div>
+			   <div class="option">Nasz zespół </div>
+			   <div style="clear:both"></div>
+		    </div>
+			
+		    <div id="sidebar">
+		                 <div id="reklama2">
+			             <div style="clear:both"></div>
+			             </div>
+			             <div style="clear:both"></div>
+					 
+					     <div id="reklama">
+			             <div style="clear:both"></div>
+			             </div>
+		        
+		    </div>
+		
+		 <div id="content">
+		   
+		   
+		   <div class="NZespół">
+		        <h1></i><center><strong>Dzień Dobry! Życzymy miłej podróży   <img src="img/buzia.jpg"></i></center></h1>
+		   <div>
+		                     <div>
+						     <div class="slider1" id="obraz1" ></div>
+						     <div class="slider2" id="obraz2" ></div>
+						     <div class="slider3" id="obraz3" ></div>
+						     <div class="slider4" id="obraz4" ></div>
+						     <div class="slider5" id="obraz5" ></div>
+						     <div class="slider6" id="obraz6" ></div>
+						     <div class="slider7" id="obraz7"></div>
+						     <div class="slider8" id="obraz8" ></div>
+						     <div class="slider9" id="obraz9" ></div>
+						     <div class="slider10" id="obraz10" ></div>
+						     <div class="slider11" id="obraz11" ></div>
+						     <div class="slider12" id="obraz12" ></div>
+						     <div class="slider13" id="obraz13" ></div>
+						     <div class="slider14" id="obraz14" ></div>
+   				             </div>
+				
+		        	
+	      </div>
+		      
+            </div>
+		 
+		   	
+		</div>	
+		    <div id="footer">
+		       
+		        2021 &copy; LifeCoders sp. z o.o. - BusFinderApp. </i><i class="icon-mail-alt"></i>LifeCoders@adres.com
+		    </div>
+		
+        </div>
+
+</body>
+
+</html>
