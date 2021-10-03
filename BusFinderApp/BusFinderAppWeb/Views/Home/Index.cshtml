@@ -1,3 +1,14 @@
-﻿@{
+﻿@using BusFinderAppCore.ViewModels;
+
+@{
     ViewData["Title"] = "Home Page";
 }
+
+
+
+@model usersViewModel
+@{
+    ViewData["Title"] = "Login";
+}
+
+<h1>@Model.Name</h1>

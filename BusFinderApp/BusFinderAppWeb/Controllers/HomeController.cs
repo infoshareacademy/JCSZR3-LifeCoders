@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using BusFinderAppCore.ViewModels;
 
 namespace BusFinderAppWeb.Controllers
 {
@@ -20,7 +21,17 @@ namespace BusFinderAppWeb.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            var user = new User();
+            using (var db = new LoggedContext())
+            {
+                user = db.users.FirstOrDefault();
+
+
+            }
+
+
+            return View(new usersViewModel { Name = user.Login });
+
         }
 
         public IActionResult Privacy()
