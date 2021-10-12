@@ -3,14 +3,16 @@ using BusFinderAppWeb.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BusFinderAppWeb.Migrations
 {
     [DbContext(typeof(LoggedContext))]
-    partial class LoggedContextModelSnapshot : ModelSnapshot
+    [Migration("20211007200311_adminadd")]
+    partial class adminadd
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

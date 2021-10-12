@@ -32,7 +32,14 @@ namespace BusFinderAppWeb.Models
                    Id = 1,
                    Login = "William",
                    password = "123"
+               },
+               new User
+               {
+                   Id = 2,
+                   Login = "admin",
+                   password = "admin"
                }
+
            );
        }
     }

@@ -7,6 +7,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using BusFinderAppCore.ViewModels;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace BusFinderAppWeb.Controllers
 {
@@ -18,25 +19,46 @@ namespace BusFinderAppWeb.Controllers
         {
             _logger = logger;
         }
-
-        public IActionResult Index()
+        //[HttpPost]
+        public IActionResult Index(string login, string pass)
         {
-            var user = new User();
+          /*  var user = new User();
             using (var db = new LoggedContext())
             {
                 user = db.users.FirstOrDefault();
 
 
-            }
+            }*/
+          return View();
 
-
-            return View(new usersViewModel { Name = user.Login });
+          // return View(new usersViewModel { Name = user.Login });
 
         }
-
-        public IActionResult Privacy()
+        [HttpPost]
+        public IActionResult Logged(string Name, string passwd)
         {
-            return View();
+            var user = new User();
+            using (var db = new LoggedContext())
+            {
+                user = db.users.Where(x => x.Login == Name).FirstOrDefault();
+                if (user != null)
+                {
+                    if (user.password == passwd)
+                        return View(new usersViewModel {Name = user.Login});
+                    else
+                    {
+                        // return RedirectToAction("Index");
+                        ModelState.AddModelError("Error", "Niepoprawne hasło");
+                        return View("Index");
+                    }
+                }
+                else
+                {
+                    ModelState.AddModelError("Error", "Nie ma takiego użytkownika");
+                    return View("Index");
+                }
+            }
+
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

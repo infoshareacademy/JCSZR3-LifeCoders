@@ -11,5 +11,6 @@ namespace BusFinderAppCore.ViewModels
     public class usersViewModel
     {
         public string Name { get; set; }
+        public string passwd { get; set; }
     }
 }

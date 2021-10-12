@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31205.134
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusFinderAppCore", "BusFinderAppCore\BusFinderAppCore.csproj", "{8E0406A7-4A66-4302-9C6F-36133C1BD0A4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BusFinderAppCore", "BusFinderAppCore\BusFinderAppCore.csproj", "{8E0406A7-4A66-4302-9C6F-36133C1BD0A4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusFinderAppWeb", "BusFinderAppWeb\BusFinderAppWeb.csproj", "{CDBA01F1-ED7F-4B44-AF7A-29AE8E97FEE0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BusFinderAppWeb", "BusFinderAppWeb\BusFinderAppWeb.csproj", "{CDBA01F1-ED7F-4B44-AF7A-29AE8E97FEE0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusFinderAppConsole", "BusFinderAppConsole\BusFinderAppConsole.csproj", "{0023823B-9A88-468A-992B-68BC5021746D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BusFinderAppConsole", "BusFinderAppConsole\BusFinderAppConsole.csproj", "{0023823B-9A88-468A-992B-68BC5021746D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
