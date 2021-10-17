@@ -1,13 +1,19 @@
-﻿namespace BusFinderAppCore.Models
+﻿using Newtonsoft.Json;
+
+namespace BusFinderAppCore.Models
 {
     public class Station
     {
-        public int id { get; set; }
-        public string guid { get; set; }
-        public string name { get; set; }
-        public DefaultAddress default_address { get; set; }
-        public string address { get; set; }
-        public string full_address { get; set; }
-        public Coordinates coordinates { get; set; }
+        public int Id { get; set; }
+        public string Guid { get; set; }
+        [JsonProperty("name")]
+        public string Name { get; set; }
+        [JsonProperty("default_address")]
+        public DefaultAddress DefaultAddress { get; set; }
+        public string Address { get; set; }
+
+        [JsonProperty("full_address")]
+        public string FullAddress { get; set; }
+        public Coordinates Coordinates { get; set; }
     }
 }

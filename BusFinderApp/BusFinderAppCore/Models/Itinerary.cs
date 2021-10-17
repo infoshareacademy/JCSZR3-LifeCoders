@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace BusFinderAppCore.Models
 {
@@ -14,5 +15,19 @@ namespace BusFinderAppCore.Models
         public bool is_cancelled { get; set; }
         public string line_code { get; set; }
         public string direction { get; set; }
+        public string timestamp { get; set; }
+        public string GetTime()
+        {
+            DateTime dateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
+            return dateTime.AddSeconds(datetime.timestamp).ToLocalTime().ToString("HH:mm");
+        }
+
+        public string GetDay()
+        {
+            DateTime dateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
+            return dateTime.AddSeconds(datetime.timestamp).ToLocalTime().ToString("dd.MM.yyyy");
+        }
     }
+
+    
 }
