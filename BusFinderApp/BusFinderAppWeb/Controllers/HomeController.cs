@@ -19,19 +19,13 @@ namespace BusFinderAppWeb.Controllers
         {
             _logger = logger;
         }
-        //[HttpPost]
+    
         public IActionResult Index(string login, string pass)
         {
-          /*  var user = new User();
-            using (var db = new LoggedContext())
-            {
-                user = db.users.FirstOrDefault();
-
-
-            }*/
+        
           return View();
 
-          // return View(new usersViewModel { Name = user.Login });
+        
 
         }
         [HttpPost]
@@ -41,20 +35,15 @@ namespace BusFinderAppWeb.Controllers
             using (var db = new LoggedContext())
             {
                 user = db.users.Where(x => x.Login == Name).FirstOrDefault();
-                if (user != null)
+                if (user != null && user.password == passwd)
                 {
-                    if (user.password == passwd)
+                    
                         return View(new usersViewModel {Name = user.Login});
-                    else
-                    {
-                        // return RedirectToAction("Index");
-                        ModelState.AddModelError("Error", "Niepoprawne hasło");
-                        return View("Index");
-                    }
+                  
                 }
                 else
                 {
-                    ModelState.AddModelError("Error", "Nie ma takiego użytkownika");
+                    ModelState.AddModelError("Error", "Niepoprawny login lub hasło");
                     return View("Index");
                 }
             }
